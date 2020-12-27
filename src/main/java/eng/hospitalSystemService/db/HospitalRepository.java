@@ -139,9 +139,7 @@ public class HospitalRepository {
         try {
             TypedQuery<OddeleniEntity> q = em.createQuery("select i from OddeleniEntity i order by i.idoddeleni asc",OddeleniEntity.class);
             ret = q.getResultList();
-            for (OddeleniEntity oddeleniEntity:ret
-                 ) {if (oddeleniEntity.getIdoddeleni()==0)ret.remove(oddeleniEntity.getIdoddeleni());
-            }
+            ret.removeIf(oddeleniEntity -> oddeleniEntity.getIdoddeleni() == 0);
 
         } catch (Exception e) {
             throw new DbException("failed to list Departments.",e);

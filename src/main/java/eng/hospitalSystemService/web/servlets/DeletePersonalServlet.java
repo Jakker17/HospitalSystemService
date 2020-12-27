@@ -1,9 +1,6 @@
 package eng.hospitalSystemService.web.servlets;
 
-import eng.hospitalSystemService.app.Alert;
-import eng.hospitalSystemService.app.AlertService;
-import eng.hospitalSystemService.app.PersonalService;
-import eng.hospitalSystemService.app.SessionServiceProvider;
+import eng.hospitalSystemService.app.*;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,11 +13,19 @@ import java.io.IOException;
 public class DeletePersonalServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        String birthNumberOfPersonalString = request.getParameter("birthNumber");
+        AlertService alertService = SessionServiceProvider.getAlertService(request);
+        PersonalService personalService = new PersonalService();
+        PatientService patientService = new PatientService();
+
+        String birthNumberOfPersonalString = request.getParameter("birthNumberDelete");
         int birthNumberOfPersonal = Integer.parseInt(birthNumberOfPersonalString);
 
-        PersonalService personalService = new PersonalService();
-        AlertService alertService = SessionServiceProvider.getAlertService(request);
+        if(patientService.isPatientAssignedToThisStaff(birthNumberOfPersonal))
+        {
+            alertService.add(Alert.Type.danger,"Cannot delete personal with assigned patients, please re-assign them before. ");
+            response.sendRedirect("index.jsp");
+        }
+
         if(personalService.get(birthNumberOfPersonal)==null)alertService.add(Alert.Type.danger,"User not found or already deleted.");
         else {
 

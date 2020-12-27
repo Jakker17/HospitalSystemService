@@ -66,4 +66,13 @@ public class PersonalService {
 }
 
 
+    public int getPersonalBirthNumberBySurname(String personalSurname) {
+        HospitalRepository hospitalRepository= new HospitalRepository();
+        List<PersonalEntity> personals = hospitalRepository.getAllPersonal();
+        for (PersonalEntity personalEntity:personals) {
+            if(personalEntity.getPersonSurname().equals(personalSurname)) return personalEntity.getBirthnumber();
+
+        }
+        return -1;
+    }
 }

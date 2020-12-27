@@ -29,11 +29,14 @@
 
 <br class="container">
     <h1>Hospital System</h1>
-    <a href="addNewEmployee.jsp">Přidat zaměstnance</a></br>
+
     <a href="listOfEmployees.jsp">Seznam zaměstnanců</a></br>
-    <a href="addNewDepartment.jsp">Přidat Oddělení</a></br>
     <a href="listOfDepartments.jsp">Seznam Oddělení</a></br>
+    <a href="listOfPatients.jsp">Seznam pacientů</a></br>
+    <a href="addNewEmployee.jsp">Přidat zaměstnance</a></br>
+    <a href="addNewDepartment.jsp">Přidat Oddělení</a></br>
     <a href="addNewPatient.jsp">Přidat pacienta</a></br>
+
 </div>
 </body>
 </html>

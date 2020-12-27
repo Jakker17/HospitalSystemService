@@ -30,10 +30,10 @@ public class DeleteDepartmentServlet extends HttpServlet {
                 PersonalService personalService = new PersonalService();
                 List<PersonalEntity> personalEntityList = personalService.getListOfPersonal();
                 for (PersonalEntity personalEntity: personalEntityList) {
-                    if (personalEntity.getDepartment().equals(departmentID)){
+                    if (personalEntity.getDepartment()==departmentID){
                         personalService.delete(personalEntity.getBirthnumber());
+                        alertService.add(Alert.Type.success, "Department personal has been deleted.");
                     }
-                    alertService.add(Alert.Type.success, "Department personal has been deleted.");
                 }
             }
             catch (Exception e){

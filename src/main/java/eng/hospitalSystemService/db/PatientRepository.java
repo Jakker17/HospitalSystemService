@@ -6,6 +6,8 @@ import eng.hospitalSystemService.db.entities.PersonalEntity;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.TypedQuery;
+import java.util.List;
 
 public class PatientRepository {
     private static final String PU_NAME = "PU_HOSPITAL";
@@ -44,4 +46,57 @@ public class PatientRepository {
         }
     }
 
+    public PacientEntity getPatient(int birthNumber){
+
+        EntityManager em = getEntityManager();
+        PacientEntity ret;
+        try {
+            ret = em.find(PacientEntity.class,birthNumber);
+        } catch (Exception e) {
+            throw new DbException("Failed to get patient by birthNumber "+birthNumber,e);
+        }
+        return ret;
+    }
+
+    public List<PacientEntity> getAll() {
+        List<PacientEntity> ret;
+        EntityManager em = getEntityManager();
+
+        try {
+            TypedQuery<PacientEntity> q = em.createQuery("select i from PacientEntity i order by i.pacientPersonSurname asc",PacientEntity.class);
+            ret = q.getResultList();
+
+        } catch (Exception e) {
+            throw new DbException("failed to list Pacients",e);
+        }
+        return ret;
+    }
+
+    public void delete(int patientBirthNumber) {
+        EntityManager em = getEntityManager();
+        try {
+
+            PacientEntity pacientEntity = em.getReference(PacientEntity.class, patientBirthNumber);
+            em.getTransaction().begin();
+            em.remove(pacientEntity);
+            em.getTransaction().commit();
+
+        }catch (Exception ex){
+
+            throw new DbException("Failed to delete patient by birthnumber"+ patientBirthNumber,ex);
+        }
+
+    }
+
+    public void update(PacientEntity pacientEntity) {
+        EntityManager em = getEntityManager();
+        try {
+            em.getTransaction().begin();
+            em.merge(pacientEntity);
+            em.getTransaction().commit();
+        } catch (Exception ex)
+        {
+            throw new DbException("Failed to update Patient.",ex);
+        }
+    }
 }

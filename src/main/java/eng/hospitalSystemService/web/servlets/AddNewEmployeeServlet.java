@@ -15,8 +15,6 @@ import java.util.regex.Pattern;
 public class AddNewEmployeeServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-
-
         String personalNumberString = request.getParameter("birthNumber");
         String firstName = request.getParameter("name");
         String surName = request.getParameter("surname");
