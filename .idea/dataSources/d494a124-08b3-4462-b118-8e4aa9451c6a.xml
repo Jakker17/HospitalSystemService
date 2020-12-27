@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataSource name="hospitalSystemService@localhost">
+  <database-model serializer="dbm" dbms="DERBY" family-id="DERBY" format-version="4.19">
+    <root id="1">
+      <ServerVersion>10.15.2.0</ServerVersion>
+    </root>
+    <schema id="2" parent="1" name="ADMIN">
+      <Current>1</Current>
+    </schema>
+    <schema id="3" parent="1" name="APP"/>
+    <schema id="4" parent="1" name="NULLID"/>
+    <schema id="5" parent="1" name="SQLJ"/>
+    <schema id="6" parent="1" name="SYS"/>
+    <schema id="7" parent="1" name="SYSCAT"/>
+    <schema id="8" parent="1" name="SYSCS_DIAG"/>
+    <schema id="9" parent="1" name="SYSCS_UTIL"/>
+    <schema id="10" parent="1" name="SYSFUN"/>
+    <schema id="11" parent="1" name="SYSIBM"/>
+    <schema id="12" parent="1" name="SYSPROC"/>
+    <schema id="13" parent="1" name="SYSSTAT"/>
+    <table id="14" parent="2" name="ODDELENI"/>
+    <table id="15" parent="2" name="PACIENT"/>
+    <table id="16" parent="2" name="PERSONAL"/>
+    <column id="17" parent="14" name="IDODDELENI">
+      <Position>1</Position>
+      <DataType>INTEGER|4s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="18" parent="14" name="NAZEVODDELENI">
+      <Position>2</Position>
+      <DataType>VARCHAR(120)|12s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <index id="19" parent="14" name="SQL0000000000-c851401a-0176-9ab0-59e8-00001b28e0f8">
+      <ColNames>IDODDELENI</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="20" parent="14" name="SQL0000000000-c851401a-0176-9ab0-59e8-00001b28e0f8">
+      <ColNames>IDODDELENI</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="21" parent="15" name="PACIENT_BIRTHNUMBER">
+      <Position>1</Position>
+      <DataType>INTEGER|4s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="22" parent="15" name="PACIENT_PERSON_NAME">
+      <Position>2</Position>
+      <DataType>VARCHAR(60)|12s</DataType>
+    </column>
+    <column id="23" parent="15" name="PACIENT_PERSON_SURNAME">
+      <Position>3</Position>
+      <DataType>VARCHAR(60)|12s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="24" parent="15" name="ANAMNESIS">
+      <Position>4</Position>
+      <DataType>VARCHAR(255)|12s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="25" parent="15" name="MEDICAMENTSID">
+      <Position>5</Position>
+      <DataType>INTEGER|4s</DataType>
+    </column>
+    <column id="26" parent="15" name="NURSING_STAFF_BIRTHNUMBER">
+      <Position>6</Position>
+      <DataType>INTEGER|4s</DataType>
+    </column>
+    <column id="27" parent="15" name="ROOMID">
+      <Position>7</Position>
+      <DataType>INTEGER|4s</DataType>
+    </column>
+    <index id="28" parent="15" name="SQL0000000004-65c101c9-0176-9dce-4f07-00001b28ed78">
+      <ColNames>PACIENT_BIRTHNUMBER</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <index id="29" parent="15" name="SQL0000000005-63454207-0176-9dce-4f07-00001b28ed78">
+      <ColNames>NURSING_STAFF_BIRTHNUMBER</ColNames>
+    </index>
+    <key id="30" parent="15" name="SQL0000000004-65c101c9-0176-9dce-4f07-00001b28ed78">
+      <ColNames>PACIENT_BIRTHNUMBER</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="31" parent="15" name="SQL0000000005-63454207-0176-9dce-4f07-00001b28ed78">
+      <ColNames>NURSING_STAFF_BIRTHNUMBER</ColNames>
+      <RefTableName>PERSONAL</RefTableName>
+      <RefKeyName>SQL0000000081-017d8124-0176-7137-b9dc-00000b300000</RefKeyName>
+      <RefColNames>BIRTHNUMBER</RefColNames>
+    </foreign-key>
+    <column id="32" parent="16" name="BIRTHNUMBER">
+      <Position>1</Position>
+      <DataType>INTEGER|4s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="33" parent="16" name="PERSON_NAME">
+      <Position>2</Position>
+      <DataType>VARCHAR(15)|12s</DataType>
+    </column>
+    <column id="34" parent="16" name="PERSON_SURNAME">
+      <Position>3</Position>
+      <DataType>VARCHAR(20)|12s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="35" parent="16" name="PROFFESION">
+      <Position>4</Position>
+      <DataType>VARCHAR(30)|12s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="36" parent="16" name="DEPARTMENT">
+      <Position>5</Position>
+      <DataType>INTEGER|4s</DataType>
+    </column>
+    <column id="37" parent="16" name="LOGIN_NAME">
+      <Position>6</Position>
+      <DataType>VARCHAR(23)|12s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="38" parent="16" name="PASSWORD_HASH">
+      <Position>7</Position>
+      <DataType>BLOB|2004s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="39" parent="16" name="SALT_HASH">
+      <Position>8</Position>
+      <DataType>BLOB|2004s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <index id="40" parent="16" name="SQL0000000081-017d8124-0176-7137-b9dc-00000b300000">
+      <ColNames>BIRTHNUMBER</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <index id="41" parent="16" name="SQL0000000082-69c68125-0176-7137-b9dc-00000b300000">
+      <ColNames>LOGIN_NAME</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <index id="42" parent="16" name="SQL0000000002-070a00b0-0176-9ab0-59e8-00001b28e0f8">
+      <ColNames>DEPARTMENT</ColNames>
+    </index>
+    <key id="43" parent="16" name="SQL0000000081-017d8124-0176-7137-b9dc-00000b300000">
+      <ColNames>BIRTHNUMBER</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <key id="44" parent="16" name="SQL0000000082-69c68125-0176-7137-b9dc-00000b300000">
+      <ColNames>LOGIN_NAME</ColNames>
+    </key>
+    <foreign-key id="45" parent="16" name="SQL0000000002-070a00b0-0176-9ab0-59e8-00001b28e0f8">
+      <ColNames>DEPARTMENT</ColNames>
+      <RefTableName>ODDELENI</RefTableName>
+      <RefKeyName>SQL0000000000-c851401a-0176-9ab0-59e8-00001b28e0f8</RefKeyName>
+      <RefColNames>IDODDELENI</RefColNames>
+    </foreign-key>
+  </database-model>
+</dataSource>

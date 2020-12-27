@@ -1,0 +1,165 @@
+package eng.hospitalSystemService.db;
+
+import eng.hospitalSystemService.db.entities.OddeleniEntity;
+import eng.hospitalSystemService.db.entities.PersonalEntity;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import javax.persistence.TypedQuery;
+import java.util.List;
+
+public class HospitalRepository {
+    private static final String PU_NAME = "PU_HOSPITAL";
+    private static EntityManagerFactory emf = null;
+
+    private EntityManager getEntityManager(){
+        if(emf==null)
+            try {
+                emf = Persistence.createEntityManagerFactory(PU_NAME);
+            }catch (Exception e){
+                throw new DbException("Failed to create entity-manager-factory.",e);
+            }
+
+        EntityManager em;
+        try {
+            em = emf.createEntityManager();
+        }catch (Exception e){
+
+            throw new DbException("Failed to create entity-manager.",e);
+        }
+        return em;
+    }
+
+    public void insertPersonal(PersonalEntity personalEntity) {
+
+        EntityManager em = getEntityManager();
+
+        try {
+            em.getTransaction().begin();
+            em.persist(personalEntity);
+            em.getTransaction().commit();
+        }
+        catch (Exception e)
+        {
+            throw new DbException("Failed to insert item.",e);
+        }
+
+
+    }
+
+    public void updatePersonal(PersonalEntity personalEntity) {
+        EntityManager em = getEntityManager();
+
+        try {
+            em.getTransaction().begin();
+
+            // zkusit použít em.persist
+            em.merge(personalEntity);
+            em.getTransaction().commit();
+
+        }catch (Exception ex) {
+            throw new DbException("Failed to update Personal. ", ex);
+        }
+
+    }
+
+    public void deletePersonal(int birthNumberOfPersonal) {
+        EntityManager em = getEntityManager();
+        try {
+
+            PersonalEntity personalEntity = em.getReference(PersonalEntity.class, birthNumberOfPersonal);
+            em.getTransaction().begin();
+            em.remove(personalEntity);
+            em.getTransaction().commit();
+
+        }catch (Exception ex){
+
+            throw new DbException("Failed to delete person by birthnumber"+ birthNumberOfPersonal,ex);
+        }
+
+    }
+
+    public List<PersonalEntity> getAllPersonal() {
+        List<PersonalEntity> ret;
+        EntityManager em = getEntityManager();
+
+        try {
+            TypedQuery<PersonalEntity> q = em.createQuery("select i from PersonalEntity i order by i.personName asc",PersonalEntity.class);
+             ret = q.getResultList();
+
+        } catch (Exception e) {
+            throw new DbException("failed to list Personal",e);
+        }
+        return ret;
+    }
+
+    public PersonalEntity getPersonal(int birthNumber) {
+        EntityManager em = getEntityManager();
+        PersonalEntity ret;
+        try {
+            ret = em.find(PersonalEntity.class,birthNumber);
+        } catch (Exception e) {
+            throw new DbException("Failed to get personal by birthNumber "+birthNumber,e);
+        }
+        return ret;
+    }
+
+    public void insertDepartment(OddeleniEntity oddeleniEntity){
+
+        EntityManager em = getEntityManager();
+
+        try {
+            em.getTransaction().begin();
+            em.persist(oddeleniEntity);
+            em.getTransaction().commit();
+        }
+        catch (Exception e)
+        {
+            throw new DbException("Failed to insert item.",e);
+        }
+    }
+
+    public OddeleniEntity getDepartment(int departmentID) {
+        EntityManager em = getEntityManager();
+        OddeleniEntity ret;
+        try {
+            ret = em.find(OddeleniEntity.class,departmentID);
+        } catch (Exception e) {
+            throw new DbException("Failed to get personal by birthNumber "+departmentID,e);
+        }
+        return ret;
+    }
+
+    public List<OddeleniEntity> getAllDepartments() {
+        List<OddeleniEntity> ret;
+        EntityManager em = getEntityManager();
+
+        try {
+            TypedQuery<OddeleniEntity> q = em.createQuery("select i from OddeleniEntity i order by i.idoddeleni asc",OddeleniEntity.class);
+            ret = q.getResultList();
+            for (OddeleniEntity oddeleniEntity:ret
+                 ) {if (oddeleniEntity.getIdoddeleni()==0)ret.remove(oddeleniEntity.getIdoddeleni());
+            }
+
+        } catch (Exception e) {
+            throw new DbException("failed to list Departments.",e);
+        }
+        return ret;
+    }
+
+    public void deleteDepartment(int departmentID){
+        EntityManager em = getEntityManager();
+        try {
+
+            OddeleniEntity oddeleniEntity = em.getReference(OddeleniEntity.class, departmentID);
+            em.getTransaction().begin();
+            em.remove(oddeleniEntity);
+            em.getTransaction().commit();
+        }
+        catch (Exception ex){
+
+            throw new DbException("Failed to delete Department by the ID"+ departmentID,ex);
+        }
+    }
+}
