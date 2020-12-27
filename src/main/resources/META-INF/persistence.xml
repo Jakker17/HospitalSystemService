@@ -4,6 +4,7 @@
         <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
         <class>eng.hospitalSystemService.db.entities.PersonalEntity</class>
         <class>eng.hospitalSystemService.db.entities.OddeleniEntity</class>
+        <class>eng.hospitalSystemService.db.entities.PacientEntity</class>
         <exclude-unlisted-classes>false</exclude-unlisted-classes>
         <properties>
             <property name="eclipselink.jdbc.url" value="jdbc:derby://localhost:1527/hospitalSystemService"/>

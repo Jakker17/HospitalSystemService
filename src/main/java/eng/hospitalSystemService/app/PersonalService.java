@@ -64,4 +64,6 @@ public class PersonalService {
     public PersonalEntity get(String birthNumber){
         return this.get(Integer.parseInt(birthNumber));
 }
+
+
 }

@@ -70,18 +70,18 @@
       <Position>7</Position>
       <DataType>INTEGER|4s</DataType>
     </column>
-    <index id="28" parent="15" name="SQL0000000004-65c101c9-0176-9dce-4f07-00001b28ed78">
+    <index id="28" parent="15" name="SQL0000000000-e5214067-0176-a477-d019-00001b28ed78">
       <ColNames>PACIENT_BIRTHNUMBER</ColNames>
       <Unique>1</Unique>
     </index>
-    <index id="29" parent="15" name="SQL0000000005-63454207-0176-9dce-4f07-00001b28ed78">
+    <index id="29" parent="15" name="SQL0000000001-f55fc0a6-0176-a477-d019-00001b28ed78">
       <ColNames>NURSING_STAFF_BIRTHNUMBER</ColNames>
     </index>
-    <key id="30" parent="15" name="SQL0000000004-65c101c9-0176-9dce-4f07-00001b28ed78">
+    <key id="30" parent="15" name="SQL0000000000-e5214067-0176-a477-d019-00001b28ed78">
       <ColNames>PACIENT_BIRTHNUMBER</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="31" parent="15" name="SQL0000000005-63454207-0176-9dce-4f07-00001b28ed78">
+    <foreign-key id="31" parent="15" name="SQL0000000001-f55fc0a6-0176-a477-d019-00001b28ed78">
       <ColNames>NURSING_STAFF_BIRTHNUMBER</ColNames>
       <RefTableName>PERSONAL</RefTableName>
       <RefKeyName>SQL0000000081-017d8124-0176-7137-b9dc-00000b300000</RefKeyName>

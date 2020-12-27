@@ -49,7 +49,7 @@
             <input type="text" name="medicaments" id="medicaments" class="form-control">
         </div>
         <div class="form-group">
-            <label for="personalSurname">Příjmení ošetřovatele</label>
+            <label for="personalSurname">birthNumber ošetřovatele</label>
             <input type="text" name="personalSurname" id="personalSurname" class="form-control">
         </div>
         <div class="form-group">

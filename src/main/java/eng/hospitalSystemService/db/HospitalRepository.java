@@ -105,6 +105,7 @@ public class HospitalRepository {
         return ret;
     }
 
+
     public void insertDepartment(OddeleniEntity oddeleniEntity){
 
         EntityManager em = getEntityManager();
