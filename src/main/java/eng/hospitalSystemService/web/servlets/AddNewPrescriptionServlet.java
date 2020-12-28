@@ -1,9 +1,6 @@
 package eng.hospitalSystemService.web.servlets;
 
-import eng.hospitalSystemService.app.Alert;
-import eng.hospitalSystemService.app.AlertService;
-import eng.hospitalSystemService.app.PrescriptionService;
-import eng.hospitalSystemService.app.SessionServiceProvider;
+import eng.hospitalSystemService.app.*;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -17,11 +14,22 @@ public class AddNewPrescriptionServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         AlertService alertService = SessionServiceProvider.getAlertService(request);
         PrescriptionService prescriptionService = new PrescriptionService();
+        PatternCheckService patternCheckService = SessionServiceProvider.getPatternCheckService();
+        PatientService patientService = new PatientService();
 
         String nameOfMedicament = request.getParameter("nameOfMedicament");
         String usageOfMedicament = request.getParameter("usageOfMedicament");
         String birthNumberOfPatientString = request.getParameter("birthNumberOfPatient");
 
+        if (patternCheckService.doPatternCheck("[^0-9]",birthNumberOfPatientString)){
+            alertService.add(Alert.Type.danger,"Birth Number of Patient must be a number.");
+            response.sendRedirect("addNewPrescription.jsp");
+        }
+        if (nameOfMedicament.length()>60)alertService.add(Alert.Type.danger,"Too long name of Medicament, use only 60 letters-");
+        else if (usageOfMedicament.length()>255)alertService.add(Alert.Type.danger,"Too long usage of medicament, use only 255 letters.");
+        else if (patientService.get(birthNumberOfPatientString)==null)alertService.add(Alert.Type.danger,"Patient with this Number does not exist.");
+
+        else{
         int birthNumberOfPatient = Integer.parseInt(birthNumberOfPatientString);
 
         try {
@@ -33,6 +41,8 @@ public class AddNewPrescriptionServlet extends HttpServlet {
 
         alertService.add(Alert.Type.success, "Prescription successfully added");
         response.sendRedirect("index.jsp");
+        }
+        response.sendRedirect("addNewPrescription.jsp");
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
