@@ -4,7 +4,6 @@ import eng.hospitalSystemService.app.Alert;
 import eng.hospitalSystemService.app.AlertService;
 import eng.hospitalSystemService.app.PrescriptionService;
 import eng.hospitalSystemService.app.SessionServiceProvider;
-import org.eclipse.persistence.exceptions.i18n.ValidationExceptionResource;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
