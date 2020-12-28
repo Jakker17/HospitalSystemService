@@ -29,7 +29,7 @@
         </div>
         <div class="form-group">
             <label for="birthNumberOfPatient">BN of patient</label>
-            <input type="number" id="birthNumberOfPatient" name="birthNumberOfPatient" class="form-control">
+            <input type="text" id="birthNumberOfPatient" name="birthNumberOfPatient" class="form-control">
         </div>
         <div class="form-group">
             <button type="submit" class="btn btn-primary">Add</button>

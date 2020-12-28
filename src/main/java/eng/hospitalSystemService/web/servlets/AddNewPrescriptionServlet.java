@@ -25,9 +25,12 @@ public class AddNewPrescriptionServlet extends HttpServlet {
             alertService.add(Alert.Type.danger,"Birth Number of Patient must be a number.");
             response.sendRedirect("addNewPrescription.jsp");
         }
-        if (nameOfMedicament.length()>60)alertService.add(Alert.Type.danger,"Too long name of Medicament, use only 60 letters-");
+        if (nameOfMedicament.length()>60)alertService.add(Alert.Type.danger,"Too long name of Medicament, use only 60 letters.");
+        else if (nameOfMedicament.equals(""))alertService.add(Alert.Type.danger, "Name of medicament cannot be empty.");
         else if (usageOfMedicament.length()>255)alertService.add(Alert.Type.danger,"Too long usage of medicament, use only 255 letters.");
+        else if(birthNumberOfPatientString.equals(""))alertService.add(Alert.Type.danger, "Birth number of patient cannot be null.");
         else if (patientService.get(birthNumberOfPatientString)==null)alertService.add(Alert.Type.danger,"Patient with this Number does not exist.");
+
 
         else{
         int birthNumberOfPatient = Integer.parseInt(birthNumberOfPatientString);

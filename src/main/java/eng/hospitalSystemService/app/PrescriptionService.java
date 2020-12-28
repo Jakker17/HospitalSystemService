@@ -13,4 +13,10 @@ public class PrescriptionService {
         predpisEntity.setBirtnumberofpatient(birthNumberOfPatient);
         patientRepository.insertPrescription(predpisEntity);
     }
+
+    public void delete(int prescriptionId) {
+        PatientRepository patientRepository = new PatientRepository();
+        PredpisEntity predpisEntity= new PredpisEntity();
+        patientRepository.deletePrescription(prescriptionId);
+    }
 }

@@ -112,4 +112,16 @@ public class PatientRepository {
             throw new DbException("Unable to insert Prescrtiption via Repository.",ex);
         }
     }
+
+    public void deletePrescription(int prescriptionId) {
+        EntityManager em = getEntityManager();
+        try {
+            PredpisEntity predpisEntity = em.getReference(PredpisEntity.class,prescriptionId);
+            em.getTransaction().begin();
+            em.remove(predpisEntity);
+            em.getTransaction().commit();
+        }catch (Exception e){
+            throw new DbException("Unable to delete Prescrtiption via Repository",e);
+        }
+    }
 }
