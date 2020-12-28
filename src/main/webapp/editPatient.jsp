@@ -43,7 +43,6 @@
 
         <h1 align="center">${patient.pacientPersonSurname} ${patient.pacientPersonName}</h1>
 
-
         <div class="form-group">
             <label for="anamnesis">Anamnesis</label>
             <input value="${patient.anamnesis}" type="text" name="anamnesis" class="form-control"   id="anamnesis">

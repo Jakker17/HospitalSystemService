@@ -7,5 +7,16 @@
       <jdbc-driver>org.apache.derby.jdbc.ClientDriver</jdbc-driver>
       <jdbc-url>jdbc:derby://localhost:1527/hospitalSystemService</jdbc-url>
     </data-source>
+    <data-source source="LOCAL" name="PU_HOSPITAL/EclipseLink" uuid="e3dbf246-6323-49d5-9bc2-c2e905953126">
+      <driver-ref>derby.remote</driver-ref>
+      <synchronize>true</synchronize>
+      <imported>true</imported>
+      <remarks>EclipseLink
+
+C:/Users/mjuro/IdeaProjects/HospitalSystemService/src/main/resources/META-INF/persistence.xml</remarks>
+      <jdbc-driver>org.apache.derby.jdbc.ClientDriver</jdbc-driver>
+      <jdbc-url>jdbc:derby://localhost:1527/hospitalSystemService</jdbc-url>
+      <working-dir>$ProjectFileDir$</working-dir>
+    </data-source>
   </component>
 </project>
