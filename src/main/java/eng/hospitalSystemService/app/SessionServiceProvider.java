@@ -1,10 +1,16 @@
 package eng.hospitalSystemService.app;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.regex.Pattern;
+
 
 public class SessionServiceProvider {
 
     public static AlertService getAlertService(HttpServletRequest request) {AlertService alertService = (AlertService) request.getSession().getAttribute("alertService");
         return alertService;
     }
+
+    public static PatternCheckService getPatternCheckService(){
+        return new PatternCheckService();}
+
 }

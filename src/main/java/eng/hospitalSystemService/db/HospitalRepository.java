@@ -54,7 +54,6 @@ public class HospitalRepository {
         try {
             em.getTransaction().begin();
 
-            // zkusit použít em.persist
             em.merge(personalEntity);
             em.getTransaction().commit();
 

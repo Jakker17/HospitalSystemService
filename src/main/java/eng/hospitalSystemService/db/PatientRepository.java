@@ -2,6 +2,7 @@ package eng.hospitalSystemService.db;
 
 import eng.hospitalSystemService.db.entities.PacientEntity;
 import eng.hospitalSystemService.db.entities.PersonalEntity;
+import eng.hospitalSystemService.db.entities.PredpisEntity;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -97,6 +98,18 @@ public class PatientRepository {
         } catch (Exception ex)
         {
             throw new DbException("Failed to update Patient.",ex);
+        }
+    }
+
+    public void insertPrescription(PredpisEntity predpisEntity) {
+        EntityManager em = getEntityManager();
+        try {
+            em.getTransaction().begin();
+            em.persist(predpisEntity);
+            em.getTransaction().commit();
+        } catch (Exception ex)
+        {
+            throw new DbException("Unable to insert Prescrtiption via Repository.",ex);
         }
     }
 }

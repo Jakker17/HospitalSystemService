@@ -36,6 +36,7 @@
     <a href="addNewEmployee.jsp">Přidat zaměstnance</a></br>
     <a href="addNewDepartment.jsp">Přidat Oddělení</a></br>
     <a href="addNewPatient.jsp">Přidat pacienta</a></br>
+    <a href="addNewPrescription.jsp">Přidat předpis</a></br>
 
 </div>
 </body>

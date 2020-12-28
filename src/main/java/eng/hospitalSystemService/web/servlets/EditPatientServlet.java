@@ -16,6 +16,7 @@ public class EditPatientServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         AlertService alertService = SessionServiceProvider.getAlertService(request);
         PersonalService personalService = new PersonalService();
+        PatternCheckService patternCheckService = SessionServiceProvider.getPatternCheckService();
 
         String patientName = request.getParameter("patientName");
         String patientSurname= request.getParameter("patientSurname");
@@ -25,26 +26,17 @@ public class EditPatientServlet extends HttpServlet {
         String patientRoomIdString= request.getParameter("room");
         String patientNursingStaffBirthNumberString= request.getParameter("nursingStaff");
 
-        Pattern pattern = Pattern.compile("[^0-9]");
-        Matcher matcher = pattern.matcher(patientNursingStaffBirthNumberString);
-        boolean isStringContainsSpecialCharacter = matcher.find();
-        if(isStringContainsSpecialCharacter){
+        if(patternCheckService.doPatternCheck("[^0-9]", patientNursingStaffBirthNumberString)){
             alertService.add(Alert.Type.danger,"Nursing staff birthNumber can contain only Numbers.");
             response.sendRedirect("editPatient.jsp?pacientBirthNumber="+patientBirthNumberString);
         }
 
-        pattern = Pattern.compile("[^0-9]");
-        matcher = pattern.matcher(patientRoomIdString);
-        isStringContainsSpecialCharacter = matcher.find();
-        if(isStringContainsSpecialCharacter){
+        if(patternCheckService.doPatternCheck("[^0-9]", patientRoomIdString)){
             alertService.add(Alert.Type.danger,"RoomID can contain only Numbers.");
             response.sendRedirect("editPatient.jsp?pacientBirthNumber="+patientBirthNumberString);
         }
 
-        pattern = Pattern.compile("[^0-9]");
-        matcher = pattern.matcher(patientMedicamentsString);
-        isStringContainsSpecialCharacter = matcher.find();
-        if(isStringContainsSpecialCharacter){
+        if(patternCheckService.doPatternCheck("[^0-9]", patientMedicamentsString)){
             alertService.add(Alert.Type.danger,"Medicaments can contain only Numbers.");
             response.sendRedirect("editPatient.jsp?pacientBirthNumber="+patientBirthNumberString);
         }
@@ -55,6 +47,7 @@ public class EditPatientServlet extends HttpServlet {
         int patientNursingStaffBirthNumber= Integer.parseInt(patientNursingStaffBirthNumberString);
 
         if (personalService.get(patientNursingStaffBirthNumber)==null)alertService.add(Alert.Type.danger,"Not found Personal with this Birth ID.");
+        else if (patientAnamnesis.equals(""))alertService.add(Alert.Type.danger,"Anamnesis cannot be empty.");
         else if (patientAnamnesis.length()>255)alertService.add(Alert.Type.danger,"Anamnesis is too long, only 255 characters.");
         else {
             try {
