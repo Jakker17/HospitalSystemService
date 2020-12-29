@@ -1,7 +1,6 @@
 package eng.hospitalSystemService.db;
 
 import eng.hospitalSystemService.db.entities.PacientEntity;
-import eng.hospitalSystemService.db.entities.PersonalEntity;
 import eng.hospitalSystemService.db.entities.PredpisEntity;
 
 import javax.persistence.EntityManager;
@@ -123,5 +122,44 @@ public class PatientRepository {
         }catch (Exception e){
             throw new DbException("Unable to delete Prescrtiption via Repository",e);
         }
+    }
+
+    public List<PredpisEntity> getAllPrescriptionByPatient(int patientBirthNumber) {
+        EntityManager em = getEntityManager();
+        List<PredpisEntity> ret ;
+
+        try {
+       TypedQuery<PredpisEntity>q = em.createQuery("select i from PredpisEntity i order by i.prescriptionid asc",PredpisEntity.class);
+               ret = q.getResultList();
+
+               ret.removeIf(predpisEntity -> !predpisEntity.getBirtnumberofpatient().equals(patientBirthNumber));
+
+        }catch (Exception e){
+            throw new DbException("Failed to list all prescriptions by Patient Birth number.",e);
+        }
+        return ret;
+    }
+
+    public void deleteAllPrescriptionsByPatient(int patientBirthNumber) {
+        EntityManager em = getEntityManager();
+        List<PredpisEntity> prescriptions;
+        try {
+            TypedQuery<PredpisEntity> q = em.createQuery("select i from PredpisEntity i order by i.prescriptionid asc",PredpisEntity.class);
+            prescriptions = q.getResultList();
+            for (PredpisEntity predpisEntity: prescriptions) {
+                if (predpisEntity.getBirtnumberofpatient().equals(patientBirthNumber))
+                {
+                    em.getTransaction().begin();
+                    em.remove(predpisEntity);
+                    em.getTransaction().commit();
+                }
+            }
+        }
+        catch (Exception e)
+        {
+            throw new DbException("Unable to delete all prescriptions by patientNumber via repository",e);
+        }
+
+
     }
 }

@@ -1,11 +1,7 @@
 package eng.hospitalSystemService.web.servlets;
 
-import eng.hospitalSystemService.app.Alert;
-import eng.hospitalSystemService.app.AlertService;
-import eng.hospitalSystemService.app.PatientService;
-import eng.hospitalSystemService.app.SessionServiceProvider;
+import eng.hospitalSystemService.app.*;
 
-import javax.persistence.criteria.CriteriaBuilder;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -18,17 +14,18 @@ public class DeletePatientServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         AlertService alertService = SessionServiceProvider.getAlertService(request);
         PatientService patientService = new PatientService();
+        PrescriptionService prescriptionService = new PrescriptionService();
 
         String patientBirthNumberString = request.getParameter("patientBN");
 
         int patientBirthNumber = Integer.parseInt(patientBirthNumberString);
 
 
-
         if(patientService.get(patientBirthNumber)==null)alertService.add(Alert.Type.danger,"Patient was already deleted");
         else
         {
         try {
+            prescriptionService.deleteByPatient(patientBirthNumber);
             patientService.delete(patientBirthNumber);
         }
         catch (Exception e){

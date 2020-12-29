@@ -3,7 +3,6 @@ package eng.hospitalSystemService.app;
 import eng.hospitalSystemService.db.PatientRepository;
 import eng.hospitalSystemService.db.entities.PacientEntity;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class PatientService {
@@ -24,8 +23,6 @@ public class PatientService {
 
     }
 
-
-
     public PacientEntity get(int patientBirthNumberString) {
         return new PatientRepository().getPatient(patientBirthNumberString);
     }
@@ -36,8 +33,7 @@ public class PatientService {
 
     public List<PacientEntity> getListOfPatient(){
         PatientRepository patientRepository = new PatientRepository();
-        List<PacientEntity> ret = patientRepository.getAll();
-        return ret;
+        return patientRepository.getAll();
     }
 
     public void delete(int patientBirthNumber) {
@@ -54,7 +50,6 @@ public class PatientService {
         return false;
     }
 
-
     public void update(String patientName, String patientSurname, int patientBirthNumber, String patientAnamnesis, int patientMedicaments, int patientRoomId, int patientNursingStaffBirthNumber) {
         PacientEntity pacientEntity = new PacientEntity();
         pacientEntity.setPacientPersonName(patientName);
@@ -68,4 +63,6 @@ public class PatientService {
         PatientRepository patientRepository= new PatientRepository();
         patientRepository.update(pacientEntity);
     }
+
 }
+

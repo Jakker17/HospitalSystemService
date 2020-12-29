@@ -26,6 +26,7 @@
         <th scope="col">Birth Number</th>
         <th scope="col">Pokoj</th>
         <th scope="col"></th>
+        <th scope="col"></th>
     </tr>
     </thead>
     <tbody>
@@ -35,7 +36,8 @@
             <td>${patient.pacientPersonName}</td>
             <td>${patient.pacientBirthnumber}</td>
             <td>${patient.roomid}</td>
-            <td><a href="editPatient.jsp?pacientBirthNumber=${patient.pacientBirthnumber}" class="btn btn-primary">Upravit</a></td>
+            <td><a href="editPatient.jsp?pacientBirthNumber=${patient.pacientBirthnumber}" class="btn btn-primary">Edit</a></td>
+            <td><a href="listOfPrescriptions.jsp?pacientBirthNumber=${patient.pacientBirthnumber}" class="btn btn-secondary">Prescriptions</a></td>
         </tr>
     </c:forEach>
     </tbody>

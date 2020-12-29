@@ -15,16 +15,18 @@ import java.io.IOException;
 @WebServlet(name = "DeletePrescriptionServlet",urlPatterns = "/deletePrescription")
 public class DeletePrescriptionServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
         AlertService alertService = SessionServiceProvider.getAlertService(request);
         PrescriptionService prescriptionService = new PrescriptionService();
 
+        String prescriptionPatient = request.getParameter("prescriptionBirthNumberOfPatient");
         String prescriptionIdString = request.getParameter("prescriptionID");
+
         int prescriptionId = Integer.parseInt(prescriptionIdString);
 
         prescriptionService.delete(prescriptionId);
-        alertService.add(Alert.Type.success,"successfully deleted Prescription");
-        response.sendRedirect("");//not implemented yet
-
+        alertService.add(Alert.Type.success,"successfully deleted Prescription"+prescriptionPatient);
+        response.sendRedirect("listOfPrescriptions.jsp?pacientBirthNumber="+prescriptionPatient);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
