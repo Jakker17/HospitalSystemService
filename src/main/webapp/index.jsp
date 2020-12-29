@@ -31,6 +31,7 @@
     <h1>Hospital System</h1>
 
     <a href="listOfEmployees.jsp">Seznam zaměstnanců</a></br>
+    <a href="listOfRooms.jsp">Seznam Pokojů</a></br>
     <a href="listOfDepartments.jsp">Seznam Oddělení</a></br>
     <a href="listOfPatients.jsp">Seznam pacientů</a></br>
     <a href="addNewEmployee.jsp">Přidat zaměstnance</a></br>
@@ -38,7 +39,6 @@
     <a href="addNewPatient.jsp">Přidat pacienta</a></br>
     <a href="addNewPrescription.jsp">Přidat předpis</a></br>
     <a href="addNewRoom.jsp">Přidat Pokoj</a></br>
-
 
 </div>
 </body>

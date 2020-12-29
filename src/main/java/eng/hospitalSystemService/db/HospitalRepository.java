@@ -188,4 +188,33 @@ public class HospitalRepository {
             throw new DbException("Unable to find room Capacity",e);}
         return pokojEntity.getCapacity();
     }
+
+    public void deleteRoom(int roomID) {
+        EntityManager em = getEntityManager();
+
+        try {
+            PokojEntity pokojEntity = em.getReference(PokojEntity.class, roomID);
+            em.getTransaction().begin();
+            em.remove(pokojEntity);
+            em.getTransaction().commit();
+        } catch (Exception e)
+        {
+            throw new DbException("Failed to delete room via repository",e);
+        }
+    }
+
+    public List<PokojEntity> getAllRooms() {
+        EntityManager em = getEntityManager();
+        List<PokojEntity> ret;
+        try {
+            TypedQuery<PokojEntity> q = em.createQuery("select i from PokojEntity i order by i.roomid asc",PokojEntity.class);
+            ret = q.getResultList();
+            ret.removeIf(pokojEntity -> pokojEntity.getRoomid() == 0);
+        }
+        catch (Exception e)
+        {
+            throw new DbException("failed to list Rooms",e);
+        }
+        return ret;
+    }
 }

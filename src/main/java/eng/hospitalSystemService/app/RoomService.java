@@ -4,6 +4,8 @@ import eng.hospitalSystemService.db.HospitalRepository;
 import eng.hospitalSystemService.db.PatientRepository;
 import eng.hospitalSystemService.db.entities.PokojEntity;
 
+import java.util.List;
+
 public class RoomService {
     public void create(int roomId, int roomCapacity, int departmentId) {
         HospitalRepository hospitalRepository = new HospitalRepository();
@@ -35,5 +37,21 @@ public class RoomService {
             {
         return true;
             }
+    }
+
+    public void delete(int roomID) {
+        HospitalRepository hospitalRepository = new HospitalRepository();
+        hospitalRepository.deleteRoom(roomID);
+    }
+
+    public List<PokojEntity> getAllRooms(){
+        return new HospitalRepository().getAllRooms();
+    }
+
+    public boolean isRoomEmpty(int roomID) {
+        PatientRepository patientRepository = new PatientRepository();
+        if(patientRepository.getAllFromRoom(roomID)==0) {return true;}
+        else {
+        return false;}
     }
 }

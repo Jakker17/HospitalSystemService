@@ -39,7 +39,6 @@
             <td>${prescription.nameofmedicament}</td>
             <td>${prescription.usageofmedicament}</td>
             <td>
-                </form>
                 <form id="deleteForm" method="post" action="deletePrescription">
                     <input type="hidden" name="prescriptionBirthNumberOfPatient" value="${param.pacientBirthNumber}" >
                     <input type="hidden" name="prescriptionID" value="${prescription.prescriptionid}" />
@@ -69,7 +68,6 @@
             </tr>
         </c:forEach>
         </tbody>
-
     </table>
     <a href="index.jsp" type="btn btn-secondary">Main page</a>
 </div>

@@ -176,4 +176,20 @@ public class PatientRepository {
         }
         return numberOfPatients;
     }
+
+    public int getAllFromRoom(int roomID) {
+        EntityManager em = getEntityManager();
+        int tmp =0;
+        List<PacientEntity> ret;
+        try {
+            TypedQuery<PacientEntity> q = em.createQuery("select i from PacientEntity i order by i.pacientBirthnumber asc",PacientEntity.class);
+            ret = q.getResultList();
+            for (PacientEntity pacientEntity: ret) {
+                if(pacientEntity.getRoomid().equals(roomID))tmp++;
+            }
+        } catch (Exception e) {
+            throw new DbException("failed to list Pacients from Room.",e);
+        }
+        return tmp;
+    }
 }
