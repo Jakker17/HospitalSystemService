@@ -16,7 +16,7 @@ public class PersonalEntity {
     private byte[] saltHash;
 
     @Id
-    @Column(name = "BIRTHNUMBER")
+    @Column(name = "BIRTHNUMBER", nullable = false)
     public int getBirthnumber() {
         return birthnumber;
     }
@@ -26,7 +26,7 @@ public class PersonalEntity {
     }
 
     @Basic
-    @Column(name = "PERSON_NAME")
+    @Column(name = "PERSON_NAME", nullable = true, length = 15)
     public String getPersonName() {
         return personName;
     }
@@ -36,7 +36,7 @@ public class PersonalEntity {
     }
 
     @Basic
-    @Column(name = "PERSON_SURNAME")
+    @Column(name = "PERSON_SURNAME", nullable = false, length = 20)
     public String getPersonSurname() {
         return personSurname;
     }
@@ -46,7 +46,7 @@ public class PersonalEntity {
     }
 
     @Basic
-    @Column(name = "PROFFESION")
+    @Column(name = "PROFFESION", nullable = false, length = 30)
     public String getProffesion() {
         return proffesion;
     }
@@ -56,7 +56,7 @@ public class PersonalEntity {
     }
 
     @Basic
-    @Column(name = "DEPARTMENT")
+    @Column(name = "DEPARTMENT", nullable = true)
     public Integer getDepartment() {
         return department;
     }
@@ -66,7 +66,7 @@ public class PersonalEntity {
     }
 
     @Basic
-    @Column(name = "LOGIN_NAME")
+    @Column(name = "LOGIN_NAME", nullable = false, length = 23)
     public String getLoginName() {
         return loginName;
     }
@@ -76,7 +76,7 @@ public class PersonalEntity {
     }
 
     @Basic
-    @Column(name = "PASSWORD_HASH")
+    @Column(name = "PASSWORD_HASH", nullable = false)
     public byte[] getPasswordHash() {
         return passwordHash;
     }
@@ -86,7 +86,7 @@ public class PersonalEntity {
     }
 
     @Basic
-    @Column(name = "SALT_HASH")
+    @Column(name = "SALT_HASH", nullable = false)
     public byte[] getSaltHash() {
         return saltHash;
     }

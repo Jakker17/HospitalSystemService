@@ -9,12 +9,11 @@ public class PacientEntity {
     private String pacientPersonName;
     private String pacientPersonSurname;
     private String anamnesis;
-    private Integer medicamentsid;
     private Integer roomid;
     private Integer nursingStaffBirthnumber;
 
     @Id
-    @Column(name = "PACIENT_BIRTHNUMBER")
+    @Column(name = "PACIENT_BIRTHNUMBER", nullable = false)
     public int getPacientBirthnumber() {
         return pacientBirthnumber;
     }
@@ -24,7 +23,7 @@ public class PacientEntity {
     }
 
     @Basic
-    @Column(name = "PACIENT_PERSON_NAME")
+    @Column(name = "PACIENT_PERSON_NAME", nullable = true, length = 60)
     public String getPacientPersonName() {
         return pacientPersonName;
     }
@@ -34,7 +33,7 @@ public class PacientEntity {
     }
 
     @Basic
-    @Column(name = "PACIENT_PERSON_SURNAME")
+    @Column(name = "PACIENT_PERSON_SURNAME", nullable = false, length = 60)
     public String getPacientPersonSurname() {
         return pacientPersonSurname;
     }
@@ -44,7 +43,7 @@ public class PacientEntity {
     }
 
     @Basic
-    @Column(name = "ANAMNESIS")
+    @Column(name = "ANAMNESIS", nullable = false, length = 255)
     public String getAnamnesis() {
         return anamnesis;
     }
@@ -53,18 +52,9 @@ public class PacientEntity {
         this.anamnesis = anamnesis;
     }
 
-    @Basic
-    @Column(name = "MEDICAMENTSID")
-    public Integer getMedicamentsid() {
-        return medicamentsid;
-    }
-
-    public void setMedicamentsid(Integer medicamentsid) {
-        this.medicamentsid = medicamentsid;
-    }
 
     @Basic
-    @Column(name = "ROOMID")
+    @Column(name = "ROOMID", nullable = true)
     public Integer getRoomid() {
         return roomid;
     }
@@ -86,8 +76,6 @@ public class PacientEntity {
         if (pacientPersonSurname != null ? !pacientPersonSurname.equals(that.pacientPersonSurname) : that.pacientPersonSurname != null)
             return false;
         if (anamnesis != null ? !anamnesis.equals(that.anamnesis) : that.anamnesis != null) return false;
-        if (medicamentsid != null ? !medicamentsid.equals(that.medicamentsid) : that.medicamentsid != null)
-            return false;
         if (roomid != null ? !roomid.equals(that.roomid) : that.roomid != null) return false;
 
         return true;
@@ -99,13 +87,12 @@ public class PacientEntity {
         result = 31 * result + (pacientPersonName != null ? pacientPersonName.hashCode() : 0);
         result = 31 * result + (pacientPersonSurname != null ? pacientPersonSurname.hashCode() : 0);
         result = 31 * result + (anamnesis != null ? anamnesis.hashCode() : 0);
-        result = 31 * result + (medicamentsid != null ? medicamentsid.hashCode() : 0);
         result = 31 * result + (roomid != null ? roomid.hashCode() : 0);
         return result;
     }
 
     @Basic
-    @Column(name = "NURSING_STAFF_BIRTHNUMBER")
+    @Column(name = "NURSING_STAFF_BIRTHNUMBER", nullable = true)
     public Integer getNursingStaffBirthnumber() {
         return nursingStaffBirthnumber;
     }

@@ -47,10 +47,6 @@
             <input value="${patient.anamnesis}" type="text" name="anamnesis" class="form-control"   id="anamnesis">
         </div>
         <div class="form-group">
-            <label for="medicaments">Medicaments</label>
-            <input value="${patient.medicamentsid}" type="text" name="medicaments" class="form-control"   id="medicaments">
-        </div>
-        <div class="form-group">
             <label for="room">Room</label>
             <input value="${patient.roomid}" type="text" name="room" class="form-control"   id="room">
         </div>

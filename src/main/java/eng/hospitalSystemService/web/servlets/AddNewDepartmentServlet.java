@@ -1,9 +1,6 @@
 package eng.hospitalSystemService.web.servlets;
 
-import eng.hospitalSystemService.app.Alert;
-import eng.hospitalSystemService.app.AlertService;
-import eng.hospitalSystemService.app.DepartmentService;
-import eng.hospitalSystemService.app.SessionServiceProvider;
+import eng.hospitalSystemService.app.*;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -17,16 +14,13 @@ import java.util.regex.Pattern;
 @WebServlet(name = "AddNewDepartmentServlet",urlPatterns = "/addNewDepartment")
 public class AddNewDepartmentServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        AlertService alertService = SessionServiceProvider.getAlertService(request);
+        DepartmentService departmentService= new DepartmentService();
+        PatternCheckService patternCheckService = SessionServiceProvider.getPatternCheckService();
 
         String departmentIdString = request.getParameter("departmentNumber");
         String departmentName= request.getParameter("departmentName");
-
-        AlertService alertService = SessionServiceProvider.getAlertService(request);
-        DepartmentService departmentService= new DepartmentService();
-
-        Pattern pattern = Pattern.compile("[^0-9]");
-        Matcher matcher = pattern.matcher(departmentIdString);
-        boolean isStringContainsSpecialCharacter = matcher.find();
+        int departmentID;
 
         if (departmentService.get(departmentIdString)!=null)
         {
@@ -34,7 +28,7 @@ public class AddNewDepartmentServlet extends HttpServlet {
             response.sendRedirect("addNewDepartment.jsp");
         }
 
-        if (isStringContainsSpecialCharacter)
+        if (patternCheckService.doPatternCheck("[^0-9]",departmentIdString))
         {
             alertService.add(Alert.Type.danger,"Department number must contain only numbers.");
             response.sendRedirect("addNewDepartment.jsp");
@@ -46,7 +40,7 @@ public class AddNewDepartmentServlet extends HttpServlet {
             response.sendRedirect("addNewDepartment.jsp");
         }
 
-        int departmentID = Integer.parseInt(departmentIdString);
+        departmentID= Integer.parseInt(departmentIdString);
 
         if(departmentID>999||departmentID<0)alertService.add(Alert.Type.danger,"Department number must be between 0 and 1 000");
         else if(departmentIdString.length()>3)alertService.add(Alert.Type.danger,"Department number must be between 0 and 1 000");

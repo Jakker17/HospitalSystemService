@@ -9,7 +9,7 @@ public class OddeleniEntity {
     private String nazevoddeleni;
 
     @Id
-    @Column(name = "IDODDELENI")
+    @Column(name = "IDODDELENI", nullable = false)
     public int getIdoddeleni() {
         return idoddeleni;
     }
@@ -19,7 +19,7 @@ public class OddeleniEntity {
     }
 
     @Basic
-    @Column(name = "NAZEVODDELENI")
+    @Column(name = "NAZEVODDELENI", nullable = false, length = 120)
     public String getNazevoddeleni() {
         return nazevoddeleni;
     }

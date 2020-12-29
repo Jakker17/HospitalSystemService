@@ -21,7 +21,6 @@ public class EditPatientServlet extends HttpServlet {
         String patientSurname= request.getParameter("patientSurname");
         String patientBirthNumberString= request.getParameter("patientBirthNumber");
         String patientAnamnesis= request.getParameter("anamnesis");
-        String patientMedicamentsString= request.getParameter("medicaments");
         String patientRoomIdString= request.getParameter("room");
         String patientNursingStaffBirthNumberString= request.getParameter("nursingStaff");
 
@@ -35,10 +34,6 @@ public class EditPatientServlet extends HttpServlet {
             response.sendRedirect("editPatient.jsp?pacientBirthNumber="+patientBirthNumberString);
         }
 
-        if(patternCheckService.doPatternCheck("[^0-9]", patientMedicamentsString)){
-            alertService.add(Alert.Type.danger,"Medicaments can contain only Numbers.");
-            response.sendRedirect("editPatient.jsp?pacientBirthNumber="+patientBirthNumberString);
-        }
 
         if(patientService.get(patientBirthNumberString)==null){
             alertService.add(Alert.Type.danger,"Patient must have been already deleted.");
@@ -46,7 +41,7 @@ public class EditPatientServlet extends HttpServlet {
         }
 
         int patientBirthNumber= Integer.parseInt(patientBirthNumberString);
-        int patientMedicaments= Integer.parseInt(patientMedicamentsString);
+
         int patientRoomId= Integer.parseInt(patientRoomIdString);
         int patientNursingStaffBirthNumber= Integer.parseInt(patientNursingStaffBirthNumberString);
 
@@ -56,7 +51,7 @@ public class EditPatientServlet extends HttpServlet {
         else {
             try {
 
-                patientService.update(patientName, patientSurname, patientBirthNumber, patientAnamnesis, patientMedicaments, patientRoomId, patientNursingStaffBirthNumber);
+                patientService.update(patientName, patientSurname, patientBirthNumber, patientAnamnesis, patientRoomId, patientNursingStaffBirthNumber);
             } catch (Exception e) {
                 throw new RuntimeException("failed to update Patient through Servlet.", e);
             }

@@ -17,14 +17,14 @@ public class AddNewPatientServlet extends HttpServlet {
 
         AlertService alertService = SessionServiceProvider.getAlertService(request);
         PatientService patientService = new PatientService();
-
         PersonalService personalService = new PersonalService();
+        PatternCheckService patternCheckService = SessionServiceProvider.getPatternCheckService();
+        RoomService roomService = new RoomService();
 
         String patientBirthNumberString = request.getParameter("patientBirthNumber");
         String patientName = request.getParameter("patientName");
         String patientSurname = request.getParameter("patientSurname");
         String anamnesis = request.getParameter("anamnesis");
-        String medicamentsString = request.getParameter("medicaments");
         String personalSurname = request.getParameter("personalSurname");
         String roomIDString = request.getParameter("roomID");
 
@@ -35,27 +35,25 @@ public class AddNewPatientServlet extends HttpServlet {
             response.sendRedirect("addNewPatient.jsp");
         }
 
-        Pattern pattern = Pattern.compile("[^a-zA-Z]");
-        Matcher matcher = pattern.matcher(patientName);
-        boolean isStringContainsSpecialCharacter = matcher.find();
-        if(isStringContainsSpecialCharacter){
+        if (roomService.getRoom(roomIDString)==null){
+            alertService.add(Alert.Type.danger, "There is no room with this ID.");
+        }
+
+        if (roomIDString.equals(""))roomIDString="0";
+        if(patternCheckService.doPatternCheck("[^a-zA-Z]",patientSurname)){
             alertService.add(Alert.Type.danger,"Surname cannot contain numbers and special characters.");
             response.sendRedirect("addNewPatient.jsp");
         }
-        pattern = Pattern.compile("[^0-9]");
-        matcher = pattern.matcher(patientBirthNumberString);
-        isStringContainsSpecialCharacter = matcher.find();
-        if(isStringContainsSpecialCharacter){
+
+        if(patternCheckService.doPatternCheck("[^0-9]",patientBirthNumberString)){
             alertService.add(Alert.Type.danger,"BirthNumber can contain only Numbers.");
             response.sendRedirect("addNewPatient.jsp");
         }
-        matcher = pattern.matcher(roomIDString);
-        isStringContainsSpecialCharacter = matcher.find();
-        if(isStringContainsSpecialCharacter){
+
+        if(patternCheckService.doPatternCheck("[^0-9]",roomIDString)){
             alertService.add(Alert.Type.danger,"Room number can contain only Numbers.");
             response.sendRedirect("addNewPatient.jsp");
         }
-
 
         if (personalService.get(patientBirthNumberString)!=null){
             if (!personalService.get(patientBirthNumberString).getPersonSurname().equals(patientSurname))
@@ -63,7 +61,7 @@ public class AddNewPatientServlet extends HttpServlet {
                 alertService.add(Alert.Type.danger,"there is already Personal with this number but different name");
             }
         }
-        else if (personalSurname.equals(""))alertService.add(Alert.Type.danger,"Personal cannot be empty.");
+        else if(personalSurname.equals(""))alertService.add(Alert.Type.danger,"Personal cannot be empty.");
         else if(patientSurname.equals(""))alertService.add(Alert.Type.danger, "Patient Surname cannot be empty.");
         else if(patientService.get(patientBirthNumberString)!=null)alertService.add(Alert.Type.danger, "Patient with this Birth number already exists.");
         else if(patientBirthNumberString.equals(""))alertService.add(Alert.Type.danger,"Birth Number of patient cannot be empty.");
@@ -73,13 +71,15 @@ public class AddNewPatientServlet extends HttpServlet {
         {
             int patientBirthNumber = Integer.parseInt(patientBirthNumberString);
             int roomID = Integer.parseInt(roomIDString);
-            int medicaments = Integer.parseInt(medicamentsString);
 
             if (patientBirthNumber < 100000 || patientBirthNumber > 999999)alertService.add(Alert.Type.danger, "patient birthNumber can be only within 100000 and 999999 ");
+            else if(!roomService.checkAvailiabilityOfRoom(roomID))alertService.add(Alert.Type.danger,"At this room is no Space, select other room.");
             else {
-                try {
-                    patientService.create(patientBirthNumber, patientName, patientSurname, anamnesis, medicaments, personalBirthNumber, roomID);
-                } catch (Exception e) {
+                try
+                {
+                    patientService.create(patientBirthNumber, patientName, patientSurname, anamnesis, personalBirthNumber, roomID);
+                } catch (Exception e)
+                {
                     throw new RuntimeException("Failed to store Patient via servlet");
                 }
                 alertService.add(Alert.Type.success, "Patient successfully added.");

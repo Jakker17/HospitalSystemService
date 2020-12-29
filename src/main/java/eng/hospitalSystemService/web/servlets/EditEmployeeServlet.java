@@ -8,13 +8,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.sql.Blob;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 @WebServlet(name = "EditEmployeeServlet",urlPatterns = "/editEmployee")
 public class EditEmployeeServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        PersonalService personalService = new PersonalService();
+        AlertService alertService = SessionServiceProvider.getAlertService(request);
+        PatternCheckService patternCheckService = SessionServiceProvider.getPatternCheckService();
 
         String personalNumberString = request.getParameter("birthNumber");
         String firstName = request.getParameter("name");
@@ -25,14 +25,7 @@ public class EditEmployeeServlet extends HttpServlet {
         String passwordHashString = request.getParameter("password");
         String saltString = request.getParameter("salt");
 
-        PersonalService personalService = new PersonalService();
-        AlertService alertService = SessionServiceProvider.getAlertService(request);
-
-        Pattern pattern = Pattern.compile("[^0-9]");
-        Matcher matcher = pattern.matcher(departmentString);
-        boolean isStringContainsSpecialCharacter = matcher.find();
-
-        if(isStringContainsSpecialCharacter)
+        if(patternCheckService.doPatternCheck("[^0-9]",departmentString))
         {
             alertService.add(Alert.Type.danger,"Department number must contain only numbers.");
             response.sendRedirect("editEmployee.jsp?birthNumber="+personalNumberString);
@@ -50,17 +43,11 @@ public class EditEmployeeServlet extends HttpServlet {
             alertService.add(Alert.Type.danger,"User not found or already deleted.");
             response.sendRedirect("listOfEmployees.jsp");
         }
-
         else
-
         {
-            Pattern pattern1 = Pattern.compile("[^a-zA-Z]");
-            matcher = pattern1.matcher(surName);
-            isStringContainsSpecialCharacter = matcher.find();
-
             int department=0;
             if (!departmentString.isEmpty()) department= Integer.parseInt(departmentString);
-            if(isStringContainsSpecialCharacter)alertService.add(Alert.Type.danger,"Surname cannot contains special characters or numbers.");
+            if(patternCheckService.doPatternCheck("[^a-zA-Z]",surName))alertService.add(Alert.Type.danger,"Surname cannot contains special characters or numbers.");
             else if(surName.isEmpty())alertService.add(Alert.Type.danger,"Surname cannot be empty.");
             else if(passwordHashString.length()<8)alertService.add(Alert.Type.danger,"Password has to have at least 8 characters.");
             else if(department>999||department<0)alertService.add(Alert.Type.danger,"Department number must be between 0 and 1 000");

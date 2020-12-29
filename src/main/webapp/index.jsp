@@ -37,6 +37,8 @@
     <a href="addNewDepartment.jsp">Přidat Oddělení</a></br>
     <a href="addNewPatient.jsp">Přidat pacienta</a></br>
     <a href="addNewPrescription.jsp">Přidat předpis</a></br>
+    <a href="addNewRoom.jsp">Přidat Pokoj</a></br>
+
 
 </div>
 </body>

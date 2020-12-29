@@ -2,11 +2,9 @@ package eng.hospitalSystemService.db;
 
 import eng.hospitalSystemService.db.entities.OddeleniEntity;
 import eng.hospitalSystemService.db.entities.PersonalEntity;
+import eng.hospitalSystemService.db.entities.PokojEntity;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-import javax.persistence.TypedQuery;
+import javax.persistence.*;
 import java.util.List;
 
 public class HospitalRepository {
@@ -104,7 +102,6 @@ public class HospitalRepository {
         return ret;
     }
 
-
     public void insertDepartment(OddeleniEntity oddeleniEntity){
 
         EntityManager em = getEntityManager();
@@ -159,5 +156,36 @@ public class HospitalRepository {
 
             throw new DbException("Failed to delete Department by the ID"+ departmentID,ex);
         }
+    }
+
+    public void insertRoom(PokojEntity pokojEntity) {
+        EntityManager em = getEntityManager();
+        try {
+            em.getTransaction().begin();
+            em.persist(pokojEntity);
+            em.getTransaction().commit();
+        }catch (Exception e)
+        {
+            throw new DbException("Unable to add room via repository",e);
+        }
+    }
+
+    public PokojEntity getRoom(int roomID){
+        EntityManager em = getEntityManager();
+        PokojEntity ret;
+        try {
+            ret = em.find(PokojEntity.class,roomID);
+        }catch (Exception e){throw new DbException("Failed to get room by ID "+roomID,e);}
+        return ret;
+    }
+
+    public int getRoomCapacity(int roomID) {
+        EntityManager em = getEntityManager();
+        PokojEntity pokojEntity;
+        try {
+            pokojEntity = em.find(PokojEntity.class,roomID);
+        }catch (Exception e){
+            throw new DbException("Unable to find room Capacity",e);}
+        return pokojEntity.getCapacity();
     }
 }

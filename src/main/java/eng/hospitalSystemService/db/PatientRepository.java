@@ -162,4 +162,18 @@ public class PatientRepository {
 
 
     }
+
+    public int getNumberOfPatientsAtRoom(int roomID) {
+        EntityManager em = getEntityManager();
+        int numberOfPatients=0;
+        List<PacientEntity> patients;
+        patients= getAll();
+        for (PacientEntity pacientEntity:patients) {
+            if (pacientEntity.getRoomid()==roomID)
+            {
+                numberOfPatients++;
+            }
+        }
+        return numberOfPatients;
+    }
 }

@@ -10,8 +10,9 @@ public class PredpisEntity {
     private String usageofmedicament;
     private Integer birtnumberofpatient;
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "PRESCRIPTIONID")
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "PRESCRIPTIONID", nullable = false)
     public int getPrescriptionid() {
         return prescriptionid;
     }
@@ -21,7 +22,7 @@ public class PredpisEntity {
     }
 
     @Basic
-    @Column(name = "NAMEOFMEDICAMENT")
+    @Column(name = "NAMEOFMEDICAMENT", nullable = true, length = 60)
     public String getNameofmedicament() {
         return nameofmedicament;
     }
@@ -31,7 +32,7 @@ public class PredpisEntity {
     }
 
     @Basic
-    @Column(name = "USAGEOFMEDICAMENT")
+    @Column(name = "USAGEOFMEDICAMENT", nullable = true, length = 255)
     public String getUsageofmedicament() {
         return usageofmedicament;
     }
@@ -41,7 +42,7 @@ public class PredpisEntity {
     }
 
     @Basic
-    @Column(name = "BIRTNUMBEROFPATIENT")
+    @Column(name = "BIRTNUMBEROFPATIENT", nullable = true)
     public Integer getBirtnumberofpatient() {
         return birtnumberofpatient;
     }

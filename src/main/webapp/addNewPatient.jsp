@@ -45,10 +45,6 @@
             <input type="text" name="anamnesis" id="anamnesis" class="form-control">
         </div>
         <div class="form-group">
-            <label for="medicaments">Léky</label>
-            <input type="text" name="medicaments" id="medicaments" class="form-control">
-        </div>
-        <div class="form-group">
             <label for="personalSurname">prijmeni ošetřovatele</label>
             <input type="text" name="personalSurname" id="personalSurname" class="form-control">
         </div>

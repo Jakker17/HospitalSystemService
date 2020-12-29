@@ -7,7 +7,7 @@ import java.util.List;
 
 public class PatientService {
 
-    public  void create(int patientBirthNumber, String patientName, String patientSurname, String anamnesis, int medicaments, int personalBirthNumber, int roomID) {
+    public  void create(int patientBirthNumber, String patientName, String patientSurname, String anamnesis, int personalBirthNumber, int roomID) {
 
         PatientRepository patientRepository = new PatientRepository();
         PacientEntity pacientEntity = new PacientEntity();
@@ -15,7 +15,6 @@ public class PatientService {
         pacientEntity.setPacientPersonName(patientName);
         pacientEntity.setPacientPersonSurname(patientSurname);
         pacientEntity.setAnamnesis(anamnesis);
-        pacientEntity.setMedicamentsid(medicaments);
         pacientEntity.setNursingStaffBirthnumber(personalBirthNumber);
         pacientEntity.setRoomid(roomID);
 
@@ -50,13 +49,12 @@ public class PatientService {
         return false;
     }
 
-    public void update(String patientName, String patientSurname, int patientBirthNumber, String patientAnamnesis, int patientMedicaments, int patientRoomId, int patientNursingStaffBirthNumber) {
+    public void update(String patientName, String patientSurname, int patientBirthNumber, String patientAnamnesis, int patientRoomId, int patientNursingStaffBirthNumber) {
         PacientEntity pacientEntity = new PacientEntity();
         pacientEntity.setPacientPersonName(patientName);
         pacientEntity.setPacientPersonSurname(patientSurname);
         pacientEntity.setPacientBirthnumber(patientBirthNumber);
         pacientEntity.setAnamnesis(patientAnamnesis);
-        pacientEntity.setMedicamentsid(patientMedicaments);
         pacientEntity.setRoomid(patientRoomId);
         pacientEntity.setNursingStaffBirthnumber(patientNursingStaffBirthNumber);
 

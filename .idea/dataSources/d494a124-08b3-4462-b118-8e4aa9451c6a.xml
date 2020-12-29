@@ -21,169 +21,207 @@
     <table id="14" parent="2" name="ODDELENI"/>
     <table id="15" parent="2" name="PACIENT"/>
     <table id="16" parent="2" name="PERSONAL"/>
-    <table id="17" parent="2" name="PREDPIS"/>
-    <column id="18" parent="14" name="IDODDELENI">
+    <table id="17" parent="2" name="POKOJ"/>
+    <table id="18" parent="2" name="PREDPIS"/>
+    <column id="19" parent="14" name="IDODDELENI">
       <Position>1</Position>
       <DataType>INTEGER|4s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="19" parent="14" name="NAZEVODDELENI">
+    <column id="20" parent="14" name="NAZEVODDELENI">
       <Position>2</Position>
       <DataType>VARCHAR(120)|12s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <index id="20" parent="14" name="SQL0000000000-c851401a-0176-9ab0-59e8-00001b28e0f8">
+    <index id="21" parent="14" name="SQL0000000000-c851401a-0176-9ab0-59e8-00001b28e0f8">
       <ColNames>IDODDELENI</ColNames>
       <Unique>1</Unique>
     </index>
-    <key id="21" parent="14" name="SQL0000000000-c851401a-0176-9ab0-59e8-00001b28e0f8">
+    <key id="22" parent="14" name="SQL0000000000-c851401a-0176-9ab0-59e8-00001b28e0f8">
       <ColNames>IDODDELENI</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="22" parent="15" name="PACIENT_BIRTHNUMBER">
+    <column id="23" parent="15" name="PACIENT_BIRTHNUMBER">
       <Position>1</Position>
       <DataType>INTEGER|4s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="23" parent="15" name="PACIENT_PERSON_NAME">
+    <column id="24" parent="15" name="PACIENT_PERSON_NAME">
       <Position>2</Position>
       <DataType>VARCHAR(60)|12s</DataType>
     </column>
-    <column id="24" parent="15" name="PACIENT_PERSON_SURNAME">
+    <column id="25" parent="15" name="PACIENT_PERSON_SURNAME">
       <Position>3</Position>
       <DataType>VARCHAR(60)|12s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="25" parent="15" name="ANAMNESIS">
+    <column id="26" parent="15" name="ANAMNESIS">
       <Position>4</Position>
       <DataType>VARCHAR(255)|12s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="26" parent="15" name="MEDICAMENTSID">
+    <column id="27" parent="15" name="NURSING_STAFF_BIRTHNUMBER">
       <Position>5</Position>
       <DataType>INTEGER|4s</DataType>
     </column>
-    <column id="27" parent="15" name="NURSING_STAFF_BIRTHNUMBER">
+    <column id="28" parent="15" name="ROOMID">
       <Position>6</Position>
       <DataType>INTEGER|4s</DataType>
     </column>
-    <column id="28" parent="15" name="ROOMID">
-      <Position>7</Position>
-      <DataType>INTEGER|4s</DataType>
-    </column>
-    <index id="29" parent="15" name="SQL0000000000-e5214067-0176-a477-d019-00001b28ed78">
+    <index id="29" parent="15" name="SQL0000000003-3e7bc346-0176-ada5-55d3-00001b28ed78">
       <ColNames>PACIENT_BIRTHNUMBER</ColNames>
       <Unique>1</Unique>
     </index>
-    <index id="30" parent="15" name="SQL0000000001-f55fc0a6-0176-a477-d019-00001b28ed78">
+    <index id="30" parent="15" name="SQL0000000004-16920391-0176-ada5-55d3-00001b28ed78">
       <ColNames>NURSING_STAFF_BIRTHNUMBER</ColNames>
     </index>
-    <key id="31" parent="15" name="SQL0000000000-e5214067-0176-a477-d019-00001b28ed78">
+    <index id="31" parent="15" name="SQL0000000008-f42b44f7-0176-ada5-55d3-00001b28ed78">
+      <ColNames>ROOMID</ColNames>
+    </index>
+    <key id="32" parent="15" name="SQL0000000003-3e7bc346-0176-ada5-55d3-00001b28ed78">
       <ColNames>PACIENT_BIRTHNUMBER</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="32" parent="15" name="SQL0000000001-f55fc0a6-0176-a477-d019-00001b28ed78">
+    <foreign-key id="33" parent="15" name="SQL0000000004-16920391-0176-ada5-55d3-00001b28ed78">
       <ColNames>NURSING_STAFF_BIRTHNUMBER</ColNames>
       <RefTableName>PERSONAL</RefTableName>
       <RefKeyName>SQL0000000081-017d8124-0176-7137-b9dc-00000b300000</RefKeyName>
       <RefColNames>BIRTHNUMBER</RefColNames>
     </foreign-key>
-    <column id="33" parent="16" name="BIRTHNUMBER">
+    <foreign-key id="34" parent="15" name="SQL0000000008-f42b44f7-0176-ada5-55d3-00001b28ed78">
+      <ColNames>ROOMID</ColNames>
+      <RefTableName>POKOJ</RefTableName>
+      <RefKeyName>SQL0000000000-8c9400a1-0176-ada5-55d3-00001b28ed78</RefKeyName>
+      <RefColNames>ROOMID</RefColNames>
+    </foreign-key>
+    <column id="35" parent="16" name="BIRTHNUMBER">
       <Position>1</Position>
       <DataType>INTEGER|4s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="34" parent="16" name="PERSON_NAME">
+    <column id="36" parent="16" name="PERSON_NAME">
       <Position>2</Position>
       <DataType>VARCHAR(15)|12s</DataType>
     </column>
-    <column id="35" parent="16" name="PERSON_SURNAME">
+    <column id="37" parent="16" name="PERSON_SURNAME">
       <Position>3</Position>
       <DataType>VARCHAR(20)|12s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="36" parent="16" name="PROFFESION">
+    <column id="38" parent="16" name="PROFFESION">
       <Position>4</Position>
       <DataType>VARCHAR(30)|12s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="37" parent="16" name="DEPARTMENT">
+    <column id="39" parent="16" name="DEPARTMENT">
       <Position>5</Position>
       <DataType>INTEGER|4s</DataType>
     </column>
-    <column id="38" parent="16" name="LOGIN_NAME">
+    <column id="40" parent="16" name="LOGIN_NAME">
       <Position>6</Position>
       <DataType>VARCHAR(23)|12s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="39" parent="16" name="PASSWORD_HASH">
+    <column id="41" parent="16" name="PASSWORD_HASH">
       <Position>7</Position>
       <DataType>BLOB|2004s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="40" parent="16" name="SALT_HASH">
+    <column id="42" parent="16" name="SALT_HASH">
       <Position>8</Position>
       <DataType>BLOB|2004s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <index id="41" parent="16" name="SQL0000000081-017d8124-0176-7137-b9dc-00000b300000">
+    <index id="43" parent="16" name="SQL0000000081-017d8124-0176-7137-b9dc-00000b300000">
       <ColNames>BIRTHNUMBER</ColNames>
       <Unique>1</Unique>
     </index>
-    <index id="42" parent="16" name="SQL0000000082-69c68125-0176-7137-b9dc-00000b300000">
+    <index id="44" parent="16" name="SQL0000000082-69c68125-0176-7137-b9dc-00000b300000">
       <ColNames>LOGIN_NAME</ColNames>
       <Unique>1</Unique>
     </index>
-    <index id="43" parent="16" name="SQL0000000002-070a00b0-0176-9ab0-59e8-00001b28e0f8">
+    <index id="45" parent="16" name="SQL0000000002-070a00b0-0176-9ab0-59e8-00001b28e0f8">
       <ColNames>DEPARTMENT</ColNames>
     </index>
-    <key id="44" parent="16" name="SQL0000000081-017d8124-0176-7137-b9dc-00000b300000">
+    <key id="46" parent="16" name="SQL0000000081-017d8124-0176-7137-b9dc-00000b300000">
       <ColNames>BIRTHNUMBER</ColNames>
       <Primary>1</Primary>
     </key>
-    <key id="45" parent="16" name="SQL0000000082-69c68125-0176-7137-b9dc-00000b300000">
+    <key id="47" parent="16" name="SQL0000000082-69c68125-0176-7137-b9dc-00000b300000">
       <ColNames>LOGIN_NAME</ColNames>
     </key>
-    <foreign-key id="46" parent="16" name="SQL0000000002-070a00b0-0176-9ab0-59e8-00001b28e0f8">
+    <foreign-key id="48" parent="16" name="SQL0000000002-070a00b0-0176-9ab0-59e8-00001b28e0f8">
       <ColNames>DEPARTMENT</ColNames>
       <RefTableName>ODDELENI</RefTableName>
       <RefKeyName>SQL0000000000-c851401a-0176-9ab0-59e8-00001b28e0f8</RefKeyName>
       <RefColNames>IDODDELENI</RefColNames>
     </foreign-key>
-    <column id="47" parent="17" name="PRESCRIPTIONID">
+    <column id="49" parent="17" name="ROOMID">
+      <Position>1</Position>
+      <DataType>INTEGER|4s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="50" parent="17" name="CAPACITY">
+      <Position>2</Position>
+      <DataType>INTEGER|4s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="51" parent="17" name="DEPARTMENTID">
+      <Position>3</Position>
+      <DataType>INTEGER|4s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <index id="52" parent="17" name="SQL0000000000-8c9400a1-0176-ada5-55d3-00001b28ed78">
+      <ColNames>ROOMID</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <index id="53" parent="17" name="SQL0000000001-c0a0c103-0176-ada5-55d3-00001b28ed78">
+      <ColNames>DEPARTMENTID</ColNames>
+    </index>
+    <key id="54" parent="17" name="SQL0000000000-8c9400a1-0176-ada5-55d3-00001b28ed78">
+      <ColNames>ROOMID</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="55" parent="17" name="SQL0000000001-c0a0c103-0176-ada5-55d3-00001b28ed78">
+      <ColNames>DEPARTMENTID</ColNames>
+      <RefTableName>ODDELENI</RefTableName>
+      <RefKeyName>SQL0000000000-c851401a-0176-9ab0-59e8-00001b28e0f8</RefKeyName>
+      <RefColNames>IDODDELENI</RefColNames>
+    </foreign-key>
+    <column id="56" parent="18" name="PRESCRIPTIONID">
       <Position>1</Position>
       <DataType>INTEGER|4s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>null</SequenceIdentity>
       <DefaultExpression>AUTOINCREMENT: start 1 increment 1</DefaultExpression>
     </column>
-    <column id="48" parent="17" name="NAMEOFMEDICAMENT">
+    <column id="57" parent="18" name="NAMEOFMEDICAMENT">
       <Position>2</Position>
       <DataType>VARCHAR(60)|12s</DataType>
     </column>
-    <column id="49" parent="17" name="USAGEOFMEDICAMENT">
+    <column id="58" parent="18" name="USAGEOFMEDICAMENT">
       <Position>3</Position>
       <DataType>VARCHAR(255)|12s</DataType>
     </column>
-    <column id="50" parent="17" name="BIRTNUMBEROFPATIENT">
+    <column id="59" parent="18" name="BIRTNUMBEROFPATIENT">
       <Position>4</Position>
       <DataType>INTEGER|4s</DataType>
     </column>
-    <index id="51" parent="17" name="SQL0000000001-3405c0cb-0176-aa5e-61e5-00001b28ed78">
+    <index id="60" parent="18" name="SQL0000000006-40558464-0176-ada5-55d3-00001b28ed78">
       <ColNames>PRESCRIPTIONID</ColNames>
       <Unique>1</Unique>
     </index>
-    <index id="52" parent="17" name="SQL0000000002-c934c123-0176-aa5e-61e5-00001b28ed78">
+    <index id="61" parent="18" name="SQL0000000007-1d5e44af-0176-ada5-55d3-00001b28ed78">
       <ColNames>BIRTNUMBEROFPATIENT</ColNames>
     </index>
-    <key id="53" parent="17" name="SQL0000000001-3405c0cb-0176-aa5e-61e5-00001b28ed78">
+    <key id="62" parent="18" name="SQL0000000006-40558464-0176-ada5-55d3-00001b28ed78">
       <ColNames>PRESCRIPTIONID</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="54" parent="17" name="SQL0000000002-c934c123-0176-aa5e-61e5-00001b28ed78">
+    <foreign-key id="63" parent="18" name="SQL0000000007-1d5e44af-0176-ada5-55d3-00001b28ed78">
       <ColNames>BIRTNUMBEROFPATIENT</ColNames>
       <RefTableName>PACIENT</RefTableName>
-      <RefKeyName>SQL0000000000-e5214067-0176-a477-d019-00001b28ed78</RefKeyName>
+      <RefKeyName>SQL0000000003-3e7bc346-0176-ada5-55d3-00001b28ed78</RefKeyName>
       <RefColNames>PACIENT_BIRTHNUMBER</RefColNames>
     </foreign-key>
   </database-model>
