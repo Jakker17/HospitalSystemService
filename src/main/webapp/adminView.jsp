@@ -31,7 +31,6 @@
     <div>
         <h2>Personal</h2>
         <a href="addNewEmployee.jsp"class="btn btn-secondary">Add new employee</a>
-        <a href="editEmployee.jsp"class="btn btn-secondary">Edit employee</a>
         <a href="listOfEmployees.jsp"class="btn btn-secondary">list of employees</a>
     </div>
 </div>

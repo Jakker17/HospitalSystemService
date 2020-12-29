@@ -7,6 +7,7 @@ import eng.hospitalSystemService.db.entities.PokojEntity;
 import java.util.List;
 
 public class RoomService {
+
     public void create(int roomId, int roomCapacity, int departmentId) {
         HospitalRepository hospitalRepository = new HospitalRepository();
         PokojEntity pokojEntity = new PokojEntity();
@@ -16,6 +17,7 @@ public class RoomService {
 
         hospitalRepository.insertRoom(pokojEntity);
     }
+
     public PokojEntity getRoom(int roomID){
         return new HospitalRepository().getRoom(roomID);
     }
@@ -53,5 +55,15 @@ public class RoomService {
         if(patientRepository.getAllFromRoom(roomID)==0) {return true;}
         else {
         return false;}
+    }
+
+    public void update(int roomId, int roomCapacity, int departmentId) {
+        PokojEntity pokojEntity = new PokojEntity();
+        pokojEntity.setRoomid(roomId);
+        pokojEntity.setCapacity(roomCapacity);
+        pokojEntity.setDepartmentid(departmentId);
+
+        HospitalRepository hospitalRepository = new HospitalRepository();
+        hospitalRepository.updateRoom(pokojEntity);
     }
 }

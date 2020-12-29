@@ -46,20 +46,7 @@ public class HospitalRepository {
 
     }
 
-    public void updatePersonal(PersonalEntity personalEntity) {
-        EntityManager em = getEntityManager();
 
-        try {
-            em.getTransaction().begin();
-
-            em.merge(personalEntity);
-            em.getTransaction().commit();
-
-        }catch (Exception ex) {
-            throw new DbException("Failed to update Personal. ", ex);
-        }
-
-    }
 
     public void deletePersonal(int birthNumberOfPersonal) {
         EntityManager em = getEntityManager();
@@ -216,5 +203,34 @@ public class HospitalRepository {
             throw new DbException("failed to list Rooms",e);
         }
         return ret;
+    }
+
+    public void updateRoom(PokojEntity pokojEntity) {
+
+            EntityManager em = getEntityManager();
+
+            try {
+                em.getTransaction().begin();
+                em.merge(pokojEntity);
+                em.getTransaction().commit();
+
+            }catch (Exception ex) {
+                throw new DbException("Failed to update Room via Repository.", ex);
+            }
+
+    }
+
+    public void updatePersonal(PersonalEntity personalEntity) {
+        EntityManager em = getEntityManager();
+
+        try {
+            em.getTransaction().begin();
+            em.merge(personalEntity);
+            em.getTransaction().commit();
+
+        }catch (Exception ex) {
+            throw new DbException("Failed to update Personal. ", ex);
+        }
+
     }
 }

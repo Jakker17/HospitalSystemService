@@ -30,6 +30,7 @@ public class AddNewRoomServlet extends HttpServlet {
         else if(roomCapacityString.equals(""))alertService.add(Alert.Type.danger,"Room Capacity cannot be empty");
         else if(departmentIdString.equals(""))alertService.add(Alert.Type.danger,"Department ID cannot be empty");
         else if (departmentService.get(departmentIdString)== null)alertService.add(Alert.Type.danger,"There is no department with this ID");
+        else if (roomService.getRoom(roomIdString)!=null)alertService.add(Alert.Type.danger,"There is already room with this ID. ");
         else
             {
                 int roomId = Integer.parseInt(roomIdString);

@@ -16,6 +16,12 @@
     </div>
 </c:forEach>
 
-<div class="container"></div>
+<div class="container">
+    <h2>Patient</h2>
+    <a href="addNewPatient.jsp" class="btn btn-secondary">Add new patient</a>
+    <a href="listOfPatients.jsp" class="btn btn-secondary">List of patients</a>
+    <h2>Prescription</h2>
+    <a href="addNewPrescription.jsp" class="btn btn-secondary">Add new prescription</a>
+</div>
 </body>
 </html>
