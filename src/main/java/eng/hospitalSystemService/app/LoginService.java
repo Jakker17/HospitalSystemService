@@ -20,10 +20,6 @@ public class LoginService {
 
         byte[] passwordIn = SecurityUtils.hashPassword(passwordInput,salt);
 
-        if (Arrays.equals(password, passwordIn))return true;
-        else
-        {
-            return false;
-        }
+        return Arrays.equals(password, passwordIn);
     }
 }

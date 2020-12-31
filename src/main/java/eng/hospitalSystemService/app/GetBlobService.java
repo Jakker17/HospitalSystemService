@@ -20,6 +20,7 @@ public class GetBlobService {
         } catch (SQLException throwables) {
             throw new DbException("problem with blob load.",throwables);
         }
+        assert blob != null;
         long blobLength = blob.length();
         byte[] ret = blob.getBytes(1, (int) blobLength);
         blob.free();
