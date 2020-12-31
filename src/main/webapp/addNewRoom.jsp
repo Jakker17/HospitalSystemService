@@ -31,7 +31,7 @@
             </div>
             <div class="form-group">
                 <button type="submit" class="btn btn-primary">Add Room</button>
-                <a href="index.jsp" class="btn btn-secondary">Main page</a>
+                <a href="mainPage.jsp" class="btn btn-secondary">Main page</a>
             </div>
     </form>
 </div>

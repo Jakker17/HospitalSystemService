@@ -73,7 +73,7 @@
         <div class="form-group">
             <button type="submit" class="btn btn-primary">Přidat zaměstnance</button>
             &nbsp;
-            <a href="index.jsp" class="btn btn-link" >Zpět bez uložení</a>
+            <a href="mainPage.jsp" class="btn btn-link" >Zpět bez uložení</a>
         </div>
     </form>
 </div>

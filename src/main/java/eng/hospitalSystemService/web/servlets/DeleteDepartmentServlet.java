@@ -47,13 +47,13 @@ public class DeleteDepartmentServlet extends HttpServlet {
             }
             alertService.add(Alert.Type.success, "Department has been deleted.");
         }
-        response.sendRedirect("index.jsp");
+        response.sendRedirect("mainPage.jsp");
 
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         AlertService alertService = SessionServiceProvider.getAlertService(request);
         alertService.add(Alert.Type.danger, "Unauthorized access.");
-        response.sendRedirect("index.jsp");
+        response.sendRedirect("mainPage.jsp");
     }
 }

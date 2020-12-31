@@ -38,7 +38,6 @@ public class EditRoomServlet extends HttpServlet {
                 roomService.update(roomId, roomCapacity, departmentId);
                 alertService.add(Alert.Type.success, "Room has been updated successfully.");
                 response.sendRedirect("listOfRooms.jsp");
-
         }
         response.sendRedirect("editRoom.jsp?roomid="+roomIdString);
     }
@@ -46,6 +45,6 @@ public class EditRoomServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         AlertService alertService = SessionServiceProvider.getAlertService(request);
         alertService.add(Alert.Type.danger,"Unauthorized access.");
-        response.sendRedirect("index.jsp");
+        response.sendRedirect("mainPage.jsp");
     }
 }

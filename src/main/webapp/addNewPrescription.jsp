@@ -33,7 +33,7 @@
         </div>
         <div class="form-group">
             <button type="submit" class="btn btn-primary">Add</button>
-            <a href="index.jsp" class="btn btn-secondary">Main Page</a>
+            <a href="mainPage.jsp" class="btn btn-secondary">Main Page</a>
         </div>
     </form>
 </div>

@@ -3,6 +3,7 @@ package eng.hospitalSystemService.app;
 import eng.hospitalSystemService.db.HospitalRepository;
 import eng.hospitalSystemService.db.entities.PersonalEntity;
 
+import javax.persistence.EntityManager;
 import java.util.List;
 import java.util.Random;
 
@@ -74,5 +75,15 @@ public class PersonalService {
 
         }
         return -1;
+    }
+
+    public PersonalEntity getPersonalByLogin(String loginInput) {
+        HospitalRepository hospitalRepository = new HospitalRepository();
+        List<PersonalEntity> personalList = hospitalRepository.getAllPersonal();
+
+        for (PersonalEntity personalEntity: personalList) {
+            if (personalEntity.getLoginName().equals(loginInput))return  personalEntity;
+        }
+        return null;
     }
 }

@@ -83,7 +83,7 @@ public class AddNewPatientServlet extends HttpServlet {
                     throw new RuntimeException("Failed to store Patient via servlet");
                 }
                 alertService.add(Alert.Type.success, "Patient successfully added.");
-                response.sendRedirect("index.jsp");
+                response.sendRedirect("mainPage.jsp");
             }
         }
         response.sendRedirect("addNewPatient.jsp");
@@ -92,6 +92,6 @@ public class AddNewPatientServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         AlertService alertService = SessionServiceProvider.getAlertService(request);
         alertService.add(Alert.Type.danger,"Unauthorized access.");
-        response.sendRedirect("index.jsp");
+        response.sendRedirect("mainPage.jsp");
     }
 }

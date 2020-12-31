@@ -37,7 +37,7 @@
         </c:forEach>
         </tbody>
     </table>
-    <a href="index.jsp" type="btn btn-secondary">Main page</a>
+    <a href="mainPage.jsp" type="btn btn-secondary">Main page</a>
 </div>
 </body>
 </html>

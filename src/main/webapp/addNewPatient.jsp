@@ -54,7 +54,7 @@
         </div>
         <div class="form-group">
             <button type="submit" class="btn btn-primary">Přidat pacienta</button>
-            <a href="index.jsp" class="btn btn-link" >Zpět bez uložení</a>
+            <a href="mainPage.jsp" class="btn btn-link" >Zpět bez uložení</a>
         </div>
     </form>
 </div>

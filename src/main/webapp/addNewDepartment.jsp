@@ -35,7 +35,7 @@
 </div>
     <div class="form-group">
         <button type="submit" class="btn btn-primary">Přidat oddělení</button>
-        <a href="index.jsp" class="btn btn-secondary" >Zpět bez uložení</a>
+        <a href="mainPage.jsp" class="btn btn-secondary" >Zpět bez uložení</a>
     </div>
     </form>
 </div>

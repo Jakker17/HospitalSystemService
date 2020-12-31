@@ -5,10 +5,11 @@ import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
+import java.util.Arrays;
 
 public class SecurityUtils {
     public static byte[] generateSalt() {
-         java.security.SecureRandom random = null;
+         java.security.SecureRandom random;
          try
          {
              random = java.security.SecureRandom.getInstanceStrong();

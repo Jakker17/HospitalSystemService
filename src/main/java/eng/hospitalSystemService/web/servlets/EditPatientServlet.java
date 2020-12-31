@@ -37,7 +37,7 @@ public class EditPatientServlet extends HttpServlet {
 
         if(patientService.get(patientBirthNumberString)==null){
             alertService.add(Alert.Type.danger,"Patient must have been already deleted.");
-            response.sendRedirect("index.jsp");
+            response.sendRedirect("mainPage.jsp");
         }
 
         int patientBirthNumber= Integer.parseInt(patientBirthNumberString);
@@ -56,7 +56,7 @@ public class EditPatientServlet extends HttpServlet {
                 throw new RuntimeException("failed to update Patient through Servlet.", e);
             }
             alertService.add(Alert.Type.success, "Patient have been updated.");
-            response.sendRedirect("index.jsp");
+            response.sendRedirect("mainPage.jsp");
         }
         response.sendRedirect("editPatient.jsp?pacientBirthNumber="+patientBirthNumberString);
     }
@@ -64,6 +64,6 @@ public class EditPatientServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         AlertService alertService = SessionServiceProvider.getAlertService(request);
         alertService.add(Alert.Type.danger,"Unauthorized access.");
-        response.sendRedirect("index.jsp");
+        response.sendRedirect("mainPage.jsp");
     }
 }

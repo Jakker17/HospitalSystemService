@@ -50,6 +50,6 @@
         </tbody>
 
     </table>
-<a href="index.jsp" class="btn btn-secondary" >Main page</a>
+<a href="mainPage.jsp" class="btn btn-secondary" >Main page</a>
 </body>
 </html>

@@ -42,7 +42,7 @@ public class AddNewRoomServlet extends HttpServlet {
                     {
                         roomService.create(roomId, roomCapacity, departmentId);
                         alertService.add(Alert.Type.success, "Room has been added successfully.");
-                        response.sendRedirect("index.jsp");
+                        response.sendRedirect("mainPage.jsp");
                     }
                 response.sendRedirect("addNewRoom.jsp");
             }
@@ -51,6 +51,6 @@ public class AddNewRoomServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         AlertService alertService = SessionServiceProvider.getAlertService(request);
         alertService.add(Alert.Type.danger,"Unauthorized access");
-        response.sendRedirect("index.jsp");
+        response.sendRedirect("mainPage.jsp");
     }
 }

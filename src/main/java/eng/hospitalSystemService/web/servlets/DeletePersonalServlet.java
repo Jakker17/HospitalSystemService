@@ -23,7 +23,7 @@ public class DeletePersonalServlet extends HttpServlet {
         if(patientService.isPatientAssignedToThisStaff(birthNumberOfPersonal))
         {
             alertService.add(Alert.Type.danger,"Cannot delete personal with assigned patients, please re-assign them before. ");
-            response.sendRedirect("index.jsp");
+            response.sendRedirect("mainPage.jsp");
         }
 
         if(personalService.get(birthNumberOfPersonal)==null)alertService.add(Alert.Type.danger,"User not found or already deleted.");
@@ -36,12 +36,12 @@ public class DeletePersonalServlet extends HttpServlet {
             }
             alertService.add(Alert.Type.success, "User has been deleted.");
         }
-        response.sendRedirect("index.jsp");
+        response.sendRedirect("mainPage.jsp");
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         AlertService alertService = SessionServiceProvider.getAlertService(request);
         alertService.add(Alert.Type.danger, "Unauthorized access.");
-response.sendRedirect("index.jsp");
+response.sendRedirect("mainPage.jsp");
     }
 }

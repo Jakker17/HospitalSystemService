@@ -71,7 +71,7 @@ public class AddNewEmployeeServlet extends HttpServlet {
                             throw new RuntimeException("Failed to store personal via Servlet.",e);
                         }
                         alertService.add(Alert.Type.success,"User has been added.");
-                        response.sendRedirect("index.jsp");
+                        response.sendRedirect("mainPage.jsp");
                     }
 
             }
@@ -81,6 +81,6 @@ public class AddNewEmployeeServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         AlertService alertService = SessionServiceProvider.getAlertService(request);
         alertService.add(Alert.Type.danger, "Unauthorized access.");
-     response.sendRedirect("index.jsp");
+     response.sendRedirect("mainPage.jsp");
     }
 }
