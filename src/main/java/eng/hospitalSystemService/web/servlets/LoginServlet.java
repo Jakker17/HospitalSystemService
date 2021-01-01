@@ -1,10 +1,8 @@
 package eng.hospitalSystemService.web.servlets;
 
-import eng.hospitalSystemService.app.Alert;
-import eng.hospitalSystemService.app.AlertService;
-import eng.hospitalSystemService.app.LoginService;
-import eng.hospitalSystemService.app.SessionServiceProvider;
+import eng.hospitalSystemService.app.*;
 import eng.hospitalSystemService.db.DbException;
+import eng.hospitalSystemService.db.entities.PersonalEntity;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -18,6 +16,8 @@ import java.sql.SQLException;
 public class LoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         AlertService alertService = SessionServiceProvider.getAlertService(request);
+        AuthorizationService authorizationService = new AuthorizationService();
+        PersonalService personalService= new PersonalService();
 
         String loginInput = request.getParameter("loginName");
         String passwordInput = request.getParameter("password");
@@ -31,6 +31,7 @@ public class LoginServlet extends HttpServlet {
                 if (loginService.checkPassword(loginInput,passwordInput))
                 {
                     alertService.add(Alert.Type.success,"Successfully logged in.");
+                    authorizationService.setLoggedUser(personalService.getPersonalByLogin(loginInput),request);
                     response.sendRedirect("mainPage.jsp");
                 }
                 else
