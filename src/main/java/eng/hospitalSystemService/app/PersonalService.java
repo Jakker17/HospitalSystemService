@@ -2,8 +2,6 @@ package eng.hospitalSystemService.app;
 
 import eng.hospitalSystemService.db.HospitalRepository;
 import eng.hospitalSystemService.db.entities.PersonalEntity;
-
-import javax.persistence.EntityManager;
 import java.util.List;
 import java.util.Random;
 
