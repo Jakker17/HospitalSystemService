@@ -15,7 +15,19 @@
 <div class="container-fluid">
 
     <c:if test="${not empty loggedUser}">
-        Logged in <i>${loggedUser.loginName}</i> as ${loggedUser.proffesion}
+        <c:choose>
+            <c:when test="${authorizationService.isLoggedAdmin(pageContext.request)}">
+
+            </c:when>
+            <c:when test="${authorizationService.isLoggedMedicalStaff(pageContext.request)}">
+
+            </c:when>
+            <c:otherwise>
+                Jako technický zaměstnanec nemáte přústup k této části systému
+            </c:otherwise>
+        </c:choose>
+        <div align="right">Jste přihlášen <i>${loggedUser.loginName}</i> s právy pro ${loggedUser.proffesion}.
+        <form action="logout" method="post"><button type="submit" class="btn btn-link" >Odhlásit</button></form></div>
 
         <br class="container">
         <h1>Hospital System</h1>
@@ -31,6 +43,9 @@
         <a href="addNewRoom.jsp">Přidat Pokoj</a></br>
         <a href="index.jsp">Log IN</a></br>
 
+    </c:if>
+    <c:if  test="${empty loggedUser}">
+        PROSÍM PŘIHLASTE SE, ABY JSTE MĚL PŘÍSTUP. <a href="index.jsp" class="btn btn-primary">Přihlásit se</a>
     </c:if>
 </div>
 </body>
