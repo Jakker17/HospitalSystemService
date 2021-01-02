@@ -2,42 +2,72 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <jsp:useBean id="alertService" scope="session" class="eng.hospitalSystemService.app.AlertService"/>
 <jsp:useBean id="roomService" scope="request" class="eng.hospitalSystemService.app.RoomService"/>
+<jsp:useBean id="authorizationService" class="eng.hospitalSystemService.app.AuthorizationService" />
+<c:set var="loggedUser" value="${authorizationService.getLoggedUser(pageContext.request)}"/>
 <html>
 <head>
-    <title></title>
+    <title>Seznam Pokojů</title>
+    <link href="main.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
           integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
 </head>
-<body>
-<c:forEach var="alert" items="${alertService.pull()}">
-    <div class="col-6">
-        <div class="alert alert-${alert.type}" role="alert">
-                ${alert.text}
-        </div>
-    </div>
-</c:forEach>
-<div class="container">
-    <table class="table">
-        <thead>
-        <th scope="col">room ID</th>
-        <th scope="col">Capacity</th>
-        <th scope="col">Department</th>
-        <th scope="col"></th>
-        </thead>
-        <tbody>
-        <c:forEach var="room" items="${roomService.allRooms}">
-            <tr>
-                <td>${room.roomid}</td>
-                <td>${room.capacity}</td>
-                <td>${room.departmentid}</td>
-                <td>
-                    <a href="editRoom.jsp?roomid=${room.roomid}" class="btn btn-primary">Edit room</a>
-                </td>
-            </tr>
-        </c:forEach>
-        </tbody>
-    </table>
-    <a href="mainPage.jsp" type="btn btn-secondary">Main page</a>
+<body class="pozadi">
+<c:if test="${not empty loggedUser}">
+    <c:choose>
+        <c:when test="${authorizationService.isLoggedAdmin(pageContext.request)}">
+            <jsp:include page="adminMenuNav.jsp"/>
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm"></div>
+                    <div class="col-sm"><jsp:include page="alertPanel.jsp"/></div>
+                    <div class="col-sm"></div>
+                </div>
+            </div>
+
+            <h2 align="center">Seznam Pokojů</h2>
+            <div class="container">
+                <div class="row">
+                    <div class="col-1"></div>
+                    <div class="col-10">
+                        <table class="table table-light table-striped table-hover">
+                                <thead>
+                                <th scope="col">room ID</th>
+                                <th scope="col">Capacity</th>
+                                <th scope="col">Department</th>
+                                <th scope="col"></th>
+                                </thead>
+                                <tbody>
+                                <c:forEach var="room" items="${roomService.allRooms}">
+                                    <tr>
+                                        <td>${room.roomid}</td>
+                                        <td>${room.capacity}</td>
+                                        <td>${room.departmentid}</td>
+                                        <td align="right">
+                                            <a href="editRoom.jsp?roomid=${room.roomid}" class="btn btn-primary">Upravit</a>
+                                        </td>
+                                    </tr>
+                                </c:forEach>
+                                </tbody>
+                            </table>
+                    </div>
+                    <div class="col-1"></div>
+                </div>
+            </div>
+
+        </c:when>
+        <c:when test="${authorizationService.isLoggedMedicalStaff(pageContext.request)}">
+            <jsp:include page="employeeMenuNav.jsp"/>
+            <jsp:include page="noAccessPage.jsp"/>
+        </c:when>
+        <c:otherwise>
+            <jsp:include page="noAccessPage.jsp"/>
+        </c:otherwise>
+    </c:choose>
+</c:if>
+<c:if  test="${empty loggedUser}">
+    <jsp:include page="noLoggedInPage.jsp"/>
+</c:if>
+
 </div>
 </body>
 </html>

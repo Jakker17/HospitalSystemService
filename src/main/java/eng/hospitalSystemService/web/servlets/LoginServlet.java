@@ -30,8 +30,10 @@ public class LoginServlet extends HttpServlet {
             try {
                 if (loginService.checkPassword(loginInput,passwordInput))
                 {
-                    alertService.add(Alert.Type.success,"Successfully logged in.");
+                    if (authorizationService.isLoggedUser(request)){alertService.add(Alert.Type.danger,"User is logged in already.");
+                    response.sendRedirect("mainPage.jsp");}
                     authorizationService.setLoggedUser(personalService.getPersonalByLogin(loginInput),request);
+                    alertService.add(Alert.Type.success,"Successfully logged in.");
                     response.sendRedirect("mainPage.jsp");
                 }
                 else

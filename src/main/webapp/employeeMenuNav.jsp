@@ -3,7 +3,7 @@
 <jsp:useBean id="authorizationService" class="eng.hospitalSystemService.app.AuthorizationService" />
 <c:set var="loggedUser" value="${authorizationService.getLoggedUser(pageContext.request)}"/>
 
-<form action="logout" method="post">
+<form method="post" action="logout" id="logoutForm"></form>
     <div class="navigace">
         <a href="mainPage.jsp" class="btn btn-link">Hlavní stránka</a>
         <div class="seznam">
@@ -22,6 +22,5 @@
                 <a href="listOfDepartments.jsp">Seznam oddělení</a>
             </div>
         </div>
-        <div align="right"><button type="submit" class="btn btn-link">Odhlásit</button></div>
+        <div align="right"><button type="submit" class="btn btn-link" form="logoutForm">Odhlásit</button></div>
     </div>
-</form>

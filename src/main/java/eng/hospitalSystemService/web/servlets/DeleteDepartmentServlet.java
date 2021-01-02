@@ -2,6 +2,7 @@ package eng.hospitalSystemService.web.servlets;
 
 import eng.hospitalSystemService.app.*;
 import eng.hospitalSystemService.db.entities.PersonalEntity;
+import eng.hospitalSystemService.db.entities.PokojEntity;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -31,29 +32,35 @@ public class DeleteDepartmentServlet extends HttpServlet {
                 List<PersonalEntity> personalEntityList = personalService.getListOfPersonal();
                 for (PersonalEntity personalEntity: personalEntityList) {
                     if (personalEntity.getDepartment()==departmentID){
-                        personalService.delete(personalEntity.getBirthnumber());
-                        alertService.add(Alert.Type.success, "Department personal has been deleted.");
+                        alertService.add(Alert.Type.danger, "There are assigned Personals please reassign them before deleting department.");
                     }
                 }
             }
             catch (Exception e){
-                throw new RuntimeException("Failed to delete personal from this department.",e);
+                throw new RuntimeException("Failed to delete due Personal in this department.",e);
             }
+
+            try {
+                RoomService roomService = new RoomService();
+                List<PokojEntity> rooms = roomService.getAllRooms();
+                for (PokojEntity pokoj: rooms) {
+                    if (pokoj.getDepartmentid()==departmentID)
+                        alertService.add(Alert.Type.danger, "There are assigned Rooms please reassign them before deleting department.");
+                }
+            }catch (Exception e){throw new RuntimeException("Failed to delete due rooms in this department.");}
 
             try {
                 departmentService.delete(departmentID);
             } catch (Exception e) {
                 throw new RuntimeException("Failed to delete department via Servlet.", e);
             }
-            alertService.add(Alert.Type.success, "Department has been deleted.");
         }
-        response.sendRedirect("mainPage.jsp");
-
+        response.sendRedirect("deletedDep.jsp");
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         AlertService alertService = SessionServiceProvider.getAlertService(request);
         alertService.add(Alert.Type.danger, "Unauthorized access.");
-        response.sendRedirect("mainPage.jsp");
+        response.sendRedirect("index.jsp");
     }
 }

@@ -55,7 +55,7 @@
                     <div class="form-group">
                         <label for="password">Heslo</label>
                         <input type="password" name="password" id="password" class="form-control"><br>
-                        <input type="checkbox"  onclick="myFunction()"> Show Password
+                        <input type="checkbox"  onclick="myFunction()"> Zobraz heslo
                         <script>
                             function myFunction() {
                                 var x = document.getElementById("password");
