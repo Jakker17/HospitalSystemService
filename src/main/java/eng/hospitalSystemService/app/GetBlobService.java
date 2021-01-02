@@ -17,6 +17,7 @@ public class GetBlobService {
                 blob = rs.getBlob(whichBlob);
             }
 
+
         } catch (SQLException throwables) {
             throw new DbException("problem with blob load.",throwables);
         }
@@ -24,6 +25,7 @@ public class GetBlobService {
         long blobLength = blob.length();
         byte[] ret = blob.getBytes(1, (int) blobLength);
         blob.free();
+        con.commit();
         return ret;
     }
 }

@@ -1,7 +1,10 @@
 package eng.hospitalSystemService.app;
 
+import eng.hospitalSystemService.db.DbException;
 import eng.hospitalSystemService.db.HospitalRepository;
 import eng.hospitalSystemService.db.entities.PersonalEntity;
+
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Random;
 
@@ -29,8 +32,10 @@ public class PersonalService {
         hospitalRepository.insertPersonal(personalEntity);
     }
 
-    public void update(int birthNumber, String firstName, String surName, int department, String loginName, String profession, byte[] passwordHash, byte[] saltHash) {
+    public void update(int birthNumber, String firstName, String surName, int department, String loginName, String profession) throws SQLException {
+        GetBlobService getBlobService = new GetBlobService();
         PersonalEntity personalEntity= new PersonalEntity();
+        personalEntity = get(birthNumber);
 
         personalEntity.setBirthnumber(birthNumber);
         personalEntity.setPersonSurname(surName);
@@ -38,8 +43,17 @@ public class PersonalService {
         personalEntity.setDepartment(department);
         personalEntity.setProffesion(profession);
         personalEntity.setLoginName(loginName);
-        personalEntity.setSaltHash(saltHash);
-        personalEntity.setPasswordHash(passwordHash);
+        byte[] salt;
+        byte[] password;
+
+        try{
+            salt = getBlobService.getPasswordBlobFromDatabase("salt_hash",birthNumber);
+            password = getBlobService.getPasswordBlobFromDatabase("password_hash",birthNumber);}
+        catch (Exception ex){
+        throw new DbException("failed to obtain blob from DB",ex);}
+
+        personalEntity.setSaltHash(salt);
+        personalEntity.setPasswordHash(password);
 
         HospitalRepository hospitalRepository = new HospitalRepository();
         hospitalRepository.updatePersonal(personalEntity);
@@ -63,7 +77,6 @@ public class PersonalService {
     public PersonalEntity get(String birthNumber){
         return this.get(Integer.parseInt(birthNumber));
 }
-
 
     public int getPersonalBirthNumberBySurname(String personalSurname) {
         HospitalRepository hospitalRepository= new HospitalRepository();

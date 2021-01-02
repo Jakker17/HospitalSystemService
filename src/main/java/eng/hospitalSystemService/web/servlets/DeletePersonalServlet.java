@@ -23,7 +23,7 @@ public class DeletePersonalServlet extends HttpServlet {
         if(patientService.isPatientAssignedToThisStaff(birthNumberOfPersonal))
         {
             alertService.add(Alert.Type.danger,"Cannot delete personal with assigned patients, please re-assign them before. ");
-            response.sendRedirect("mainPage.jsp");
+            response.sendRedirect("listOfEmployees.jsp");
         }
 
         if(personalService.get(birthNumberOfPersonal)==null)alertService.add(Alert.Type.danger,"User not found or already deleted.");
@@ -35,13 +35,14 @@ public class DeletePersonalServlet extends HttpServlet {
                 throw new RuntimeException("Failed to delete personal via Servlet.", e);
             }
             alertService.add(Alert.Type.success, "User has been deleted.");
+
         }
-        response.sendRedirect("mainPage.jsp");
+        response.sendRedirect("listOfEmployees.jsp");
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         AlertService alertService = SessionServiceProvider.getAlertService(request);
         alertService.add(Alert.Type.danger, "Unauthorized access.");
-response.sendRedirect("mainPage.jsp");
+response.sendRedirect("index.jsp");
     }
 }

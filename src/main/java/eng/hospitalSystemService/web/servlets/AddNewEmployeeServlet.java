@@ -73,7 +73,6 @@ public class AddNewEmployeeServlet extends HttpServlet {
                         alertService.add(Alert.Type.success,"User has been added.");
                         response.sendRedirect("mainPage.jsp");
                     }
-
             }
         response.sendRedirect("addNewEmployee.jsp");
     }

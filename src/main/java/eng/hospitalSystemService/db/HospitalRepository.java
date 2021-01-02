@@ -227,7 +227,6 @@ public class HospitalRepository {
             em.getTransaction().begin();
             em.merge(personalEntity);
             em.getTransaction().commit();
-
         }catch (Exception ex) {
             throw new DbException("Failed to update Personal. ", ex);
         }

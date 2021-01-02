@@ -22,8 +22,6 @@ public class EditEmployeeServlet extends HttpServlet {
         String departmentString = request.getParameter("department");
         String profession = request.getParameter("profession");
         String loginName = request.getParameter("loginName");
-        String passwordHashString = request.getParameter("password");
-        String saltString = request.getParameter("salt");
 
         if(patternCheckService.doPatternCheck("[^0-9]",departmentString))
         {
@@ -49,17 +47,13 @@ public class EditEmployeeServlet extends HttpServlet {
             if (!departmentString.isEmpty()) department= Integer.parseInt(departmentString);
             if(patternCheckService.doPatternCheck("[^a-zA-Z]",surName))alertService.add(Alert.Type.danger,"Surname cannot contains special characters or numbers.");
             else if(surName.isEmpty())alertService.add(Alert.Type.danger,"Surname cannot be empty.");
-            else if(passwordHashString.length()<8)alertService.add(Alert.Type.danger,"Password has to have at least 8 characters.");
             else if(department>999||department<0)alertService.add(Alert.Type.danger,"Department number must be between 0 and 1 000");
             else
             {
                 int birthNumber = Integer.parseInt(personalNumberString);
-                byte[] passwordHash = passwordHashString.getBytes();
-                byte[] saltHash = saltString.getBytes();
-
                 try
                 {
-                    personalService.update(birthNumber,firstName,surName,department,loginName,profession,passwordHash,saltHash);
+                    personalService.update(birthNumber,firstName,surName,department,loginName,profession);
                 }
                 catch (Exception e)
                 {
@@ -67,7 +61,7 @@ public class EditEmployeeServlet extends HttpServlet {
                 }
 
                 alertService.add(Alert.Type.success, "User has been edited.");
-                response.sendRedirect("mainPage.jsp");
+                response.sendRedirect("listOfEmployees.jsp");
             }
             response.sendRedirect("editEmployee.jsp?birthNumber="+personalNumberString);
         }
@@ -76,6 +70,6 @@ public class EditEmployeeServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         AlertService alertService = SessionServiceProvider.getAlertService(request);
         alertService.add(Alert.Type.danger, "Unauthorized access.");
-        response.sendRedirect("mainPage.jsp");
+        response.sendRedirect("index.jsp");
     }
 }

@@ -2,6 +2,10 @@ html{
     background-color: #BEE9E8;
 }
 
+table{
+  border-top: black;
+}
+
 .navigace {
     overflow: hidden;
     background-color: #008CD0;
