@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <c:forEach var="alert" items="${alertService.pull()}">
-    <div class="col-6">
+    <div class="text-center" >
         <div class="alert alert-${alert.type}" role="alert">
                 ${alert.text}
         </div>

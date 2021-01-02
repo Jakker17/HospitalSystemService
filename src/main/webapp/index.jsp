@@ -1,41 +1,42 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<html>
+<html lang="en">
 <head>
-    <title></title>
+    <meta charset="utf-8">
+    <title>Přihlásit</title>
+
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
           integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="main.css">
+    <link href="signIn.css" rel="stylesheet">
 </head>
-<body>
-<jsp:include page="alertPanel.jsp"/>
 
-<div class="container">
-    <h1>LOG IN</h1>
+<body class="text-center pozadi">
+<main class="form-signin">
+    <jsp:include page="alertPanel.jsp"/>
     <form method="post" action="login">
-        <div class="form-group">
-            <label for="loginName">LOGIN</label>
-            <input id="loginName" type="text" class="form-control" name="loginName">
+        <h1 class="h3 mb-3 fw-normal">Přihlásit</h1>
+        <input type="text" id="loginName" name="loginName" class="form-control" placeholder="Login" required autofocus>
+        <input type="password" id="password" name="password" class="form-control" placeholder="Heslo" required>
+        <div class="checkbox mb-3">
+            <label>
+                <input type="checkbox" onclick="myFunction()"> Zobraz heslo
+            </label>
         </div>
-        <div class="form-group">
-            <label for="password">PASSWORD</label>
-            <input id="password" type="password" class="form-control" name="password">
-            <input type="checkbox"  onclick="myFunction()"> Show Password
-            <script>
-                function myFunction() {
-                    var x = document.getElementById("password");
-                    if (x.type === "password") {
-                        x.type = "text";
-                    } else {
-                        x.type = "password";
-                    }
-                }
-            </script>
-        </div>
-        <div class="form-group">
-            <button type="submit" class="btn btn-primary">LOG IN</button>
-        </div>
+        <button class="w-100 btn btn-lg btn-primary" type="submit">Přihlásit</button>
+        <p class="mt-5 mb-3 text-muted">&copy; 2020-2021</p>
     </form>
-</div>
+</main>
+<script>
+    function myFunction() {
+        var x = document.getElementById("password");
+        if (x.type === "password") {
+            x.type = "text";
+        } else {
+            x.type = "password";
+        }
+    }
+</script>
 </body>
 </html>

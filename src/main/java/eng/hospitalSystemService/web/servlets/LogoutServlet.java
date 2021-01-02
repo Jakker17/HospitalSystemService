@@ -22,7 +22,7 @@ public class LogoutServlet extends HttpServlet {
         else
         {
             authorizationService.setLoggedUser(null, request);
-            alertService.add(Alert.Type.success, "Successfully logged out.");
+            alertService.add(Alert.Type.success, "Logged out.");
             response.sendRedirect("index.jsp");
         }
         response.sendRedirect("index.jsp");

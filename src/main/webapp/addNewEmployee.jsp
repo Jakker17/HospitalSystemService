@@ -4,14 +4,14 @@
 <c:set var="loggedUser" value="${authorizationService.getLoggedUser(pageContext.request)}"/>
 <jsp:useBean id="alertService" scope="session" class="eng.hospitalSystemService.app.AlertService"/>
 
-<html>
+<html class="pozadi">
 <head>
     <title>Přidat nového zaměstnance</title>
     <link rel="stylesheet" href="main.css" type="text/css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
           integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
 </head>
-<body>
+<body style="background-color: #BEE9E8;">
 <jsp:include page="alertPanel.jsp"/>
     <c:if test="${not empty loggedUser}">
         <c:choose>
@@ -69,12 +69,13 @@
             </div>
         </c:when>
         <c:otherwise>
-            nemáte přístup k této části systému.
+            <jsp:include page="employeeMenuNav.jsp"/>
+            <jsp:include page="noAccessPage.jsp"/>
         </c:otherwise>
         </c:choose>
     </c:if>
 <c:if  test="${empty loggedUser}">
-    PROSÍM PŘIHLASTE SE, ABY JSTE MĚL PŘÍSTUP. <a href="index.jsp" class="btn btn-primary">Přihlásit se</a>
+    <jsp:include page="noLoggedInPage.jsp"/>
 </c:if>
 </body>
 </html>

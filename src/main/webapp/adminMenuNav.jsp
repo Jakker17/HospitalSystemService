@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <jsp:useBean id="authorizationService" class="eng.hospitalSystemService.app.AuthorizationService" />
 <c:set var="loggedUser" value="${authorizationService.getLoggedUser(pageContext.request)}"/>
