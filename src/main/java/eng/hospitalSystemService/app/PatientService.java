@@ -2,6 +2,7 @@ package eng.hospitalSystemService.app;
 
 import eng.hospitalSystemService.db.PatientRepository;
 import eng.hospitalSystemService.db.entities.PacientEntity;
+import eng.hospitalSystemService.db.entities.PokojEntity;
 
 import java.util.List;
 
@@ -62,5 +63,23 @@ public class PatientService {
         patientRepository.update(pacientEntity);
     }
 
+    public List<PacientEntity> getAllBYNursingStaff(int nursingStaffBirthNumber) {
+        PatientRepository patientRepository = new PatientRepository();
+        List<PacientEntity> patients = patientRepository.getAll();
+        patients.removeIf(pacientEntity -> !pacientEntity.getNursingStaffBirthnumber().equals(nursingStaffBirthNumber) );
+        return patients;
+    }
+
+    public List<PacientEntity> getAllByDepartment(int departmentID) {
+        PatientRepository patientRepository = new PatientRepository();
+        RoomService roomService = new RoomService();
+        PokojEntity pokojEntity;
+        List<PacientEntity> patients = patientRepository.getAll();
+        for (PacientEntity pacientEntity:patients) {
+            pokojEntity = roomService.getRoom(pacientEntity.getRoomid());
+            if (pokojEntity.getDepartmentid()!=departmentID) patients.remove(pacientEntity);
+        }
+        return patients;
+    }
 }
 
