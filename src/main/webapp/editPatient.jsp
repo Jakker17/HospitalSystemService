@@ -1,10 +1,3 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: juros
-  Date: 12/27/2020
-  Time: 6:02 PM
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <jsp:useBean id="alertService" scope="session" class="eng.hospitalSystemService.app.AlertService"/>
 <jsp:useBean id="patientService" class="eng.hospitalSystemService.app.PatientService" scope="request"/>

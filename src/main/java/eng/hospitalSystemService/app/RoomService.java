@@ -66,4 +66,10 @@ public class RoomService {
         HospitalRepository hospitalRepository = new HospitalRepository();
         hospitalRepository.updateRoom(pokojEntity);
     }
+
+    public List<PokojEntity> getAllRoomsByDepartment(int departmentID) {
+        List<PokojEntity> rooms = getAllRooms();
+        rooms.removeIf(pokoj -> pokoj.getDepartmentid() != departmentID);
+        return rooms;
+    }
 }

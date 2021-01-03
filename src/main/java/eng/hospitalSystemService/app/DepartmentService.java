@@ -2,6 +2,8 @@ package eng.hospitalSystemService.app;
 
 import eng.hospitalSystemService.db.HospitalRepository;
 import eng.hospitalSystemService.db.entities.OddeleniEntity;
+import eng.hospitalSystemService.db.entities.PersonalEntity;
+import eng.hospitalSystemService.db.entities.PokojEntity;
 
 import java.util.List;
 
@@ -33,5 +35,16 @@ public class DepartmentService {
     {
      HospitalRepository hospitalRepository = new HospitalRepository();
      hospitalRepository.deleteDepartment(departmentID);
+    }
+
+    public boolean isDepartmentEmpty(int departmentID) {
+        PersonalService personalService = new PersonalService();
+        RoomService roomService = new RoomService();
+        List<PersonalEntity> personal = personalService.getListOfPersonalByDepartment(departmentID);
+        List<PokojEntity> rooms = roomService.getAllRoomsByDepartment(departmentID);
+        if (personal.isEmpty()){
+            if (rooms.isEmpty()) return true;
+        }
+        return false;
     }
 }

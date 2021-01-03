@@ -44,7 +44,7 @@ public class AddNewEmployeeServlet extends HttpServlet {
             response.sendRedirect("addNewEmployee.jsp");
         }
 
-        if(personalService.get(personalNumberString)!=null)alertService.add(Alert.Type.danger,"Birth number already added.");
+        if(personalService.get(personalNumberString)!=null)alertService.add(Alert.Type.danger,"Personal with birthNumber already exists.");
         else if(personalNumberString.equals(""))alertService.add(Alert.Type.danger,"Birth number cannot empty");
         else if(personalNumberString.length()!=6)alertService.add(Alert.Type.danger,"Birth number can have only 6 characters");
         else if(surName.length()==0)alertService.add(Alert.Type.danger,"Surname cannot be empty.");

@@ -97,4 +97,14 @@ public class PersonalService {
         }
         return null;
     }
+
+    public List<PersonalEntity> getListOfPersonalByDepartment(int departmentID) {
+        List<PersonalEntity> personal = getListOfPersonal();
+        personal.removeIf(person -> !person.getDepartment().equals(departmentID));
+        return personal;
+    }
+    public List<PersonalEntity> getListOfPersonalByDepartment(String departmentID){
+        return this.getListOfPersonalByDepartment(Integer.parseInt(departmentID));
+    }
+
 }

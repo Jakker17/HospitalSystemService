@@ -56,7 +56,7 @@
                             <td>${department.idoddeleni}</td>
                             <td>${department.nazevoddeleni}</td>
                             <td align="right">
-                                <a onclick="window.open('deleteDepartmentPopup.jsp?departmentID=${department.idoddeleni}')" class="btn btn-danger">delete</a>
+                                <a href="departmentInventory.jsp?departmentID=${department.idoddeleni}" class="btn btn-primary">Inventář</a>
                             </td>
                         </tr>
                     </c:forEach>

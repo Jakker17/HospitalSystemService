@@ -12,7 +12,6 @@
           integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
 </head>
 <body class="pozadi">
-<jsp:include page="alertPanel.jsp"/>
     <c:if test="${not empty loggedUser}">
         <c:choose>
         <c:when test="${authorizationService.isLoggedAdmin(pageContext.request)}">

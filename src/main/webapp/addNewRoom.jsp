@@ -12,7 +12,6 @@
 </head>
 <body class="pozadi">
 
-<jsp:include page="alertPanel.jsp"/>
 <c:if test="${not empty loggedUser}">
     <c:choose>
         <c:when test="${authorizationService.isLoggedAdmin(pageContext.request)}">
