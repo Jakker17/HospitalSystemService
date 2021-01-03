@@ -18,8 +18,8 @@
             <button class="seznamRozbalit btn btn-link">Oddělení<i class="fa fa-caret-down"></i>
             </button>
             <div class="seznam-content">
-                <a href="myDepartment.jsp">Moje oddělení</a><!-- musím dodělat -->
                 <a href="listOfDepartments.jsp">Seznam oddělení</a>
+                <a href="myDepartment.jsp">Moje oddělení</a><!-- musím dodělat -->
             </div>
         </div>
         <div align="right"><button type="submit" class="btn btn-link" form="logoutForm">Odhlásit</button></div>
