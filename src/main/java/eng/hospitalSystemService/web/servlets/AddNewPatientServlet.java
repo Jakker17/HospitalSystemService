@@ -8,8 +8,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 @WebServlet(name = "AddNewPatientServlet",urlPatterns = "/addNewPatient")
 public class AddNewPatientServlet extends HttpServlet {
@@ -52,11 +50,8 @@ public class AddNewPatientServlet extends HttpServlet {
             alertService.add(Alert.Type.danger,"Room number can contain only Numbers.");
         }
 
-        else if (personalService.get(patientBirthNumberString)!=null){
-            if (!personalService.get(patientBirthNumberString).getPersonSurname().equals(patientSurname))
-            {
+        else if (personalService.get(patientBirthNumberString)!=null&&!personalService.get(patientBirthNumberString).getPersonSurname().equals(patientSurname)){
                 alertService.add(Alert.Type.danger,"there is already Personal with this number but different name");
-            }
         }
         else if(personalSurname.equals(""))alertService.add(Alert.Type.danger,"Personal cannot be empty.");
         else if(patientSurname.equals(""))alertService.add(Alert.Type.danger, "Patient Surname cannot be empty.");

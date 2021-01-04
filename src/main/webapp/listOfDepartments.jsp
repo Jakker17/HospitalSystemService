@@ -32,8 +32,8 @@
                 <table class="table table-light table-striped table-hover">
                     <thead>
                     <tr>
-                        <th scope="col">ID of Department</th>
-                        <th scope="col">Name of Department</th>
+                        <th scope="col">ID oddělení</th>
+                        <th scope="col">Název oddělení</th>
                         <th scope="col"></th>
                     </tr>
                     </thead>
@@ -72,8 +72,8 @@
                         <table class="table table-light table-striped table-hover">
                             <thead>
                             <tr>
-                                <th scope="col">ID of Department</th>
-                                <th scope="col">Name of Department</th>
+                                <th scope="col">ID oddělení</th>
+                                <th scope="col">Název oddělení</th>
                             </tr>
                             </thead>
 
@@ -92,7 +92,7 @@
             </div>
         </c:when>
         <c:otherwise>
-            <jsp:include page="noAccessPage.jsp"/>
+            <jsp:include page="noAccessPageMain.jsp"/>
         </c:otherwise>
     </c:choose>
 </c:if>

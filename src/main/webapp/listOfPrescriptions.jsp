@@ -38,12 +38,12 @@
                 <div class="row">
                     <div class="col-1"></div>
                     <div class="col-10">
-                        <h2 align="center">Seznam předipsů</h2>
+                        <h2 align="center">Seznam předpisů</h2>
                         <table class="table table-light table-striped table-hover">
                             <thead>
-                            <th scope="col">ID</th>
-                            <th scope="col">Name of Medicament</th>
-                            <th scope="col">Usage of Medicament</th>
+                            <th scope="col">ID předpisu</th>
+                            <th scope="col">Název léku</th>
+                            <th scope="col">Způsob užívání</th>
                             </thead>
                             <tbody>
                             <c:forEach var="prescription" items="${prescriptionService.getAllByPatient(param.pacientBirthNumber)}">
@@ -62,7 +62,7 @@
             </div>
         </c:when>
         <c:otherwise>
-            <jsp:include page="noAccessPage.jsp"/>
+            <jsp:include page="noAccessPageMain.jsp"/>
         </c:otherwise>
     </c:choose>
 </c:if>

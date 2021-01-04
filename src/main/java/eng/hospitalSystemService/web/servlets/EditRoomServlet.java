@@ -7,7 +7,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.awt.*;
 import java.io.IOException;
 
 @WebServlet(name = "EditRoomServlet",urlPatterns = "/editRoom")
@@ -45,6 +44,6 @@ public class EditRoomServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         AlertService alertService = SessionServiceProvider.getAlertService(request);
         alertService.add(Alert.Type.danger,"Unauthorized access.");
-        response.sendRedirect("mainPage.jsp");
+        response.sendRedirect("index.jsp");
     }
 }

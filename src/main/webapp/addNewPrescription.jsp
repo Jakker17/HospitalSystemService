@@ -30,15 +30,15 @@
                 <h1>Nový Předpis</h1>
                 <form id="addNewPrescription" method="post" action="addNewPrescription">
                     <div class="form-group">
-                        <label for="nameOfMedicament">Name of Medicament</label>
+                        <label for="nameOfMedicament">Jméno léku</label>
                         <input name="nameOfMedicament" id="nameOfMedicament" class="form-control" type="text">
                     </div>
                     <div class="form-group">
-                        <label for="usageOfMedicament">Usage of Medicaments</label>
+                        <label for="usageOfMedicament">Způsob používání</label>
                         <input name="usageOfMedicament" id="usageOfMedicament" class="form-control" type="text">
                     </div>
                     <div class="form-group">
-                        <label for="birthNumberOfPatient">BN of patient</label>
+                        <label for="birthNumberOfPatient">Rodné číslo pacienta</label>
                         <input type="text" id="birthNumberOfPatient" name="birthNumberOfPatient" class="form-control" readonly value="${param.patientBN}">
                     </div>
                     <div class="form-group">

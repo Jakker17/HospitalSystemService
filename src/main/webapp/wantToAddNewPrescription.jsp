@@ -5,7 +5,7 @@
 <c:set var="loggedUser" value="${authorizationService.getLoggedUser(pageContext.request)}"/>
 <html>
 <head>
-    <title>Chcete přidat předpis</title>
+    <title>přidat předpis?</title>
     <link rel="stylesheet" href="main.css" type="text/css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
           integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
@@ -16,6 +16,7 @@
     <c:choose>
         <c:when test="${authorizationService.isLoggedAdmin(pageContext.request)}">
             <jsp:include page="adminMenuNav.jsp"/>
+            <jsp:include page="alertPanel.jsp"/>
             <jsp:include page="noAccessPage.jsp"/>
         </c:when>
         <c:when test="${authorizationService.isLoggedMedicalStaff(pageContext.request)}">

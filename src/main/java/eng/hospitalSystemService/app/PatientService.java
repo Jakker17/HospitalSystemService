@@ -70,16 +70,16 @@ public class PatientService {
         return patients;
     }
 
-    public List<PacientEntity> getAllByDepartment(int departmentID) {
-        PatientRepository patientRepository = new PatientRepository();
-        RoomService roomService = new RoomService();
-        PokojEntity pokojEntity;
+
+    public List<PacientEntity> getPatientsAtDepartment(int departmentID){
+        PatientRepository patientRepository= new PatientRepository();
         List<PacientEntity> patients = patientRepository.getAll();
-        for (PacientEntity pacientEntity:patients) {
-            pokojEntity = roomService.getRoom(pacientEntity.getRoomid());
-            if (pokojEntity.getDepartmentid()!=departmentID) patients.remove(pacientEntity);
-        }
-        return patients;
+
+
+    }
+
+    public List<PacientEntity> getAllByDepartment(String departmentID) {
+        return this.getPatientsAtDepartment(Integer.parseInt(departmentID));
     }
 
     public List<PacientEntity> getAllByRoom(int roomID){

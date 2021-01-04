@@ -38,11 +38,11 @@
                     <div class="col-10">
                         <form method="post" action="editRoom">
                             <div class="form-group">
-                                <label for="capacity">Capacity</label>
+                                <label for="capacity">Kapacita</label>
                                 <input type="text" name="capacity" id="capacity" class="form-control" value="${room.capacity}">
                             </div>
                             <div class="form-group">
-                                <label for="departmentID">Department ID</label>
+                                <label for="departmentID">ID oddělení</label>
                                 <input type="text" name="departmentID" id="departmentID" class="form-control" value="${room.departmentid}">
                             </div>
                             <div class="form-group">
@@ -64,11 +64,11 @@
                                             </button>
                                         </div>
                                         <div class="modal-body">
-                                            Are you sure you want to delete room <c:out value="${room.roomid}"/>?
+                                            Jste si jisti, že chcete smazat pokoj <c:out value="${room.roomid}"/>?
                                         </div>
                                         <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
-                                            <button type="submit" class="btn btn-primary" form="deleteForm">Yes</button>
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Ne</button>
+                                            <button type="submit" class="btn btn-primary" form="deleteForm">Ano</button>
                                         </div>
                                     </div>
                                 </div>
@@ -85,7 +85,7 @@
             <jsp:include page="noAccessPage.jsp"/>
         </c:when>
         <c:otherwise>
-            <jsp:include page="noAccessPage.jsp"/>
+            <jsp:include page="noAccessPageMain.jsp"/>
         </c:otherwise>
     </c:choose>
 </c:if>

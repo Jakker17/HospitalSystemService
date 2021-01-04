@@ -2,7 +2,6 @@ package eng.hospitalSystemService.web.servlets;
 
 import eng.hospitalSystemService.app.*;
 import eng.hospitalSystemService.db.DbException;
-import eng.hospitalSystemService.db.entities.PersonalEntity;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -51,6 +50,6 @@ public class LoginServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         AlertService alertService = SessionServiceProvider.getAlertService(request);
         alertService.add(Alert.Type.danger,"Unauthorized access.");
-        response.sendRedirect("mainPage.jsp");
+        response.sendRedirect("index.jsp");
     }
 }

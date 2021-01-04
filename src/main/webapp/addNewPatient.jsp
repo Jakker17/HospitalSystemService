@@ -47,7 +47,7 @@
                         <input type="text" name="anamnesis" id="anamnesis" class="form-control">
                     </div>
                     <div class="form-group">
-                        <label for="personalSurname">prijmeni ošetřovatele</label>
+                        <label for="personalSurname">Příjmení ošetřovatele</label>
                         <input type="text" name="personalSurname" id="personalSurname" class="form-control">
                     </div>
                     <div class="form-group">

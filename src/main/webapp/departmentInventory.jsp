@@ -68,7 +68,7 @@
                                 <th scope="col">Příjmení</th>
                                 <th scope="col">Jméno</th>
                                 <th scope="col">Login</th>
-                                <th scope="col">Birth Number</th>
+                                <th scope="col">Rodné číslo</th>
                                 <th scope="col"></th>
                             </tr>
                             </thead>
@@ -93,9 +93,8 @@
                         <h2 align="center">Pokoje</h2>
                         <table class="table table-light table-striped table-hover">
                             <thead>
-                            <th scope="col">room ID</th>
-                            <th scope="col">Capacity</th>
-                            <th scope="col">Department</th>
+                            <th scope="col">Číslo Pokoje</th>
+                            <th scope="col">Kapacita</th>
                             <th scope="col"></th>
                             </thead>
                             <tbody>
@@ -103,7 +102,6 @@
                                 <tr>
                                     <td>${room.roomid}</td>
                                     <td>${room.capacity}</td>
-                                    <td>${room.departmentid}</td>
                                     <td align="right">
                                         <a href="editRoom.jsp?roomid=${room.roomid}" class="btn btn-primary">Upravit</a>
                                     </td>
@@ -122,7 +120,7 @@
             <jsp:include page="noAccessPage.jsp"/>
         </c:when>
         <c:otherwise>
-            <jsp:include page="noAccessPage.jsp"/>
+            <jsp:include page="noAccessPageMain.jsp"/>
         </c:otherwise>
     </c:choose>
 </c:if>

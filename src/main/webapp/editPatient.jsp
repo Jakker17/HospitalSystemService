@@ -6,6 +6,7 @@
 <c:set var="loggedUser" value="${authorizationService.getLoggedUser(pageContext.request)}"/>
 
 
+
 <html>
 <head>
     <title>Upravit Pacienta</title>
@@ -47,15 +48,15 @@
                     <h1 align="center">${patient.pacientPersonSurname} ${patient.pacientPersonName}</h1>
 
                     <div class="form-group">
-                        <label for="anamnesis">Anamnesis</label>
+                        <label for="anamnesis">Anamnéza</label>
                         <input value="${patient.anamnesis}" type="text" name="anamnesis" class="form-control"   id="anamnesis">
                     </div>
                     <div class="form-group">
-                        <label for="room">Room</label>
+                        <label for="room">Pokoj</label>
                         <input value="${patient.roomid}" type="text" name="room" class="form-control"   id="room">
                     </div>
                     <div class="form-group">
-                        <label for="nursingStaff">Nursing staff</label>
+                        <label for="nursingStaff">RČ ošetřovatele</label>
                         <input value="${patient.nursingStaffBirthnumber}" type="text" name="nursingStaff" class="form-control"   id="nursingStaff">
                     </div>
                     <div class="form-group">
@@ -66,7 +67,7 @@
                 </form>
                 <form id="deleteForm" method="post" action="deletePatient">
                     <input type="hidden" name="patientBN" value="${patient.pacientBirthnumber}" />
-                    <button class="btn btn-danger" data-toggle="modal" data-target="#deleteModal" type="button">Delete</button>
+                    <button class="btn btn-danger" data-toggle="modal" data-target="#deleteModal" type="button">Odstranit</button>
                     <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
@@ -77,11 +78,11 @@
                                     </button>
                                 </div>
                                 <div class="modal-body">
-                                    Are you sure you want to delete patient  <c:out value="${patient.pacientPersonName}"/><c:out value="${patient.pacientPersonSurname}"/>?
+                                    Jste si jisti, že chcete smazat pacienta <c:out value="${patient.pacientPersonName}"/><c:out value="${patient.pacientPersonSurname}"/>?
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
-                                    <button type="submit" class="btn btn-primary" form="deleteForm">Yes</button>
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Ne</button>
+                                    <button type="submit" class="btn btn-primary" form="deleteForm">Ano</button>
                                 </div>
                             </div>
                         </div>

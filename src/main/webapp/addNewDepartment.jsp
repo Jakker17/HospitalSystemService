@@ -39,7 +39,7 @@
                                     <input type="text" name="departmentName" id="departmentName" class="form-control">
                                 </div>
                                 <div class="form-group">
-                                    <button type="submit" class="btn btn-primary">Přidat oddělení</button>
+                                    <button type="submit" class="btn btn-primary">Přidat</button>
                                     <a href="mainPage.jsp" class="btn btn-secondary" >Zpět bez uložení</a>
                                 </div>
                             </form>
@@ -53,7 +53,7 @@
                 <jsp:include page="noAccessPage.jsp"/>
             </c:when>
             <c:otherwise>
-                <jsp:include page="noAccessPage.jsp"/>
+                <jsp:include page="noAccessPageMain.jsp"/>
             </c:otherwise>
         </c:choose>
     </c:if>

@@ -66,7 +66,6 @@
                     <form id="deleteForm" method="post" action="deletePersonal">
                         <input type="hidden" name="birthNumberDelete" value="${personal.birthnumber}" />
                         <button class="btn btn-danger" data-toggle="modal" data-target="#deleteModal" type="button">Smazat</button>
-
                         <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
@@ -77,7 +76,7 @@
                                         </button>
                                     </div>
                                     <div class="modal-body">
-                                        Are you sure you want to delete personal <c:out value="${personal.personName}"/><c:out value="${personal.personSurname}"/>?
+                                        Jste si jisti, že chcete smazat Zaměstnance <c:out value="${personal.personName}"/><c:out value="${personal.personSurname}"/>?
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Ne</button>

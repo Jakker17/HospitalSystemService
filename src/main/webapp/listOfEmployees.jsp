@@ -9,7 +9,7 @@
     <link href="main.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
           integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
-    <title>List of Employees</title>
+    <title>Seznam Zaměstnanců</title>
 </head>
 <body class="pozadi">
 <c:if test="${not empty loggedUser}">
@@ -35,8 +35,8 @@
                                 <th scope="col">Příjmení</th>
                                 <th scope="col">Jméno</th>
                                 <th scope="col">Login</th>
-                                <th scope="col">Birth Number</th>
-                                <th scope="col">Department</th>
+                                <th scope="col">Rodné číslo</th>
+                                <th scope="col">ID oddělení</th>
                                 <th scope="col"></th>
                             </tr>
                             </thead>
@@ -52,7 +52,6 @@
                                 </tr>
                             </c:forEach>
                             </tbody>
-
                         </table>
                     </div>
                     <div class="col-1"></div>
@@ -65,7 +64,7 @@
             <jsp:include page="noAccessPage.jsp"/>
         </c:when>
         <c:otherwise>
-            <jsp:include page="noAccessPage.jsp"/>
+            <jsp:include page="noAccessPageMain.jsp"/>
         </c:otherwise>
     </c:choose>
 </c:if>

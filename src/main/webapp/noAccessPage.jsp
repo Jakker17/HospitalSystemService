@@ -3,8 +3,8 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <main class="flex-shrink-0 pozadi">
     <div class="container">
-        <h1 class="mt-5">No access</h1>
-        <p class="lead">Your access rights are not enough to access this page.</p>
-        <p>Return via <a href="mainPage.jsp">this</a> link.</p>
+        <h1 class="mt-5">Není přístup</h1>
+        <p class="lead">Vaše přístupová práva vám neumožňují přístup na tuto stránku.</p>
+        <p>Vraťte se zpět přes <a href="mainPage.jsp">tento</a> odkaz.</p>
     </div>
 </main>

@@ -46,9 +46,9 @@
                         <table class="table table-light table-striped table-hover">
                             <thead>
                             <tr>
-                                <th scope="col">Surname</th>
-                                <th scope="col">Name</th>
-                                <th scope="col">Birth Number</th>
+                                <th scope="col">Příjmení</th>
+                                <th scope="col">Jméno</th>
+                                <th scope="col">Rodné číslo</th>
                                 <th scope="col">Pokoj</th>
                                 <th scope="col"></th>
                             </tr>
@@ -71,7 +71,7 @@
             </div>
         </c:when>
         <c:otherwise>
-            <jsp:include page="noAccessPage.jsp"/>
+            <jsp:include page="noAccessPageMain.jsp"/>
         </c:otherwise>
     </c:choose>
 </c:if>

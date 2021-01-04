@@ -64,6 +64,6 @@ public class EditPatientServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         AlertService alertService = SessionServiceProvider.getAlertService(request);
         alertService.add(Alert.Type.danger,"Unauthorized access.");
-        response.sendRedirect("mainPage.jsp");
+        response.sendRedirect("index.jsp");
     }
 }

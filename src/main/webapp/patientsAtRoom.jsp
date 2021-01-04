@@ -20,7 +20,7 @@
     <c:choose>
         <c:when test="${authorizationService.isLoggedAdmin(pageContext.request)}">
             <jsp:include page="adminMenuNav.jsp"/>
-            <jsp:include page="noAccessPageMain.jsp"/>
+            <jsp:include page="noAccessPage.jsp"/>
         </c:when>
         <c:when test="${authorizationService.isLoggedMedicalStaff(pageContext.request)}">
             <jsp:include page="employeeMenuNav.jsp"/>
@@ -32,11 +32,10 @@
                 </div>
             </div>
             <div class="container">
-                <h1 align="center">Moje Oddělení</h1>
+                <h1 align="center">Pokoj ${room.roomid}</h1>
                 <div class="row">
                     <div class="col-1"></div>
                     <div class="col-10">
-                        <h2 align="center">Seznam pacientů</h2>
                         <table class="table table-light table-striped table-hover">
                             <thead>
                             <tr>
@@ -73,6 +72,5 @@
 <c:if  test="${empty loggedUser}">
     <jsp:include page="noLoggedInPage.jsp"/>
 </c:if>
-
 </body>
 </html>

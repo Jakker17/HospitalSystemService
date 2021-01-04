@@ -9,7 +9,7 @@
 <c:set var="loggedUser" value="${authorizationService.getLoggedUser(pageContext.request)}"/>
 <html>
 <head>
-    <title>List of Patients</title>
+    <title>Seznam pacientů</title>
     <link href="main.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
           integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
@@ -45,9 +45,9 @@
                         <table class="table table-light table-striped table-hover">
                             <thead>
                             <tr>
-                                <th scope="col">Surname</th>
-                                <th scope="col">Name</th>
-                                <th scope="col">Birth Number</th>
+                                <th scope="col">Příjmení</th>
+                                <th scope="col">Jméno</th>
+                                <th scope="col">Rodné číslo</th>
                                 <th scope="col">Pokoj</th>
                                 <th scope="col">Oddělení</th>
                                 <th scope="col">Ošetřovatel</th>
@@ -76,7 +76,7 @@
             </div>
         </c:when>
         <c:otherwise>
-            <jsp:include page="noAccessPage.jsp"/>
+            <jsp:include page="noAccessPageMain.jsp"/>
         </c:otherwise>
     </c:choose>
 </c:if>

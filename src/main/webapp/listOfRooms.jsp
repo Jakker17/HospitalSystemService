@@ -31,9 +31,9 @@
                     <div class="col-10">
                         <table class="table table-light table-striped table-hover">
                                 <thead>
-                                <th scope="col">room ID</th>
-                                <th scope="col">Capacity</th>
-                                <th scope="col">Department</th>
+                                <th scope="col">Číslo Pokoje</th>
+                                <th scope="col">Kapacita</th>
+                                <th scope="col">ID oddělení</th>
                                 <th scope="col"></th>
                                 </thead>
                                 <tbody>
@@ -60,14 +60,12 @@
             <jsp:include page="noAccessPage.jsp"/>
         </c:when>
         <c:otherwise>
-            <jsp:include page="noAccessPage.jsp"/>
+            <jsp:include page="noAccessPageMain.jsp"/>
         </c:otherwise>
     </c:choose>
 </c:if>
 <c:if  test="${empty loggedUser}">
     <jsp:include page="noLoggedInPage.jsp"/>
 </c:if>
-
-</div>
 </body>
 </html>

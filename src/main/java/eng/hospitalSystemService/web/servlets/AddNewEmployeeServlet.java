@@ -8,8 +8,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 @WebServlet(name = "AddNewEmployeeServlet",urlPatterns = "/addNewEmployee")
 public class AddNewEmployeeServlet extends HttpServlet {
@@ -18,6 +16,7 @@ public class AddNewEmployeeServlet extends HttpServlet {
         PersonalService personalService = new PersonalService();
         DepartmentService departmentService = new DepartmentService();
         PatternCheckService patternCheckService = SessionServiceProvider.getPatternCheckService();
+        PatientService patientService = new PatientService();
 
         String personalNumberString = request.getParameter("birthNumber");
         String firstName = request.getParameter("name");
@@ -47,6 +46,9 @@ public class AddNewEmployeeServlet extends HttpServlet {
         if(personalService.get(personalNumberString)!=null)alertService.add(Alert.Type.danger,"Personal with birthNumber already exists.");
         else if(personalNumberString.equals(""))alertService.add(Alert.Type.danger,"Birth number cannot empty");
         else if(personalNumberString.length()!=6)alertService.add(Alert.Type.danger,"Birth number can have only 6 characters");
+        else if(patientService.get(personalNumberString)!=null&&!patientService.get(personalNumberString).getPacientPersonSurname().equals(surName)){
+                alertService.add(Alert.Type.danger,"There is already patient with this Birth Number but different Surname.");
+        }
         else if(surName.length()==0)alertService.add(Alert.Type.danger,"Surname cannot be empty.");
         else if(patternCheckService.doPatternCheck("[^a-zA-Z]",surName))alertService.add(Alert.Type.danger,"Surname cannot contains special characters or numbers.");
         else if(profession.equals(""))alertService.add(Alert.Type.danger,"Invalid profession,Choose one from (admin,Technicky personal,Zdravotnicky Personal)");
@@ -80,6 +82,6 @@ public class AddNewEmployeeServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         AlertService alertService = SessionServiceProvider.getAlertService(request);
         alertService.add(Alert.Type.danger, "Unauthorized access.");
-     response.sendRedirect("mainPage.jsp");
+     response.sendRedirect("index.jsp");
     }
 }

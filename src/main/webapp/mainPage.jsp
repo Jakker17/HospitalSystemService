@@ -24,7 +24,6 @@
                         <div class="col-sm"></div>
                     </div>
                 </div>
-                <jsp:include page="alertPanel.jsp"/>
             </c:when>
             <c:when test="${authorizationService.isLoggedMedicalStaff(pageContext.request)}">
                 <jsp:include page="employeeMenuNav.jsp"/>
@@ -49,13 +48,6 @@
         </c:choose>
     </c:if>
     <c:if  test="${empty loggedUser}">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm"></div>
-                <div class="col-sm"><jsp:include page="alertPanel.jsp"/></div>
-                <div class="col-sm"></div>
-            </div>
-        </div>
         <jsp:include page="noLoggedInPage.jsp"/>
     </c:if>
 </body>

@@ -29,37 +29,7 @@
                     <div class="col-sm"></div>
                 </div>
             </div>
-            <h2 align="center">Seznam oddělení</h2>
-            <div class="container">
-                <div class="row">
-                    <div class="col-1"></div>
-                    <div class="col-10">
-                        <h2 align="center">Seznam oddělení</h2>
-                        <table class="table table-light table-striped table-hover">
-                            <thead>
-                            <tr>
-                                <th scope="col">ID of Department</th>
-                                <th scope="col">Name of Department</th>
-                                <th scope="col"></th>
-                            </tr>
-                            </thead>
-
-                            <tbody>
-                            <c:forEach var="department" items="${departmentService.listOfDepartments}">
-                                <tr>
-                                    <td>${department.idoddeleni}</td>
-                                    <td>${department.nazevoddeleni}</td>
-                                    <td align="right">
-                                        <a href="departmentInventory.jsp?departmentID=${department.idoddeleni}" class="btn btn-primary">Inventář</a>
-                                    </td>
-                                </tr>
-                            </c:forEach>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="col-1"></div>
-                </div>
-            </div>
+            <jsp:include page="noAccessPage.jsp"/>
         </c:when>
         <c:when test="${authorizationService.isLoggedMedicalStaff(pageContext.request)}">
             <jsp:include page="employeeMenuNav.jsp"/>
@@ -76,6 +46,7 @@
                     <div class="col-1"></div>
                     <div class="col-10">
                         <h2 align="center">Seznam pacientů</h2>
+                        <input type="hidden" value="${personal.department}">
                         <table class="table table-light table-striped table-hover">
                             <thead>
                             <tr>
@@ -88,13 +59,14 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <c:forEach var="patient" items="${patientService.getAllByDepartment(personal.department)}">
+                             <c:forEach var="patient" items="${patientService.getAllByDepartment(personal.department)}">
+                                 <c:set var="personal2" value="${personalService.get(patient.nursingStaffBirthnumber)}"/>
                                 <tr>
                                     <td>${patient.pacientPersonSurname}</td>
                                     <td>${patient.pacientPersonName}</td>
                                     <td>${patient.pacientBirthnumber}</td>
                                     <td>${patient.roomid}</td>
-                                    <td>${personal.personName} ${personal.personSurname}</td>
+                                    <td>${personal2.personName} ${personal2.personSurname}</td>
                                     <td align="right"><a href="editPatient.jsp?pacientBirthNumber=${patient.pacientBirthnumber}" class="btn btn-primary">Upravit</a><a href="listOfPrescriptions.jsp?pacientBirthNumber=${patient.pacientBirthnumber}" class="btn btn-secondary">Předpisy</a></td>
                                 </tr>
                             </c:forEach>
@@ -130,7 +102,7 @@
             </div>
         </c:when>
         <c:otherwise>
-            <jsp:include page="noAccessPage.jsp"/>
+            <jsp:include page="noAccessPageMain.jsp"/>
         </c:otherwise>
     </c:choose>
 </c:if>
