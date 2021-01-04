@@ -33,6 +33,10 @@ public class AddNewPatientServlet extends HttpServlet {
         if (personalService.get(personalBirthNumber)==null){
             alertService.add(Alert.Type.danger,"There is no personal with this surname.");
         }
+        else if (!personalService.get(personalBirthNumber).getProffesion().equals("Zdravotnicky Personal"))
+        {
+            alertService.add(Alert.Type.danger,"This personal is not medical staff and cannot be assigned.");
+        }
 
         else if (roomService.getRoom(roomIDString)==null){
             alertService.add(Alert.Type.danger, "There is no room with this ID.");

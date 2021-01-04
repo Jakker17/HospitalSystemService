@@ -66,7 +66,9 @@ public class PersonalService {
 
     public List<PersonalEntity> getListOfPersonal(){
         HospitalRepository hospitalRepository = new HospitalRepository();
-        return hospitalRepository.getAllPersonal();
+        List<PersonalEntity> personals = hospitalRepository.getAllPersonal();
+        personals.removeIf(employee -> employee.getBirthnumber() == 999999);
+        return personals;
     }
 
     public PersonalEntity get(int birthNumber){
@@ -102,6 +104,7 @@ public class PersonalService {
         personal.removeIf(person -> !person.getDepartment().equals(departmentID));
         return personal;
     }
+
     public List<PersonalEntity> getListOfPersonalByDepartment(String departmentID){
         return this.getListOfPersonalByDepartment(Integer.parseInt(departmentID));
     }

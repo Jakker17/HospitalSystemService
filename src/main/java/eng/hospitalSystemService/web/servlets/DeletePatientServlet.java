@@ -33,7 +33,7 @@ public class DeletePatientServlet extends HttpServlet {
         }
             alertService.add(Alert.Type.success, "User has been deleted.");
         }
-        response.sendRedirect("mainPage.jsp");
+        response.sendRedirect("listOfPatients.jsp");
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

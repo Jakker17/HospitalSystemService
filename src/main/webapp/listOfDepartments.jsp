@@ -23,7 +23,6 @@
                     <div class="col-sm"></div>
                 </div>
             </div>
-            <h2 align="center">Seznam oddělení</h2>
             <div class="container">
                 <div class="row">
                     <div class="col-1"></div>

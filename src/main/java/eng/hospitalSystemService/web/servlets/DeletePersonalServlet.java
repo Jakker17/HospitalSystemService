@@ -25,6 +25,10 @@ public class DeletePersonalServlet extends HttpServlet {
             alertService.add(Alert.Type.danger,"Cannot delete personal with assigned patients, please re-assign them before. ");
             response.sendRedirect("listOfEmployees.jsp");
         }
+        if(birthNumberOfPersonal==999999){
+            alertService.add(Alert.Type.danger,"Cannot delete this personal, as it is main ADMIN.");
+            response.sendRedirect("listOfEmployees.jsp");
+        }
 
         if(personalService.get(birthNumberOfPersonal)==null)alertService.add(Alert.Type.danger,"User not found or already deleted.");
         else {
