@@ -1,7 +1,6 @@
 package eng.hospitalSystemService.app;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.regex.Pattern;
 
 
 public class SessionServiceProvider {

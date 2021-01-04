@@ -5,7 +5,6 @@ import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
-import java.util.Arrays;
 
 public class SecurityUtils {
     public static byte[] generateSalt() {
@@ -18,8 +17,7 @@ public class SecurityUtils {
          {
              throw new RuntimeException("Failed to get strong algortihm");
          }
-         byte[] ret = random.generateSeed(128);
-         return ret;
+         return random.generateSeed(128);
     }
 
 
@@ -30,8 +28,7 @@ public class SecurityUtils {
             SecretKeyFactory skf = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA512");
             PBEKeySpec spec = new PBEKeySpec(passwordBytes,salt,100,128);
             SecretKey key = skf.generateSecret(spec);
-            byte[] res = key.getEncoded();
-            return res;
+            return key.getEncoded();
         }
         catch (NoSuchAlgorithmException | InvalidKeySpecException e)
         {

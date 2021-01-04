@@ -27,8 +27,7 @@ public class DepartmentService {
 
     public List<OddeleniEntity> getListOfDepartments(){
         HospitalRepository hospitalRepository = new HospitalRepository();
-        List<OddeleniEntity> listOfDepartments= hospitalRepository.getAllDepartments();
-        return  listOfDepartments;
+        return hospitalRepository.getAllDepartments();
     }
 
     public void delete(int departmentID)

@@ -46,7 +46,6 @@
                     <div class="col-1"></div>
                     <div class="col-10">
                         <h2 align="center">Seznam pacientů</h2>
-                        <input type="hidden" value="${personal.department}">
                         <table class="table table-light table-striped table-hover">
                             <thead>
                             <tr>

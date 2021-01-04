@@ -34,7 +34,7 @@ public class PersonalService {
 
     public void update(int birthNumber, String firstName, String surName, int department, String loginName, String profession) throws SQLException {
         GetBlobService getBlobService = new GetBlobService();
-        PersonalEntity personalEntity= new PersonalEntity();
+        PersonalEntity personalEntity;
         personalEntity = get(birthNumber);
 
         personalEntity.setBirthnumber(birthNumber);
@@ -66,8 +66,7 @@ public class PersonalService {
 
     public List<PersonalEntity> getListOfPersonal(){
         HospitalRepository hospitalRepository = new HospitalRepository();
-        List<PersonalEntity> listOfPersonal= hospitalRepository.getAllPersonal();
-        return listOfPersonal;
+        return hospitalRepository.getAllPersonal();
     }
 
     public PersonalEntity get(int birthNumber){

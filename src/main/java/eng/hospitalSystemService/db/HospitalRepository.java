@@ -46,8 +46,6 @@ public class HospitalRepository {
 
     }
 
-
-
     public void deletePersonal(int birthNumberOfPersonal) {
         EntityManager em = getEntityManager();
         try {

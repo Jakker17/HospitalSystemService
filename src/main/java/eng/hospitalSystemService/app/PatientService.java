@@ -2,7 +2,6 @@ package eng.hospitalSystemService.app;
 
 import eng.hospitalSystemService.db.PatientRepository;
 import eng.hospitalSystemService.db.entities.PacientEntity;
-import eng.hospitalSystemService.db.entities.PokojEntity;
 
 import java.util.List;
 
@@ -70,18 +69,13 @@ public class PatientService {
         return patients;
     }
 
-
     public List<PacientEntity> getPatientsAtDepartment(int departmentID){
         PatientRepository patientRepository= new PatientRepository();
         List<PacientEntity> patients = patientRepository.getAll();
         RoomService roomService = new RoomService();
 
         patients.removeIf(patient -> roomService.getRoom(patient.getRoomid()).getDepartmentid() != departmentID);
-return patients;
-    }
-
-    public List<PacientEntity> getAllByDepartment(String departmentID) {
-        return this.getPatientsAtDepartment(Integer.parseInt(departmentID));
+        return patients;
     }
 
     public List<PacientEntity> getAllByRoom(int roomID){
