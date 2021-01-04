@@ -83,7 +83,7 @@ public class AddNewPatientServlet extends HttpServlet {
                     throw new RuntimeException("Failed to store Patient via servlet");
                 }
                 alertService.add(Alert.Type.success, "Patient successfully added.");
-                response.sendRedirect("mainPage.jsp");
+                response.sendRedirect("wantToAddNewPrescription.jsp?patientBN="+patientBirthNumber);
             }
         }
         response.sendRedirect("addNewPatient.jsp");

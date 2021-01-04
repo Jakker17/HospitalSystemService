@@ -112,6 +112,7 @@
                             <tr>
                                 <th scope="col">Pokoj</th>
                                 <th scope="col">Kapacita</th>
+                                <th scope="col"></th>
                             </tr>
                             </thead>
                             <tbody>
@@ -119,6 +120,7 @@
                                 <tr>
                                     <td>${room.roomid}</td>
                                     <td>${room.capacity}</td>
+                                    <td align="right"><a href="patientsAtRoom.jsp?roomID=${room.roomid}" class="btn btn-primary">Rozpis</a></td>
                             </c:forEach>
                             </tbody>
                         </table>

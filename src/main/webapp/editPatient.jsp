@@ -1,11 +1,15 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <jsp:useBean id="alertService" scope="session" class="eng.hospitalSystemService.app.AlertService"/>
 <jsp:useBean id="patientService" class="eng.hospitalSystemService.app.PatientService" scope="request"/>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<jsp:useBean id="authorizationService" class="eng.hospitalSystemService.app.AuthorizationService" />
+<c:set var="loggedUser" value="${authorizationService.getLoggedUser(pageContext.request)}"/>
+
 
 <html>
 <head>
-    <title>Edit Patient</title>
+    <title>Upravit Pacienta</title>
+     <link href="main.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
           integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
 
@@ -17,66 +21,82 @@
     </script>
 
 </head>
-<body>
+<body class="pozadi">
 <c:set var="patient" value="${patientService.get(param.pacientBirthNumber)}"/>
-<div class="container">
-    <c:forEach var="alert" items="${alertService.pull()}">
-        <div class="col-6">
-            <div class="alert alert-${alert.type}" role="alert">
-                    ${alert.text}
-            </div>
-        </div>
-    </c:forEach>
-
-    <form method="post" action="editPatient">
-        <input type="hidden" name="patientName" value="${patient.pacientPersonName}">
-        <input type="hidden" name="patientSurname" value="${patient.pacientPersonSurname}">
-        <input type="hidden" name="patientBirthNumber" value="${patient.pacientBirthnumber}">
-
-        <h1 align="center">${patient.pacientPersonSurname} ${patient.pacientPersonName}</h1>
-
-        <div class="form-group">
-            <label for="anamnesis">Anamnesis</label>
-            <input value="${patient.anamnesis}" type="text" name="anamnesis" class="form-control"   id="anamnesis">
-        </div>
-        <div class="form-group">
-            <label for="room">Room</label>
-            <input value="${patient.roomid}" type="text" name="room" class="form-control"   id="room">
-        </div>
-        <div class="form-group">
-            <label for="nursingStaff">Nursing staff</label>
-            <input value="${patient.nursingStaffBirthnumber}" type="text" name="nursingStaff" class="form-control"   id="nursingStaff">
-        </div>
-        <div class="form-group">
-            <button type="submit" class="btn btn-primary">Uložit úpravy</button>
-            <a href="listOfPatients.jsp" class="btn btn-link">Zpět bez uložení</a>
-        </div>
-    </form>
-    <form id="deleteForm" method="post" action="deletePatient">
-    <input type="hidden" name="patientBN" value="${patient.pacientBirthnumber}" />
-        <button class="btn btn-danger" data-toggle="modal" data-target="#deleteModal" type="button">Delete</button>
-    <!-- Modal -->
-    <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title" id="myModalLabel">Delete</h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    Are you sure you want to delete patient  <c:out value="${patient.pacientPersonName}"/><c:out value="${patient.pacientPersonSurname}"/>?
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
-                    <button type="submit" class="btn btn-primary" form="deleteForm">Yes</button>
+<c:if test="${not empty loggedUser}">
+    <c:choose>
+        <c:when test="${authorizationService.isLoggedAdmin(pageContext.request)}">
+            <jsp:include page="adminMenuNav.jsp"/>
+            <jsp:include page="noAccessPage.jsp"/>
+        </c:when>
+        <c:when test="${authorizationService.isLoggedMedicalStaff(pageContext.request)}">
+            <jsp:include page="employeeMenuNav.jsp"/>
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm"></div>
+                    <div class="col-sm"><jsp:include page="alertPanel.jsp"/></div>
+                    <div class="col-sm"></div>
                 </div>
             </div>
-        </div>
-    </div>
-    </form>
-</div>
+            <div class="container">
+                <form method="post" action="editPatient">
+                    <input type="hidden" name="patientName" value="${patient.pacientPersonName}">
+                    <input type="hidden" name="patientSurname" value="${patient.pacientPersonSurname}">
+                    <input type="hidden" name="patientBirthNumber" value="${patient.pacientBirthnumber}">
+
+                    <h1 align="center">${patient.pacientPersonSurname} ${patient.pacientPersonName}</h1>
+
+                    <div class="form-group">
+                        <label for="anamnesis">Anamnesis</label>
+                        <input value="${patient.anamnesis}" type="text" name="anamnesis" class="form-control"   id="anamnesis">
+                    </div>
+                    <div class="form-group">
+                        <label for="room">Room</label>
+                        <input value="${patient.roomid}" type="text" name="room" class="form-control"   id="room">
+                    </div>
+                    <div class="form-group">
+                        <label for="nursingStaff">Nursing staff</label>
+                        <input value="${patient.nursingStaffBirthnumber}" type="text" name="nursingStaff" class="form-control"   id="nursingStaff">
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary">Uložit úpravy</button>
+                        <a href="addNewPrescription.jsp?patientBN${patient.pacientBirthnumber}" class="btn btn-secondary">Přidat Předpis</a>
+                        <a href="listOfPatients.jsp" class="btn btn-link">Zpět bez uložení</a>
+                    </div>
+                </form>
+                <form id="deleteForm" method="post" action="deletePatient">
+                    <input type="hidden" name="patientBN" value="${patient.pacientBirthnumber}" />
+                    <button class="btn btn-danger" data-toggle="modal" data-target="#deleteModal" type="button">Delete</button>
+                    <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h4 class="modal-title" id="myModalLabel">Delete</h4>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    Are you sure you want to delete patient  <c:out value="${patient.pacientPersonName}"/><c:out value="${patient.pacientPersonSurname}"/>?
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                                    <button type="submit" class="btn btn-primary" form="deleteForm">Yes</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </c:when>
+        <c:otherwise>
+            <jsp:include page="noAccessPageMain.jsp"/>
+        </c:otherwise>
+    </c:choose>
+</c:if>
+<c:if  test="${empty loggedUser}">
+    <jsp:include page="noLoggedInPage.jsp"/>
+</c:if>
 
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"
         integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous">

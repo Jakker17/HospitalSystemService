@@ -81,5 +81,12 @@ public class PatientService {
         }
         return patients;
     }
+
+    public List<PacientEntity> getAllByRoom(int roomID){
+        PatientRepository patientRepository = new PatientRepository();
+        List<PacientEntity> patients = patientRepository.getAll();
+        patients.removeIf(pacientEntity -> !pacientEntity.getRoomid().equals(roomID));
+        return  patients;
+    }
 }
 
