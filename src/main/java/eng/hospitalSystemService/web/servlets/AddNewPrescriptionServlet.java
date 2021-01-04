@@ -43,7 +43,7 @@ public class AddNewPrescriptionServlet extends HttpServlet {
         }
 
         alertService.add(Alert.Type.success, "Prescription successfully added");
-        response.sendRedirect("mainPage.jsp");
+        response.sendRedirect("listOfPatients.jsp");
         }
         response.sendRedirect("addNewPrescription.jsp");
     }
@@ -51,6 +51,6 @@ public class AddNewPrescriptionServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         AlertService alertService = SessionServiceProvider.getAlertService(request);
         alertService.add(Alert.Type.danger,"Unauthorized access.");
-        response.sendRedirect("mainPage.jsp");
+        response.sendRedirect("index.jsp");
     }
 }

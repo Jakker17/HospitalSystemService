@@ -28,34 +28,31 @@ public class AddNewPatientServlet extends HttpServlet {
         String personalSurname = request.getParameter("personalSurname");
         String roomIDString = request.getParameter("roomID");
 
+        if (roomIDString.equals(""))roomIDString="0";
+
         int personalBirthNumber;
         personalBirthNumber = personalService.getPersonalBirthNumberBySurname(personalSurname);
         if (personalService.get(personalBirthNumber)==null){
             alertService.add(Alert.Type.danger,"There is no personal with this surname.");
-            response.sendRedirect("addNewPatient.jsp");
         }
 
-        if (roomService.getRoom(roomIDString)==null){
+        else if (roomService.getRoom(roomIDString)==null){
             alertService.add(Alert.Type.danger, "There is no room with this ID.");
         }
 
-        if (roomIDString.equals(""))roomIDString="0";
-        if(patternCheckService.doPatternCheck("[^a-zA-Z]",patientSurname)){
+        else if(patternCheckService.doPatternCheck("[^a-zA-Z]",patientSurname)){
             alertService.add(Alert.Type.danger,"Surname cannot contain numbers and special characters.");
-            response.sendRedirect("addNewPatient.jsp");
         }
 
-        if(patternCheckService.doPatternCheck("[^0-9]",patientBirthNumberString)){
+        else if(patternCheckService.doPatternCheck("[^0-9]",patientBirthNumberString)){
             alertService.add(Alert.Type.danger,"BirthNumber can contain only Numbers.");
-            response.sendRedirect("addNewPatient.jsp");
         }
 
-        if(patternCheckService.doPatternCheck("[^0-9]",roomIDString)){
+        else if(patternCheckService.doPatternCheck("[^0-9]",roomIDString)){
             alertService.add(Alert.Type.danger,"Room number can contain only Numbers.");
-            response.sendRedirect("addNewPatient.jsp");
         }
 
-        if (personalService.get(patientBirthNumberString)!=null){
+        else if (personalService.get(patientBirthNumberString)!=null){
             if (!personalService.get(patientBirthNumberString).getPersonSurname().equals(patientSurname))
             {
                 alertService.add(Alert.Type.danger,"there is already Personal with this number but different name");
@@ -92,6 +89,6 @@ public class AddNewPatientServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         AlertService alertService = SessionServiceProvider.getAlertService(request);
         alertService.add(Alert.Type.danger,"Unauthorized access.");
-        response.sendRedirect("mainPage.jsp");
+        response.sendRedirect("index.jsp");
     }
 }

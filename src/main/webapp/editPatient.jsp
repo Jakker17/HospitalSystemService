@@ -60,7 +60,7 @@
                     </div>
                     <div class="form-group">
                         <button type="submit" class="btn btn-primary">Uložit úpravy</button>
-                        <a href="addNewPrescription.jsp?patientBN${patient.pacientBirthnumber}" class="btn btn-secondary">Přidat Předpis</a>
+                        <a href="addNewPrescription.jsp?patientBN=${patient.pacientBirthnumber}" class="btn btn-secondary">Přidat Předpis</a>
                         <a href="listOfPatients.jsp" class="btn btn-link">Zpět bez uložení</a>
                     </div>
                 </form>
