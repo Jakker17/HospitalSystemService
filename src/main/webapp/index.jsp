@@ -1,5 +1,9 @@
+<%@ page import="eng.hospitalSystemService.app.Alert" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<jsp:useBean id="authorizationService" class="eng.hospitalSystemService.app.AuthorizationService" />
+<jsp:useBean id="alertService" class="eng.hospitalSystemService.app.AlertService" scope="session"/>
+<c:set var="loggedUser" value="${authorizationService.getLoggedUser(pageContext.request)}"/>
 
 <html lang="en">
 <head>
@@ -12,6 +16,11 @@
     <link href="signIn.css" rel="stylesheet">
 </head>
 
+<c:if test="${not empty loggedUser}">
+    <%
+        response.sendRedirect("mainPage.jsp");
+    %>
+</c:if>
 <body class="text-center pozadi">
 <main class="form-signin">
     <jsp:include page="alertPanel.jsp"/>
