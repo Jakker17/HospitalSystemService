@@ -74,8 +74,10 @@ public class PatientService {
     public List<PacientEntity> getPatientsAtDepartment(int departmentID){
         PatientRepository patientRepository= new PatientRepository();
         List<PacientEntity> patients = patientRepository.getAll();
+        RoomService roomService = new RoomService();
 
-
+        patients.removeIf(patient -> roomService.getRoom(patient.getRoomid()).getDepartmentid() != departmentID);
+return patients;
     }
 
     public List<PacientEntity> getAllByDepartment(String departmentID) {

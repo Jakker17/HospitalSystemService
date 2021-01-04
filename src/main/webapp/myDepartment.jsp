@@ -59,7 +59,7 @@
                             </tr>
                             </thead>
                             <tbody>
-                             <c:forEach var="patient" items="${patientService.getAllByDepartment(personal.department)}">
+                             <c:forEach var="patient" items="${patientService.getPatientsAtDepartment(personal.department)}">
                                  <c:set var="personal2" value="${personalService.get(patient.nursingStaffBirthnumber)}"/>
                                 <tr>
                                     <td>${patient.pacientPersonSurname}</td>
