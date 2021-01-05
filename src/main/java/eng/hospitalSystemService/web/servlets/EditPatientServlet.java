@@ -23,7 +23,7 @@ public class EditPatientServlet extends HttpServlet {
         String patientBirthNumberString= request.getParameter("patientBirthNumber");
         String patientAnamnesis= request.getParameter("anamnesis");
         String patientRoomIdString= request.getParameter("room");
-        //String patientNursingStaffBirthNumberString= request.getParameter("nursingStaff");
+
         String patientNursingStaffSurname = request.getParameter("nursingStaff");
 
         if(patientService.get(patientBirthNumberString)==null){

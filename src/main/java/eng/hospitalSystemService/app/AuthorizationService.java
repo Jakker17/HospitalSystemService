@@ -1,7 +1,6 @@
 package eng.hospitalSystemService.app;
 
 import eng.hospitalSystemService.db.entities.PersonalEntity;
-
 import javax.servlet.http.HttpServletRequest;
 
 public class AuthorizationService {

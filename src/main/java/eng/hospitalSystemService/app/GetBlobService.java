@@ -17,7 +17,6 @@ public class GetBlobService {
                 blob = rs.getBlob(whichBlob);
             }
 
-
         } catch (SQLException throwables) {
             throw new DbException("problem with blob load.",throwables);
         }
