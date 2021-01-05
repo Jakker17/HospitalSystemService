@@ -30,8 +30,6 @@ public class AddNewPrescriptionServlet extends HttpServlet {
         else if (usageOfMedicament.length()>255)alertService.add(Alert.Type.danger,"Too long usage of medicament, use only 255 letters.");
         else if(birthNumberOfPatientString.equals(""))alertService.add(Alert.Type.danger, "Birth number of patient cannot be null.");
         else if (patientService.get(birthNumberOfPatientString)==null)alertService.add(Alert.Type.danger,"Patient with this Number does not exist.");
-
-
         else{
         int birthNumberOfPatient = Integer.parseInt(birthNumberOfPatientString);
 
@@ -45,7 +43,7 @@ public class AddNewPrescriptionServlet extends HttpServlet {
         alertService.add(Alert.Type.success, "Prescription successfully added");
         response.sendRedirect("listOfPatients.jsp");
         }
-        response.sendRedirect("addNewPrescription.jsp");
+        response.sendRedirect("addNewPrescription.jsp?patientBN="+birthNumberOfPatientString);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

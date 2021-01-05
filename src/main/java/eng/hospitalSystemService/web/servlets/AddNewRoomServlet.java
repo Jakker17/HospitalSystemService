@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.AbstractList;
 
 @WebServlet(name = "AddNewRoomServlet", urlPatterns = "/addNewRoom")
 public class AddNewRoomServlet extends HttpServlet {
@@ -25,6 +26,9 @@ public class AddNewRoomServlet extends HttpServlet {
         if (patternCheckService.doPatternCheck("[^0-9]", roomIdString)) alertService.add(Alert.Type.danger, "Room ID can obtain only Numbers.");
         else if(patternCheckService.doPatternCheck("[^0-9]", roomCapacityString)) alertService.add(Alert.Type.danger, "Room Capacity can obtain only Numbers.");
         else if(patternCheckService.doPatternCheck("[^0-9]", departmentIdString)) alertService.add(Alert.Type.danger, "DepartmentID can obtain only Numbers.");
+        else if(roomIdString.length()>5)alertService.add(Alert.Type.danger,"Invalid length of room ID, maximum 5 number");
+        else if(roomCapacityString.length()>5)alertService.add(Alert.Type.danger,"Invalid length of room Capacity, maximum 5 number");
+        else if(departmentIdString.length()>5)alertService.add(Alert.Type.danger,"Invalid length of room department, maximum 5 number");
         else if(roomCapacityString.length()>1)alertService.add(Alert.Type.danger,"Room capacity can be only from 0-9");
         else if(roomIdString.equals(""))alertService.add(Alert.Type.danger,"Room ID cannot be empty");
         else if(roomCapacityString.equals(""))alertService.add(Alert.Type.danger,"Room Capacity cannot be empty");
@@ -37,7 +41,9 @@ public class AddNewRoomServlet extends HttpServlet {
                 int roomCapacity = Integer.parseInt(roomCapacityString);
                 int departmentId = Integer.parseInt(departmentIdString);
 
+
                 if (roomId>9999||roomId<0)alertService.add(Alert.Type.danger,"Room ID number can be only within range 0 - 9999");
+                else if(roomCapacity==0) alertService.add(Alert.Type.danger,"Capacity cannot be 0.");
                 else
                     {
                         roomService.create(roomId, roomCapacity, departmentId);

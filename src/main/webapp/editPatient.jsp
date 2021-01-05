@@ -3,10 +3,8 @@
 <jsp:useBean id="alertService" scope="session" class="eng.hospitalSystemService.app.AlertService"/>
 <jsp:useBean id="patientService" class="eng.hospitalSystemService.app.PatientService" scope="request"/>
 <jsp:useBean id="authorizationService" class="eng.hospitalSystemService.app.AuthorizationService" />
+<jsp:useBean id="personalService" class="eng.hospitalSystemService.app.PersonalService"/>
 <c:set var="loggedUser" value="${authorizationService.getLoggedUser(pageContext.request)}"/>
-
-
-
 <html>
 <head>
     <title>Upravit Pacienta</title>
@@ -24,6 +22,7 @@
 </head>
 <body class="pozadi">
 <c:set var="patient" value="${patientService.get(param.pacientBirthNumber)}"/>
+<c:set var="personal" value="${personalService.get(patient.nursingStaffBirthnumber)}"/>
 <c:if test="${not empty loggedUser}">
     <c:choose>
         <c:when test="${authorizationService.isLoggedAdmin(pageContext.request)}">
@@ -56,8 +55,8 @@
                         <input value="${patient.roomid}" type="text" name="room" class="form-control"   id="room">
                     </div>
                     <div class="form-group">
-                        <label for="nursingStaff">RČ ošetřovatele</label>
-                        <input value="${patient.nursingStaffBirthnumber}" type="text" name="nursingStaff" class="form-control"   id="nursingStaff">
+                        <label for="nursingStaff">Prijmeni ošetřovatele</label>
+                        <input value="${personal.personSurname}" type="text" name="nursingStaff" class="form-control"   id="nursingStaff">
                     </div>
                     <div class="form-group">
                         <button type="submit" class="btn btn-primary">Uložit úpravy</button>

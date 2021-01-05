@@ -58,7 +58,9 @@
                     </div>
                     <div class="col-1"></div>
                 </div>
+                <a href="addNewPrescription.jsp?patientBN=${param.pacientBirthNumber}" class="btn btn-primary">Přidat předpis</a>
                 <a href="listOfPatients.jsp" class="btn btn-secondary">Seznam Pacientů</a>
+
             </div>
         </c:when>
         <c:otherwise>

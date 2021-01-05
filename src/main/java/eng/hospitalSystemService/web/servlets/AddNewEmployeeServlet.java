@@ -43,14 +43,16 @@ public class AddNewEmployeeServlet extends HttpServlet {
             response.sendRedirect("addNewEmployee.jsp");
         }
 
-        if(personalService.get(personalNumberString)!=null)alertService.add(Alert.Type.danger,"Personal with birthNumber already exists.");
-        else if(personalNumberString.equals(""))alertService.add(Alert.Type.danger,"Birth number cannot empty");
+        if(personalNumberString.equals(""))alertService.add(Alert.Type.danger,"Birth number cannot empty");
         else if(personalNumberString.length()!=6)alertService.add(Alert.Type.danger,"Birth number can have only 6 characters");
+        else if(personalService.get(personalNumberString)!=null)alertService.add(Alert.Type.danger,"Personal with birthNumber already exists.");
         else if(patientService.get(personalNumberString)!=null&&!patientService.get(personalNumberString).getPacientPersonSurname().equals(surName)){
-                alertService.add(Alert.Type.danger,"There is already patient with this Birth Number but different Surname.");
-        }
+                alertService.add(Alert.Type.danger,"There is already patient with this Birth Number but different Surname."); }
+        else if(firstName.length()>15)alertService.add(Alert.Type.danger,"Invalid length of name, maximum 15 numbers.");
+        else if(surName.length()>20)alertService.add(Alert.Type.danger,"Invalid length of surname, maximum 20 numbers.");
+        else if(departmentString.length()>5)alertService.add(Alert.Type.danger,"Invalid length of department, maximum 5 numbers.");
         else if(surName.length()==0)alertService.add(Alert.Type.danger,"Surname cannot be empty.");
-        else if(patternCheckService.doPatternCheck("[^a-zA-Z]",surName))alertService.add(Alert.Type.danger,"Surname cannot contains special characters or numbers.");
+        else if(patternCheckService.doPatternCheck("[^a-zA-Z]",surName))alertService.add(Alert.Type.danger,"Surname cannot contain special characters or numbers.");
         else if(profession.equals(""))alertService.add(Alert.Type.danger,"Invalid profession,Choose one from (admin,Technicky personal,Zdravotnicky Personal)");
         else if(password.length()<8)alertService.add(Alert.Type.danger,"Password has to have at least 8 characters.");
         else if(!profession.equals("admin")&&!profession.equals("Zdravotnicky Personal")&&!profession.equals("Technicky personal"))

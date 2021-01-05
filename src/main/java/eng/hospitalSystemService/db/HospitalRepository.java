@@ -67,7 +67,7 @@ public class HospitalRepository {
         EntityManager em = getEntityManager();
 
         try {
-            TypedQuery<PersonalEntity> q = em.createQuery("select i from PersonalEntity i order by i.personName asc",PersonalEntity.class);
+            TypedQuery<PersonalEntity> q = em.createQuery("select i from PersonalEntity i order by i.personSurname asc",PersonalEntity.class);
              ret = q.getResultList();
 
         } catch (Exception e) {

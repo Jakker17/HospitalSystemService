@@ -57,6 +57,9 @@ public class AddNewPatientServlet extends HttpServlet {
         else if (personalService.get(patientBirthNumberString)!=null&&!personalService.get(patientBirthNumberString).getPersonSurname().equals(patientSurname)){
                 alertService.add(Alert.Type.danger,"there is already Personal with this number but different name");
         }
+        else if(patientBirthNumberString.length()>6)alertService.add(Alert.Type.danger,"BN cannot be longer then 6 numbers.");
+        else if(patientName.length()>60)alertService.add(Alert.Type.danger,"Name cannot be longer then 60 characters.");
+        else if(patientSurname.length()>60)alertService.add(Alert.Type.danger,"Surname cannot be longer then 60 characters.");
         else if(personalSurname.equals(""))alertService.add(Alert.Type.danger,"Personal cannot be empty.");
         else if(patientSurname.equals(""))alertService.add(Alert.Type.danger, "Patient Surname cannot be empty.");
         else if(patientService.get(patientBirthNumberString)!=null)alertService.add(Alert.Type.danger, "Patient with this Birth number already exists.");

@@ -41,7 +41,7 @@ public class AddNewDepartmentServlet extends HttpServlet {
         departmentID= Integer.parseInt(departmentIdString);
 
         if(departmentID>999||departmentID<0)alertService.add(Alert.Type.danger,"Department number must be between 0 and 1 000");
-        else if(departmentIdString.length()>3)alertService.add(Alert.Type.danger,"Department number must be between 0 and 1 000");
+        else if(departmentIdString.length()>5)alertService.add(Alert.Type.danger,"Department number cannot be bigger then 5 numbers.");
         else if(departmentName.length()>120)alertService.add(Alert.Type.danger,"Department name Length cannot be bigger then 120 characters.");
         else if(departmentName.equals(""))alertService.add(Alert.Type.danger,"Department name cannot be empty.");
         else

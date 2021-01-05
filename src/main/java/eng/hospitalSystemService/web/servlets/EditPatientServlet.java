@@ -16,16 +16,24 @@ public class EditPatientServlet extends HttpServlet {
         PersonalService personalService = new PersonalService();
         PatternCheckService patternCheckService = SessionServiceProvider.getPatternCheckService();
         PatientService patientService = new PatientService();
+        RoomService roomService = new RoomService();
 
         String patientName = request.getParameter("patientName");
         String patientSurname= request.getParameter("patientSurname");
         String patientBirthNumberString= request.getParameter("patientBirthNumber");
         String patientAnamnesis= request.getParameter("anamnesis");
         String patientRoomIdString= request.getParameter("room");
-        String patientNursingStaffBirthNumberString= request.getParameter("nursingStaff");
+        //String patientNursingStaffBirthNumberString= request.getParameter("nursingStaff");
+        String patientNursingStaffSurname = request.getParameter("nursingStaff");
 
-        if(patternCheckService.doPatternCheck("[^0-9]", patientNursingStaffBirthNumberString)){
-            alertService.add(Alert.Type.danger,"Nursing staff birthNumber can contain only Numbers.");
+        if(patientService.get(patientBirthNumberString)==null){
+            alertService.add(Alert.Type.danger,"Patient must have been already deleted.");
+            response.sendRedirect("mainPage.jsp");
+        }
+
+        int personalBirthNumber = personalService.getPersonalBirthNumberBySurname(patientNursingStaffSurname);
+        if (personalService.get(personalBirthNumber)==null){
+            alertService.add(Alert.Type.danger,"There is no personal with this surname.");
             response.sendRedirect("editPatient.jsp?pacientBirthNumber="+patientBirthNumberString);
         }
 
@@ -33,25 +41,38 @@ public class EditPatientServlet extends HttpServlet {
             alertService.add(Alert.Type.danger,"RoomID can contain only Numbers.");
             response.sendRedirect("editPatient.jsp?pacientBirthNumber="+patientBirthNumberString);
         }
+        if (patientRoomIdString.equals(""))
+        {alertService.add(Alert.Type.danger,"room ID cannot be empty");
+            response.sendRedirect("editPatient.jsp?pacientBirthNumber="+patientBirthNumberString);
+        }
 
+        if (patientRoomIdString.length()>5)
+        {alertService.add(Alert.Type.danger,"room ID cannot be longer then 5 numbers");
+            response.sendRedirect("editPatient.jsp?pacientBirthNumber="+patientBirthNumberString);
+        }
 
-        if(patientService.get(patientBirthNumberString)==null){
-            alertService.add(Alert.Type.danger,"Patient must have been already deleted.");
-            response.sendRedirect("mainPage.jsp");
+        if (roomService.getRoom(Integer.parseInt(patientRoomIdString))==null)
+        {alertService.add(Alert.Type.danger,"This room Does not exist.");
+        response.sendRedirect("editPatient.jsp?pacientBirthNumber="+patientBirthNumberString);
+        }
+
+        if (!roomService.checkAvailiabilityOfRoom(Integer.parseInt(patientRoomIdString)))
+        {alertService.add(Alert.Type.danger,"There is no space at this room.");
+            response.sendRedirect("editPatient.jsp?pacientBirthNumber="+patientBirthNumberString);
         }
 
         int patientBirthNumber= Integer.parseInt(patientBirthNumberString);
-
         int patientRoomId= Integer.parseInt(patientRoomIdString);
-        int patientNursingStaffBirthNumber= Integer.parseInt(patientNursingStaffBirthNumberString);
-
-        if (personalService.get(patientNursingStaffBirthNumber)==null)alertService.add(Alert.Type.danger,"Not found Personal with this Birth ID.");
+        if (!personalService.get(personalBirthNumber).getProffesion().equals("Zdravotnicky Personal"))
+        {
+            alertService.add(Alert.Type.danger,"This personal is not medical staff and cannot be assigned.");
+        }
         else if (patientAnamnesis.equals(""))alertService.add(Alert.Type.danger,"Anamnesis cannot be empty.");
         else if (patientAnamnesis.length()>255)alertService.add(Alert.Type.danger,"Anamnesis is too long, only 255 characters.");
         else {
             try {
 
-                patientService.update(patientName, patientSurname, patientBirthNumber, patientAnamnesis, patientRoomId, patientNursingStaffBirthNumber);
+                patientService.update(patientName, patientSurname, patientBirthNumber, patientAnamnesis, patientRoomId, personalBirthNumber);
             } catch (Exception e) {
                 throw new RuntimeException("failed to update Patient through Servlet.", e);
             }

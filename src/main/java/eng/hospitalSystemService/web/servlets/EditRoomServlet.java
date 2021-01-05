@@ -21,9 +21,13 @@ public class EditRoomServlet extends HttpServlet {
         String roomIdString = request.getParameter("roomID");
         String roomCapacityString = request.getParameter("capacity");
         String departmentIdString = request.getParameter("departmentID");
+        if(roomService.getRoom(roomIdString)==null){alertService.add(Alert.Type.danger,"Room was already deleted.");
+        response.sendRedirect("listOfRooms.jsp");}
 
         if(patternCheckService.doPatternCheck("[^0-9]", roomCapacityString)) alertService.add(Alert.Type.danger, "Room Capacity can obtain only Numbers.");
         else if(patternCheckService.doPatternCheck("[^0-9]", departmentIdString)) alertService.add(Alert.Type.danger, "DepartmentID can obtain only Numbers.");
+        else if(roomCapacityString.length()>5)alertService.add(Alert.Type.danger,"Invalid length of room Capacity, maximum 5 number");
+        else if(departmentIdString.length()>5)alertService.add(Alert.Type.danger,"Invalid length of room department, maximum 5 number");
         else if(roomCapacityString.length()>1)alertService.add(Alert.Type.danger,"Room capacity can be only from 0-9");
         else if(roomCapacityString.equals(""))alertService.add(Alert.Type.danger,"Room Capacity cannot be empty");
         else if(departmentIdString.equals(""))alertService.add(Alert.Type.danger,"Department ID cannot be empty");
