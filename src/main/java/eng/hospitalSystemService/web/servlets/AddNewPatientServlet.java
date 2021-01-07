@@ -31,48 +31,47 @@ public class AddNewPatientServlet extends HttpServlet {
         int personalBirthNumber;
         personalBirthNumber = personalService.getPersonalBirthNumberBySurname(personalSurname);
         if (personalService.get(personalBirthNumber)==null){
-            alertService.add(Alert.Type.danger,"There is no personal with this surname.");
+            alertService.add(Alert.Type.danger,"Personal s tímto příjmením neexistuje");
         }
         else if (!personalService.get(personalBirthNumber).getProffesion().equals("Zdravotnicky Personal"))
         {
-            alertService.add(Alert.Type.danger,"This personal is not medical staff and cannot be assigned.");
+            alertService.add(Alert.Type.danger,"Tento personál není zdravotník a tudíž nemůže být přiřazen.");
         }
 
         else if (roomService.getRoom(roomIDString)==null){
-            alertService.add(Alert.Type.danger, "There is no room with this ID.");
+            alertService.add(Alert.Type.danger, "Pokoj s tímto ID neexistuje");
         }
 
         else if(patternCheckService.doPatternCheck("[^a-zA-Z]",patientSurname)){
-            alertService.add(Alert.Type.danger,"Surname cannot contain numbers and special characters.");
+            alertService.add(Alert.Type.danger,"Příjmení nesmí obsahovat specílní znaky a čísla.");
         }
 
         else if(patternCheckService.doPatternCheck("[^0-9]",patientBirthNumberString)){
-            alertService.add(Alert.Type.danger,"BirthNumber can contain only Numbers.");
+            alertService.add(Alert.Type.danger,"Rodné číslo může obsahovat jenom čísla.");
         }
 
         else if(patternCheckService.doPatternCheck("[^0-9]",roomIDString)){
-            alertService.add(Alert.Type.danger,"Room number can contain only Numbers.");
+            alertService.add(Alert.Type.danger,"ID pokoje může obsahovat jenom čísla.");
         }
 
         else if (personalService.get(patientBirthNumberString)!=null&&!personalService.get(patientBirthNumberString).getPersonSurname().equals(patientSurname)){
-                alertService.add(Alert.Type.danger,"there is already Personal with this number but different name");
+                alertService.add(Alert.Type.danger,"Existuje personal s tímto rodným číslem ale různým příjmením.");
         }
-        else if(patientBirthNumberString.length()>6)alertService.add(Alert.Type.danger,"BN cannot be longer then 6 numbers.");
-        else if(patientName.length()>60)alertService.add(Alert.Type.danger,"Name cannot be longer then 60 characters.");
-        else if(patientSurname.length()>60)alertService.add(Alert.Type.danger,"Surname cannot be longer then 60 characters.");
-        else if(personalSurname.equals(""))alertService.add(Alert.Type.danger,"Personal cannot be empty.");
-        else if(patientSurname.equals(""))alertService.add(Alert.Type.danger, "Patient Surname cannot be empty.");
-        else if(patientService.get(patientBirthNumberString)!=null)alertService.add(Alert.Type.danger, "Patient with this Birth number already exists.");
-        else if(patientBirthNumberString.equals(""))alertService.add(Alert.Type.danger,"Birth Number of patient cannot be empty.");
-        else if(anamnesis.length()>255)alertService.add(Alert.Type.danger,"Anamnesis cannot be longer then 255 characters.");
-        else if(anamnesis.equals(""))alertService.add(Alert.Type.danger,"Anamnesis cannot be empty.");
+        else if(patientBirthNumberString.length()>6)alertService.add(Alert.Type.danger,"RČ nesmí být delší než 6 znaků.");
+        else if(patientName.length()>60)alertService.add(Alert.Type.danger,"Jméno nesmí být delší než 60 znaků.");
+        else if(patientSurname.length()>60)alertService.add(Alert.Type.danger,"Příjmení nesmí být delší než 60 znaků.");
+        else if(personalSurname.equals(""))alertService.add(Alert.Type.danger,"Ošetřovatel nesmí být prázdný.");
+        else if(patientSurname.equals(""))alertService.add(Alert.Type.danger, "Příjmení pacienta nesmí být prázdné");
+        else if(patientService.get(patientBirthNumberString)!=null)alertService.add(Alert.Type.danger, "Pacient s tímto rodným číslem již existuje.");
+        else if(patientBirthNumberString.equals(""))alertService.add(Alert.Type.danger,"Rodné číslo nesmí být prázdné");
+        else if(anamnesis.length()>255)alertService.add(Alert.Type.danger,"Anamnéza nesmí být delší než 255 znaků.");
+        else if(anamnesis.equals(""))alertService.add(Alert.Type.danger,"Anamnéza nesmí být prázdná");
         else
         {
             int patientBirthNumber = Integer.parseInt(patientBirthNumberString);
             int roomID = Integer.parseInt(roomIDString);
 
-            if (patientBirthNumber < 100000 || patientBirthNumber > 999999)alertService.add(Alert.Type.danger, "patient birthNumber can be only within 100000 and 999999 ");
-            else if(!roomService.checkAvailiabilityOfRoom(roomID))alertService.add(Alert.Type.danger,"At this room is no Space, select other room.");
+            if(!roomService.checkAvailiabilityOfRoom(roomID))alertService.add(Alert.Type.danger,"Na tomto pokoji již není místo.");
             else {
                 try
                 {
@@ -81,7 +80,7 @@ public class AddNewPatientServlet extends HttpServlet {
                 {
                     throw new RuntimeException("Failed to store Patient via servlet");
                 }
-                alertService.add(Alert.Type.success, "Patient successfully added.");
+                alertService.add(Alert.Type.success, "Pacient vytvořen úspěšně.");
                 response.sendRedirect("wantToAddNewPrescription.jsp?patientBN="+patientBirthNumber);
             }
         }
@@ -90,7 +89,7 @@ public class AddNewPatientServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         AlertService alertService = SessionServiceProvider.getAlertService(request);
-        alertService.add(Alert.Type.danger,"Unauthorized access.");
+        alertService.add(Alert.Type.danger,"Neoprávněný přístup.");
         response.sendRedirect("index.jsp");
     }
 }

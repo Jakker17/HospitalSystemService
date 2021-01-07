@@ -21,7 +21,7 @@ public class DeletePatientServlet extends HttpServlet {
         int patientBirthNumber = Integer.parseInt(patientBirthNumberString);
 
 
-        if(patientService.get(patientBirthNumber)==null)alertService.add(Alert.Type.danger,"Patient was already deleted");
+        if(patientService.get(patientBirthNumber)==null)alertService.add(Alert.Type.danger,"Pacient nenalezen.");
         else
         {
         try {
@@ -31,14 +31,14 @@ public class DeletePatientServlet extends HttpServlet {
         catch (Exception e){
             throw new RuntimeException("Unable to delete patient through servlet",e);
         }
-            alertService.add(Alert.Type.success, "User has been deleted.");
+            alertService.add(Alert.Type.success, "Pacient smazán.");
         }
         response.sendRedirect("listOfPatients.jsp");
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         AlertService alertService = SessionServiceProvider.getAlertService(request);
-        alertService.add(Alert.Type.danger,"Unauthorized access.");
+        alertService.add(Alert.Type.danger,"Neoprávněný přístup.");
         response.sendRedirect("index.jsp");
     }
 }

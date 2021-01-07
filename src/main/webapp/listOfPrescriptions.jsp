@@ -6,7 +6,7 @@
 <c:set var="loggedUser" value="${authorizationService.getLoggedUser(pageContext.request)}"/>
 <html>
 <head>
-    <title>Seznam Předpisů</title>
+    <title>Seznam předpisů</title>
     <link rel="stylesheet" href="main.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
           integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
@@ -59,7 +59,7 @@
                     <div class="col-1"></div>
                 </div>
                 <a href="addNewPrescription.jsp?patientBN=${param.pacientBirthNumber}" class="btn btn-primary">Přidat předpis</a>
-                <a href="listOfPatients.jsp" class="btn btn-secondary">Seznam Pacientů</a>
+                <a href="listOfPatients.jsp" class="btn btn-secondary">Seznam pacientů</a>
 
             </div>
         </c:when>

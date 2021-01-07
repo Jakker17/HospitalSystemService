@@ -23,21 +23,21 @@ public class LoginServlet extends HttpServlet {
 
         LoginService loginService = new LoginService();
 
-        if (loginInput.equals(""))alertService.add(Alert.Type.danger,"Login cannot be empty.");
-        else if (passwordInput.equals(""))alertService.add(Alert.Type.danger,"Password cannot be empty.");
+        if (loginInput.equals(""))alertService.add(Alert.Type.danger,"Login nesmí být prázdný.");
+        else if (passwordInput.equals(""))alertService.add(Alert.Type.danger,"Heslo nesmí být prázdné.");
         else {
             try {
                 if (loginService.checkPassword(loginInput,passwordInput))
                 {
-                    if (authorizationService.isLoggedUser(request)){alertService.add(Alert.Type.danger,"User is logged in already.");
+                    if (authorizationService.isLoggedUser(request)){alertService.add(Alert.Type.danger,"Uživatel již je přihlášen.");
                     response.sendRedirect("mainPage.jsp");}
                     authorizationService.setLoggedUser(personalService.getPersonalByLogin(loginInput),request);
-                    alertService.add(Alert.Type.success,"Successfully logged in.");
+                    alertService.add(Alert.Type.success,"Úspěšně přihlášen.");
                     response.sendRedirect("mainPage.jsp");
                 }
                 else
                     {
-                        alertService.add(Alert.Type.danger,"Wrong login/password, try again.");
+                        alertService.add(Alert.Type.danger,"Špatný login/heslo, zkuste znovu.");
                         response.sendRedirect("index.jsp");
                     }
             } catch (SQLException throwables) {
@@ -49,7 +49,7 @@ public class LoginServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         AlertService alertService = SessionServiceProvider.getAlertService(request);
-        alertService.add(Alert.Type.danger,"Unauthorized access.");
+        alertService.add(Alert.Type.danger,"Neoprávněný přístup.");
         response.sendRedirect("index.jsp");
     }
 }

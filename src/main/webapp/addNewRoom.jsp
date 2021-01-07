@@ -24,7 +24,7 @@
                 </div>
             </div>
 
-            <h2 align="center">Přidat Pokoj</h2>
+            <h2 align="center">Přidat pokoj</h2>
 
             <div class="container">
                 <div class="row">
@@ -32,19 +32,19 @@
                     <div class="col-10">
                         <form id="addNewRoom" action="addNewRoom" method="post">
                             <div class="form-group">
-                                <label for="roomID">Room ID</label>
+                                <label for="roomID">ID pokoje</label>
                                 <input type="text" name="roomID" id="roomID" class="form-control">
                             </div>
                             <div class="form-group">
-                                <label for="capacityOfRoom">Room Capacity</label>
+                                <label for="capacityOfRoom">Kapacita pokoje</label>
                                 <input type="text" name="capacityOfRoom" id="capacityOfRoom" class="form-control">
                             </div>
                             <div class="form-group">
-                                <label for="departmentID">Department ID</label>
+                                <label for="departmentID">ID oddělení</label>
                                 <input type="text" name="departmentID" id="departmentID" class="form-control">
                             </div>
                             <div class="form-group">
-                                <button type="submit" class="btn btn-primary">Přidat Pokoj</button>
+                                <button type="submit" class="btn btn-primary">Přidat pokoj</button>
                                 <a href="mainPage.jsp" class="btn btn-secondary">Odejít bez uložení</a>
                             </div>
                         </form>

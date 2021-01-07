@@ -17,11 +17,11 @@ public class LogoutServlet extends HttpServlet {
         AlertService alertService = SessionServiceProvider.getAlertService(request);
         AuthorizationService authorizationService = new AuthorizationService();
 
-        if (!authorizationService.isLoggedUser(request))alertService.add(Alert.Type.danger,"There is no logged user to logout.");
+        if (!authorizationService.isLoggedUser(request))alertService.add(Alert.Type.danger,"Není nikdo přihlášen k odhlášení.");
         else
         {
             authorizationService.setLoggedUser(null, request);
-            alertService.add(Alert.Type.success, "Logged out.");
+            alertService.add(Alert.Type.success, "Odhlášen.");
             response.sendRedirect("index.jsp");
         }
         response.sendRedirect("index.jsp");
@@ -29,7 +29,7 @@ public class LogoutServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         AlertService alertService = SessionServiceProvider.getAlertService(request);
-        alertService.add(Alert.Type.danger,"Unauthorized access.");
+        alertService.add(Alert.Type.danger,"Neoprávněný přístup.");
         response.sendRedirect("index.jsp");
     }
 }

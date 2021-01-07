@@ -93,7 +93,7 @@
                         <h2 align="center">Pokoje</h2>
                         <table class="table table-light table-striped table-hover">
                             <thead>
-                            <th scope="col">Číslo Pokoje</th>
+                            <th scope="col">Číslo pokoje</th>
                             <th scope="col">Kapacita</th>
                             <th scope="col"></th>
                             </thead>

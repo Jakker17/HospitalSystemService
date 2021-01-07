@@ -6,7 +6,7 @@
 <c:set var="loggedUser" value="${authorizationService.getLoggedUser(pageContext.request)}"/>
 <html>
 <head>
-    <title>Seznam Pokojů</title>
+    <title>Seznam pokojů</title>
     <link href="main.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
           integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
@@ -24,14 +24,14 @@
                 </div>
             </div>
 
-            <h2 align="center">Seznam Pokojů</h2>
+            <h2 align="center">Seznam pokojů</h2>
             <div class="container">
                 <div class="row">
                     <div class="col-1"></div>
                     <div class="col-10">
                         <table class="table table-light table-striped table-hover">
                                 <thead>
-                                <th scope="col">Číslo Pokoje</th>
+                                <th scope="col">Číslo pokoje</th>
                                 <th scope="col">Kapacita</th>
                                 <th scope="col">ID oddělení</th>
                                 <th scope="col"></th>

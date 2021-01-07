@@ -22,15 +22,15 @@ public class DeletePersonalServlet extends HttpServlet {
 
         if(patientService.isPatientAssignedToThisStaff(birthNumberOfPersonal))
         {
-            alertService.add(Alert.Type.danger,"Cannot delete personal with assigned patients, please re-assign them before. ");
+            alertService.add(Alert.Type.danger,"Není možné smazat zaměstnance s přiřazenýma pacientama.");
             response.sendRedirect("listOfEmployees.jsp");
         }
         if(birthNumberOfPersonal==999999){
-            alertService.add(Alert.Type.danger,"Cannot delete this personal, as it is main ADMIN.");
+            alertService.add(Alert.Type.danger,"Nejde smazat tohoto uživatele, jakožto hlavního admina.");
             response.sendRedirect("listOfEmployees.jsp");
         }
 
-        if(personalService.get(birthNumberOfPersonal)==null)alertService.add(Alert.Type.danger,"User not found or already deleted.");
+        if(personalService.get(birthNumberOfPersonal)==null)alertService.add(Alert.Type.danger,"Uživatel nenalezen.");
         else {
 
             try {
@@ -38,7 +38,7 @@ public class DeletePersonalServlet extends HttpServlet {
             } catch (Exception e) {
                 throw new RuntimeException("Failed to delete personal via Servlet.", e);
             }
-            alertService.add(Alert.Type.success, "User has been deleted.");
+            alertService.add(Alert.Type.success, "Uživatel smazán.");
 
         }
         response.sendRedirect("listOfEmployees.jsp");
@@ -46,7 +46,7 @@ public class DeletePersonalServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         AlertService alertService = SessionServiceProvider.getAlertService(request);
-        alertService.add(Alert.Type.danger, "Unauthorized access.");
+        alertService.add(Alert.Type.danger, "Neoprávněný přístup.");
         response.sendRedirect("index.jsp");
     }
 }

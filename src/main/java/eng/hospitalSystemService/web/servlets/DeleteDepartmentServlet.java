@@ -20,7 +20,7 @@ public class DeleteDepartmentServlet extends HttpServlet {
         DepartmentService departmentService = new DepartmentService();
         if(departmentService.get(departmentID)==null)
         {
-            alertService.add(Alert.Type.danger,"Department was already deleted.");
+            alertService.add(Alert.Type.danger,"Oddělení nenalezeno.");
             response.sendRedirect("listOfDepartments.jsp");
         }
         else {
@@ -31,17 +31,17 @@ public class DeleteDepartmentServlet extends HttpServlet {
                 } catch (Exception e) {
                     throw new RuntimeException("Failed to delete department via Servlet.", e);
                 }
-                alertService.add(Alert.Type.success,"department was deleted.");
+                alertService.add(Alert.Type.success,"Oddělení smazáno");
                 response.sendRedirect("listOfDepartments.jsp");
             }
-            else{alertService.add(Alert.Type.danger,"Department is not empty. Please reassign personal or rooms from it.");}
+            else{alertService.add(Alert.Type.danger,"Oddělení není prázdné. Přesuňte pokoje a personál nejdříve.");}
         }
         response.sendRedirect("departmentInventory.jsp?departmentID="+departmentID);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         AlertService alertService = SessionServiceProvider.getAlertService(request);
-        alertService.add(Alert.Type.danger, "Unauthorized access.");
+        alertService.add(Alert.Type.danger, "Neoprávněný přístup.");
         response.sendRedirect("index.jsp");
     }
 }

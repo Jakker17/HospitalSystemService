@@ -22,32 +22,32 @@ public class AddNewDepartmentServlet extends HttpServlet {
 
         if (departmentService.get(departmentIdString)!=null)
         {
-            alertService.add(Alert.Type.danger,"Department number is already used.");
+            alertService.add(Alert.Type.danger,"ID oddělení již je použito.");
             response.sendRedirect("addNewDepartment.jsp");
         }
 
         if (patternCheckService.doPatternCheck("[^0-9]",departmentIdString))
         {
-            alertService.add(Alert.Type.danger,"Department number must contain only numbers.");
+            alertService.add(Alert.Type.danger,"ID oddělení musí obsahovat jen čísla.");
             response.sendRedirect("addNewDepartment.jsp");
         }
 
         if (departmentIdString.equals(""))
         {
-            alertService.add(Alert.Type.danger,"department number cannot be empty.");
+            alertService.add(Alert.Type.danger,"ID oddělení nesmí být prázdné");
             response.sendRedirect("addNewDepartment.jsp");
         }
 
         departmentID= Integer.parseInt(departmentIdString);
 
-        if(departmentID>999||departmentID<0)alertService.add(Alert.Type.danger,"Department number must be between 0 and 1 000");
-        else if(departmentIdString.length()>5)alertService.add(Alert.Type.danger,"Department number cannot be bigger then 5 numbers.");
-        else if(departmentName.length()>120)alertService.add(Alert.Type.danger,"Department name Length cannot be bigger then 120 characters.");
-        else if(departmentName.equals(""))alertService.add(Alert.Type.danger,"Department name cannot be empty.");
+        if(departmentID>999||departmentID<0)alertService.add(Alert.Type.danger,"ID oddělení musí být v rozsahu 0-999");
+        else if(departmentIdString.length()>5)alertService.add(Alert.Type.danger,"ID oddělení nesmí obsahovat více jak 5 znaků.");
+        else if(departmentName.length()>120)alertService.add(Alert.Type.danger,"Název oddělení nesmí být větší než 120 znaků.");
+        else if(departmentName.equals(""))alertService.add(Alert.Type.danger,"Název oddělení nesmí být prázdný.");
         else
             {
                 departmentService.create(departmentID,departmentName);
-                alertService.add(Alert.Type.success,"Department Added successfully.");
+                alertService.add(Alert.Type.success,"Oddělení přidáno úspěšně.");
                 response.sendRedirect("mainPage.jsp");
             }
         response.sendRedirect("addNewDepartment.jsp");
@@ -55,7 +55,7 @@ public class AddNewDepartmentServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         AlertService alertService = SessionServiceProvider.getAlertService(request);
-        alertService.add(Alert.Type.danger, "Unauthorized access.");
+        alertService.add(Alert.Type.danger, "Neoprávněný přístup.");
         response.sendRedirect("index.jsp");
     }
 }

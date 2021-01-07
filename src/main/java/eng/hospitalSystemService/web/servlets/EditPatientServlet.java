@@ -27,37 +27,37 @@ public class EditPatientServlet extends HttpServlet {
         String patientNursingStaffSurname = request.getParameter("nursingStaff");
 
         if(patientService.get(patientBirthNumberString)==null){
-            alertService.add(Alert.Type.danger,"Patient must have been already deleted.");
+            alertService.add(Alert.Type.danger,"Pecient neexistuje.");
             response.sendRedirect("mainPage.jsp");
         }
 
         int personalBirthNumber = personalService.getPersonalBirthNumberBySurname(patientNursingStaffSurname);
         if (personalService.get(personalBirthNumber)==null){
-            alertService.add(Alert.Type.danger,"There is no personal with this surname.");
+            alertService.add(Alert.Type.danger,"Ošetřovatel s tímto příjmením neexistuje.");
             response.sendRedirect("editPatient.jsp?pacientBirthNumber="+patientBirthNumberString);
         }
 
         if(patternCheckService.doPatternCheck("[^0-9]", patientRoomIdString)){
-            alertService.add(Alert.Type.danger,"RoomID can contain only Numbers.");
+            alertService.add(Alert.Type.danger,"ID pokoje musí obsahovat jen čísla.");
             response.sendRedirect("editPatient.jsp?pacientBirthNumber="+patientBirthNumberString);
         }
         if (patientRoomIdString.equals(""))
-        {alertService.add(Alert.Type.danger,"room ID cannot be empty");
+        {alertService.add(Alert.Type.danger,"ID pokoje nesmí být prázdné.");
             response.sendRedirect("editPatient.jsp?pacientBirthNumber="+patientBirthNumberString);
         }
 
         if (patientRoomIdString.length()>5)
-        {alertService.add(Alert.Type.danger,"room ID cannot be longer then 5 numbers");
+        {alertService.add(Alert.Type.danger,"ID pokoje nesmí být delší než 5 čísel.");
             response.sendRedirect("editPatient.jsp?pacientBirthNumber="+patientBirthNumberString);
         }
 
         if (roomService.getRoom(Integer.parseInt(patientRoomIdString))==null)
-        {alertService.add(Alert.Type.danger,"This room Does not exist.");
+        {alertService.add(Alert.Type.danger,"Tento pokoj neexistuje.");
         response.sendRedirect("editPatient.jsp?pacientBirthNumber="+patientBirthNumberString);
         }
 
         if (!roomService.checkAvailiabilityOfRoom(Integer.parseInt(patientRoomIdString)))
-        {alertService.add(Alert.Type.danger,"There is no space at this room.");
+        {alertService.add(Alert.Type.danger,"Na tomto pokoji již není místo.");
             response.sendRedirect("editPatient.jsp?pacientBirthNumber="+patientBirthNumberString);
         }
 
@@ -65,10 +65,10 @@ public class EditPatientServlet extends HttpServlet {
         int patientRoomId= Integer.parseInt(patientRoomIdString);
         if (!personalService.get(personalBirthNumber).getProffesion().equals("Zdravotnicky Personal"))
         {
-            alertService.add(Alert.Type.danger,"This personal is not medical staff and cannot be assigned.");
+            alertService.add(Alert.Type.danger,"Tento personal není zdravotník a proto nemůže být přiřazen.");
         }
-        else if (patientAnamnesis.equals(""))alertService.add(Alert.Type.danger,"Anamnesis cannot be empty.");
-        else if (patientAnamnesis.length()>255)alertService.add(Alert.Type.danger,"Anamnesis is too long, only 255 characters.");
+        else if (patientAnamnesis.equals(""))alertService.add(Alert.Type.danger,"Anamnéza nesmí být prázdná.");
+        else if (patientAnamnesis.length()>255)alertService.add(Alert.Type.danger,"Anamnéza nesmí být delší než 255 znaků.");
         else {
             try {
 
@@ -76,7 +76,7 @@ public class EditPatientServlet extends HttpServlet {
             } catch (Exception e) {
                 throw new RuntimeException("failed to update Patient through Servlet.", e);
             }
-            alertService.add(Alert.Type.success, "Patient have been updated.");
+            alertService.add(Alert.Type.success, "Pacient upraven.");
             response.sendRedirect("mainPage.jsp");
         }
         response.sendRedirect("editPatient.jsp?pacientBirthNumber="+patientBirthNumberString);
@@ -84,7 +84,7 @@ public class EditPatientServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         AlertService alertService = SessionServiceProvider.getAlertService(request);
-        alertService.add(Alert.Type.danger,"Unauthorized access.");
+        alertService.add(Alert.Type.danger,"Neoprávněný přístup.");
         response.sendRedirect("index.jsp");
     }
 }

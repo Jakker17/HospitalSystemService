@@ -9,7 +9,7 @@
     <link href="main.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
           integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
-    <title>Seznam Zaměstnanců</title>
+    <title>Seznam zaměstnanců</title>
 </head>
 <body class="pozadi">
 <c:if test="${not empty loggedUser}">
@@ -24,7 +24,7 @@
                 </div>
             </div>
 
-            <h2 align="center">Seznam Zaměstnanců</h2>
+            <h2 align="center">Seznam zaměstnanců</h2>
             <div class="container">
                 <div class="row">
                     <div class="col-1"></div>

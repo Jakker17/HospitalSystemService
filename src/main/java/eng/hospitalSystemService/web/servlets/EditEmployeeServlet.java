@@ -25,29 +25,29 @@ public class EditEmployeeServlet extends HttpServlet {
 
         if(patternCheckService.doPatternCheck("[^0-9]",departmentString))
         {
-            alertService.add(Alert.Type.danger,"Department number must contain only numbers.");
+            alertService.add(Alert.Type.danger,"ID oddělení musí obsahovat pouze čísla.");
             response.sendRedirect("editEmployee.jsp?birthNumber="+personalNumberString);
         }
 
         DepartmentService departmentService = new DepartmentService();
         if(departmentService.get(departmentString)==null)
         {
-            alertService.add(Alert.Type.danger,"Department doesn't exist.");
+            alertService.add(Alert.Type.danger,"Oddělení neexistuje.");
             response.sendRedirect("editEmployee.jsp?birthNumber="+personalNumberString);
         }
 
         if(personalService.get(personalNumberString)==null)
         {
-            alertService.add(Alert.Type.danger,"User not found or already deleted.");
+            alertService.add(Alert.Type.danger,"Uživatel nenalezen.");
             response.sendRedirect("listOfEmployees.jsp");
         }
         else
         {
             int department=0;
             if (!departmentString.isEmpty()) department= Integer.parseInt(departmentString);
-            if(patternCheckService.doPatternCheck("[^a-zA-Z]",surName))alertService.add(Alert.Type.danger,"Surname cannot contains special characters or numbers.");
-            else if(surName.isEmpty())alertService.add(Alert.Type.danger,"Surname cannot be empty.");
-            else if(department>999||department<0)alertService.add(Alert.Type.danger,"Department number must be between 0 and 1 000");
+            if(patternCheckService.doPatternCheck("[^a-zA-Z]",surName))alertService.add(Alert.Type.danger,"Příjmení nesmí obsahovat speciální znaky ani čísla.");
+            else if(surName.isEmpty())alertService.add(Alert.Type.danger,"Příjmení nesmí být prázdné.");
+            else if(department>999||department<0)alertService.add(Alert.Type.danger,"ID oddělení musí být v rozsahu 0 - 999.");
             else
             {
                 int birthNumber = Integer.parseInt(personalNumberString);
@@ -60,7 +60,7 @@ public class EditEmployeeServlet extends HttpServlet {
                     throw new RuntimeException("Failed to store personal via Servlet.",e);
                 }
 
-                alertService.add(Alert.Type.success, "User has been edited.");
+                alertService.add(Alert.Type.success, "Uživatel upraven.");
                 response.sendRedirect("listOfEmployees.jsp");
             }
             response.sendRedirect("editEmployee.jsp?birthNumber="+personalNumberString);
@@ -69,7 +69,7 @@ public class EditEmployeeServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         AlertService alertService = SessionServiceProvider.getAlertService(request);
-        alertService.add(Alert.Type.danger, "Unauthorized access.");
+        alertService.add(Alert.Type.danger, "Neoprávněný přístup.");
         response.sendRedirect("index.jsp");
     }
 }

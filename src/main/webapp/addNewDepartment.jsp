@@ -35,7 +35,7 @@
                                     <input type="text" name="departmentNumber" id="departmentNumber" class="form-control">
                                 </div>
                                 <div class="form-group">
-                                    <label for="departmentName">Název Oddělení</label>
+                                    <label for="departmentName">Název oddělení</label>
                                     <input type="text" name="departmentName" id="departmentName" class="form-control">
                                 </div>
                                 <div class="form-group">

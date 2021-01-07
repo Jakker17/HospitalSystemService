@@ -22,14 +22,14 @@ public class AddNewPrescriptionServlet extends HttpServlet {
         String birthNumberOfPatientString = request.getParameter("birthNumberOfPatient");
 
         if (patternCheckService.doPatternCheck("[^0-9]",birthNumberOfPatientString)){
-            alertService.add(Alert.Type.danger,"Birth Number of Patient must be a number.");
+            alertService.add(Alert.Type.danger,"Rodné číslo pacienta musí být číslo");
             response.sendRedirect("addNewPrescription.jsp");
         }
-        if (nameOfMedicament.length()>60)alertService.add(Alert.Type.danger,"Too long name of Medicament, use only 60 letters.");
-        else if (nameOfMedicament.equals(""))alertService.add(Alert.Type.danger, "Name of medicament cannot be empty.");
-        else if (usageOfMedicament.length()>255)alertService.add(Alert.Type.danger,"Too long usage of medicament, use only 255 letters.");
-        else if(birthNumberOfPatientString.equals(""))alertService.add(Alert.Type.danger, "Birth number of patient cannot be null.");
-        else if (patientService.get(birthNumberOfPatientString)==null)alertService.add(Alert.Type.danger,"Patient with this Number does not exist.");
+        if (nameOfMedicament.length()>60)alertService.add(Alert.Type.danger,"Pro název léku použijte jen 60 písmen.");
+        else if (nameOfMedicament.equals(""))alertService.add(Alert.Type.danger, "Jméno léku nesmí být prázdné.");
+        else if (usageOfMedicament.length()>255)alertService.add(Alert.Type.danger,"Pro použítí léku použijte jen 255písmen.");
+        else if(birthNumberOfPatientString.equals(""))alertService.add(Alert.Type.danger, "Rodné číslo nesmí být prázdné.");
+        else if (patientService.get(birthNumberOfPatientString)==null)alertService.add(Alert.Type.danger,"Pacient s tímto rodným číslem neexistuje.");
         else{
         int birthNumberOfPatient = Integer.parseInt(birthNumberOfPatientString);
 
@@ -40,7 +40,7 @@ public class AddNewPrescriptionServlet extends HttpServlet {
             throw new RuntimeException("Unable to create prescription via Servlet",e);
         }
 
-        alertService.add(Alert.Type.success, "Prescription successfully added");
+        alertService.add(Alert.Type.success, "Předpis úspěšně vytvořen.");
         response.sendRedirect("listOfPatients.jsp");
         }
         response.sendRedirect("addNewPrescription.jsp?patientBN="+birthNumberOfPatientString);
@@ -48,7 +48,7 @@ public class AddNewPrescriptionServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         AlertService alertService = SessionServiceProvider.getAlertService(request);
-        alertService.add(Alert.Type.danger,"Unauthorized access.");
+        alertService.add(Alert.Type.danger,"Neoprávněný přístup.");
         response.sendRedirect("index.jsp");
     }
 }

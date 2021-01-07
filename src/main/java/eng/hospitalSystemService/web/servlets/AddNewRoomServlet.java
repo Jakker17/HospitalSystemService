@@ -23,18 +23,18 @@ public class AddNewRoomServlet extends HttpServlet {
         String roomCapacityString = request.getParameter("capacityOfRoom");
         String departmentIdString = request.getParameter("departmentID");
 
-        if (patternCheckService.doPatternCheck("[^0-9]", roomIdString)) alertService.add(Alert.Type.danger, "Room ID can obtain only Numbers.");
-        else if(patternCheckService.doPatternCheck("[^0-9]", roomCapacityString)) alertService.add(Alert.Type.danger, "Room Capacity can obtain only Numbers.");
-        else if(patternCheckService.doPatternCheck("[^0-9]", departmentIdString)) alertService.add(Alert.Type.danger, "DepartmentID can obtain only Numbers.");
-        else if(roomIdString.length()>5)alertService.add(Alert.Type.danger,"Invalid length of room ID, maximum 5 number");
-        else if(roomCapacityString.length()>5)alertService.add(Alert.Type.danger,"Invalid length of room Capacity, maximum 5 number");
-        else if(departmentIdString.length()>5)alertService.add(Alert.Type.danger,"Invalid length of room department, maximum 5 number");
-        else if(roomCapacityString.length()>1)alertService.add(Alert.Type.danger,"Room capacity can be only from 0-9");
-        else if(roomIdString.equals(""))alertService.add(Alert.Type.danger,"Room ID cannot be empty");
-        else if(roomCapacityString.equals(""))alertService.add(Alert.Type.danger,"Room Capacity cannot be empty");
-        else if(departmentIdString.equals(""))alertService.add(Alert.Type.danger,"Department ID cannot be empty");
-        else if (departmentService.get(departmentIdString)== null)alertService.add(Alert.Type.danger,"There is no department with this ID");
-        else if (roomService.getRoom(roomIdString)!=null)alertService.add(Alert.Type.danger,"There is already room with this ID. ");
+        if (patternCheckService.doPatternCheck("[^0-9]", roomIdString)) alertService.add(Alert.Type.danger, "ID pokoje může obsahovat pouze čísla.");
+        else if(patternCheckService.doPatternCheck("[^0-9]", roomCapacityString)) alertService.add(Alert.Type.danger, "Kapacita pokoje může obsahovat pouze čísla.");
+        else if(patternCheckService.doPatternCheck("[^0-9]", departmentIdString)) alertService.add(Alert.Type.danger, "ID oddělení může obsahovat pouze čísla.");
+        else if(roomIdString.length()>5)alertService.add(Alert.Type.danger,"Neplatná délka ID pokoje, maximálně 5 čísel.");
+        else if(roomCapacityString.length()>5)alertService.add(Alert.Type.danger,"Neplatná délka kapacity pokoje, maximálně 5 čísel.");
+        else if(departmentIdString.length()>5)alertService.add(Alert.Type.danger,"Neplatná délka ID oddělení, maximálně 5 čísel.");
+        else if(roomCapacityString.length()>1)alertService.add(Alert.Type.danger,"Pokoj může mít kapacitu pouze v rozsahu 0-9.");
+        else if(roomIdString.equals(""))alertService.add(Alert.Type.danger,"ID pokoje nesmí být prázdné");
+        else if(roomCapacityString.equals(""))alertService.add(Alert.Type.danger,"Kapacita pokoje nesmí být prázdná.");
+        else if(departmentIdString.equals(""))alertService.add(Alert.Type.danger,"ID oddělení nesmí být prázdné.");
+        else if (departmentService.get(departmentIdString)== null)alertService.add(Alert.Type.danger,"Oddělení s tímto ID neexistuje");
+        else if (roomService.getRoom(roomIdString)!=null)alertService.add(Alert.Type.danger,"Pokoj s tímto ID už existuje. ");
         else
             {
                 int roomId = Integer.parseInt(roomIdString);
@@ -42,12 +42,12 @@ public class AddNewRoomServlet extends HttpServlet {
                 int departmentId = Integer.parseInt(departmentIdString);
 
 
-                if (roomId>9999||roomId<0)alertService.add(Alert.Type.danger,"Room ID number can be only within range 0 - 9999");
-                else if(roomCapacity==0) alertService.add(Alert.Type.danger,"Capacity cannot be 0.");
+                if (roomId>9999||roomId<0)alertService.add(Alert.Type.danger,"ID pokoje musí být v rozsahu 0-999");
+                else if(roomCapacity==0) alertService.add(Alert.Type.danger,"Kapacita nesmí být 0");
                 else
                     {
                         roomService.create(roomId, roomCapacity, departmentId);
-                        alertService.add(Alert.Type.success, "Room has been added successfully.");
+                        alertService.add(Alert.Type.success, "Pokoj byl přidán úspěšně");
                         response.sendRedirect("mainPage.jsp");
                     }
                 response.sendRedirect("addNewRoom.jsp");
@@ -56,7 +56,7 @@ public class AddNewRoomServlet extends HttpServlet {
     }
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         AlertService alertService = SessionServiceProvider.getAlertService(request);
-        alertService.add(Alert.Type.danger,"Unauthorized access");
+        alertService.add(Alert.Type.danger,"Neoprávněný přístup.");
         response.sendRedirect("index.jsp");
     }
 }

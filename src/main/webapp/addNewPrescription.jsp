@@ -27,7 +27,7 @@
                 </div>
             </div>
             <div class="container">
-                <h1>Nový Předpis</h1>
+                <h1>Nový předpis</h1>
                 <form id="addNewPrescription" method="post" action="addNewPrescription">
                     <div class="form-group">
                         <label for="nameOfMedicament">Jméno léku</label>

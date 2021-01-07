@@ -21,23 +21,23 @@ public class DeleteRoomServlet extends HttpServlet {
         String roomIDString = request.getParameter("roomID");
 
         if (roomService.getRoom(roomIDString)==null){
-            alertService.add(Alert.Type.danger,"Room was already deleted or not found.");
+            alertService.add(Alert.Type.danger,"Pokoj nenalezen.");
             response.sendRedirect("listOfRooms.jsp");
         }
 
         if(!roomService.isRoomEmpty(Integer.parseInt(roomIDString))) {
-            alertService.add(Alert.Type.danger, "Room is not empty, please re-assign all patients from this room");
+            alertService.add(Alert.Type.danger, "Pokoj není prázdný, přesuňte pacienty.");
             response.sendRedirect("listOfRooms.jsp");
         }
 
         roomService.delete(Integer.parseInt(roomIDString));
-        alertService.add(Alert.Type.success,"Room was deleted successfully.");
+        alertService.add(Alert.Type.success,"Pokoj úspěšně smazán.");
         response.sendRedirect("listOfRooms.jsp");
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         AlertService alertService = SessionServiceProvider.getAlertService(request);
-        alertService.add(Alert.Type.danger,"Unauthorized access.");
+        alertService.add(Alert.Type.danger,"Neoprávněný přístup.");
         response.sendRedirect("index.jsp");
     }
 }
